@@ -79,23 +79,33 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/08/18/My-New-Post/">如何为你的Git注册一个SSL Key?</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="如何为你的Git注册一个SSL-Key"><a href="#如何为你的Git注册一个SSL-Key" class="headerlink" title="如何为你的Git注册一个SSL Key?"></a>如何为你的Git注册一个SSL Key?</h1><ul>
+        <ul>
 <li><strong>不是哥们，为啥要弄SSL Key？</strong><br>答：如果你不注册和绑定SSLKey，任何需要使用git进行对仓库的操作都会被拒绝！如果你想使用GitPages进行Hexo博客的托管，注册SSL Key是必要的！但非常遗憾，网上流行的Hexo博客教程都忽略了这一点，导致*$ hexo d*的部署操作总是失败。</li>
 </ul>
 <p>1.打开git Bash，键入（注意区分大小写），git会自动生成一个RSA密钥，包含公钥和私钥。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;***@gmail.com&quot;</span><br></pre></td></tr></table></figure>
 
 <p>2.根据命令行提示，进入文件夹，获取以<code>ssh-rsa</code>的字符串（包括<code>ssh-rsa</code>)，一般的路径在<strong>C:&#x2F;User&#x2F;用户名&#x2F;.ssh</strong></p>
-<p><img src="https://i-blog.csdnimg.cn/blog_migrate/684e733ae1e4d46d2d6bb9e3e365839a.png" alt="在这里插入图片描述"></p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/684e733ae1e4d46d2d6bb9e3e365839a.png" alt="生成ssl-rsa密钥"></p>
 <p>3.使用VSCode或者记事本打开<strong>id_rsa.pub</strong>（<strong>公钥</strong>），复制全部文本内容，一般格式如下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-rsa ********************************************************************************************************************************************************************************************************************************************************************************= ***@gmail.com</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>4.前往GitHub，配置SSL Key</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/settings/keys">Sign in to GitHub-Keys</a></p>
-<p><img src="file:///C:/Users/lenovo/Pictures/Typedown/09376937-2d88-410b-a39b-bb9cfc3a1d0a.png" alt="09376937-2d88-410b-a39b-bb9cfc3a1d0a"></p>
-<p><img src="file:///C:/Users/lenovo/Pictures/Typedown/ec3a53b4-4aa2-4198-a31c-8fef1e590fbb.png" alt="ec3a53b4-4aa2-4198-a31c-8fef1e590fbb"></p>
+<p><img src="/img/sslKey/sslkey.png" alt="SSL Key界面"></p>
+<p><img src="/img/sslKey/addsslkey.png" alt="添加SSL Key"></p>
 <p>5.确认SSH Key添加完成以后，尝试在gitBash上键入以下命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
 
@@ -105,7 +115,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/08/18/My-New-Post/" data-id="clzyy3r5x0000hktn2ooff7km" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/08/18/My-New-Post/" data-id="clzyyjjc90001h0tn259v9zsu" data-title="如何为你的Git注册一个SSL Key?" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -156,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/08/18/hello-world/" data-id="clzyy3r640001hktn30p3a8d5" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/08/18/hello-world/" data-id="clzyyjjc60000h0tn3gj889jm" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -199,7 +209,7 @@
       <ul>
         
           <li>
-            <a href="/2024/08/18/My-New-Post/">(no title)</a>
+            <a href="/2024/08/18/My-New-Post/">如何为你的Git注册一个SSL Key?</a>
           </li>
         
           <li>
