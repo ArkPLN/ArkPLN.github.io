@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2025/04/06/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/bench.webp">
 <meta property="article:published_time" content="2025-04-06T13:20:29.000Z">
-<meta property="article:modified_time" content="2025-04-06T13:41:11.523Z">
+<meta property="article:modified_time" content="2025-04-08T03:54:49.630Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2025/04/06/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/bench.webp">
@@ -291,7 +291,7 @@
               <div class="markdown-body">
                 
                 <h1 id="前端八股文学习笔记"><a href="#前端八股文学习笔记" class="headerlink" title="前端八股文学习笔记"></a>前端八股文学习笔记</h1><h2 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h2><h3 id="EventLoop-微任务与宏任务"><a href="#EventLoop-微任务与宏任务" class="headerlink" title="EventLoop 微任务与宏任务"></a>EventLoop 微任务与宏任务</h3><blockquote>
-<p>参考资料：<br><a href="%22https://juejin.cn/post/7484521465200132122%22">深入浅出 JavaScript 事件循环与异步编程技巧</a><br><a href="%22https://juejin.cn/post/7108751200262029319%22">一文详解Event Loop事件循环、微任务、宏任务</a></p>
+<p>参考资料：<br><a href="https://juejin.cn/post/7484521465200132122" target="_blank" rel="noopener noreferrer">深入浅出 JavaScript 事件循环与异步编程技巧</a><br><a href="https://juejin.cn/post/7108751200262029319" target="_blank" rel="noopener noreferrer">一文详解Event Loop事件循环、微任务、宏任务</a></p>
 </blockquote>
 <h4 id="1-调用栈"><a href="#1-调用栈" class="headerlink" title="1.调用栈"></a>1.调用栈</h4><p>调用栈是 JavaScript 执行<strong>同步代码</strong>的地方。它是一个<strong>后进先出</strong>的数据结构，用来记录函数的调用顺序。每当一个函数被调用时，它就会被推入调用栈；当函数执行完毕后，它就会从调用栈中弹出。</p>
 <p>例如：</p>
@@ -398,7 +398,7 @@
 <h4 id="6-总结"><a href="#6-总结" class="headerlink" title="6.总结"></a>6.总结</h4><p>所有同步任务都在主线程上执行，形成一个执行栈（call stack）。</p>
 <p>遇到异步任务, 进入异步处理模块并注册回调函数; 等到指定的事件完成(如ajax请求响应返回, setTimeout延迟到指定时间)时，异步处理模块会将这个回调函数移入异步任务队列。</p>
 <p>当栈中的代码执行完毕，执行栈中的任务为空时，主线程会先检查微任务队列中是否有任务，如果有，就将微任务队列中的所有任务依次执行，直到微任务队列为空; 之后再检查宏任务队列中是否有任务，如果有，则取出第一个宏任务加入到执行栈中，之后再清空执行栈，检查微任务，以此循环，直到全部的任务都执行完成。</p>
-
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
                 
               </div>
             
