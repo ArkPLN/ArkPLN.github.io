@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2025/04/06/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/bench.webp">
 <meta property="article:published_time" content="2025-04-06T13:20:29.000Z">
-<meta property="article:modified_time" content="2025-04-09T01:06:16.989Z">
+<meta property="article:modified_time" content="2025-04-09T01:22:05.068Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2025/04/06/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/bench.webp">
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k words
+          3.4k words
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
         
-          23 mins
+          29 mins
         
       </span>
     
@@ -464,6 +464,66 @@
 <p>使用 <code>localStorage.removeItem(key)</code> 来删除指定的键值对。</p>
 <p>使用 <code>localStorage.clear()</code> 清除存储在 LocalStorage 中的所有数据。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 存储对象</span><br><span class="hljs-keyword">const</span> user = &#123;<br>  <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;JohnDoe&#x27;</span>,<br>  <span class="hljs-attr">age</span>: <span class="hljs-number">30</span>,<br>&#125;;<br> <br><span class="hljs-comment">// 使用 JSON.stringify 转换对象为字符串</span><br><span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;user&#x27;</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(user));<br> <br><span class="hljs-comment">// 读取对象并使用 JSON.parse 转换回原对象</span><br><span class="hljs-keyword">const</span> storedUser = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">&#x27;user&#x27;</span>));<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(storedUser.<span class="hljs-property">username</span>); <span class="hljs-comment">// &quot;JohnDoe&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(storedUser.<span class="hljs-property">age</span>); <span class="hljs-comment">// 30</span><br><br></code></pre></td></tr></table></figure>
+<h5 id="LocalStorage的缺点"><a href="#LocalStorage的缺点" class="headerlink" title="LocalStorage的缺点"></a>LocalStorage的缺点</h5><ol>
+<li>只能存储字符串：LocalStorage 只能存储字符串类型的数据，其他类型的数据需要进行序列化（<code>JSON.Stringify</code>）。</li>
+<li>同步操作：LocalStorage 是同步的，可能会对性能产生影响，尤其是当存储的数据量较大时。</li>
+<li>同源策略限制：LocalStorage 中的数据是 按域名隔离 的，无法在不同域之间共享数据。</li>
+<li>没有过期时间：LocalStorage 中的数据不会自动过期，因此需要手动管理存储数据的生命周期。如果不手动清理过期数据，可能会造成存储空间浪费。</li>
+<li>不适用于敏感信息：LocalStorage 数据容易被浏览器中的脚本访问，因此不适合存储敏感的用户数据（如密码、令牌等）。它不具备像 Cookie 的 HttpOnly、Secure 和 SameSite 等安全特性。</li>
+</ol>
+<h5 id="localStorage总结"><a href="#localStorage总结" class="headerlink" title="localStorage总结"></a>localStorage总结</h5><p>LocalStorage 是一种客户端存储机制，允许在浏览器中存储数据，具有较大的存储空间（通常为 5MB 或更多），并且数据会在浏览器关闭后保持，直到被手动删除。<br>它非常适合用于持久化存储用户数据、缓存数据和管理 SPA(<em>单网页应用</em>) 的状态。但需要注意的是，LocalStorage 存储的数据容易受到 XSS 攻击，因此不适合存储敏感数据.<br>同时，它的数据存储是同步的，可能会影响性能。在使用时，要谨慎选择合适的数据存储方式，确保数据的安全性和有效管理。</p>
+<h4 id="SessionStorage"><a href="#SessionStorage" class="headerlink" title="SessionStorage"></a>SessionStorage</h4><h5 id="SessionStorages是什么"><a href="#SessionStorages是什么" class="headerlink" title="SessionStorages是什么"></a>SessionStorages是什么</h5><p>SessionStorage 提供了一种简单的方式来在浏览器会话中存储数据，且该数据是 <strong>仅限于当前会话</strong> 的。<br>每个浏览器标签页或窗口都有独立的 SessionStorage，彼此之间的数据不能共享。SessionStorage 与 LocalStorage 类似，但它的生命周期更加短暂。<br><strong>特点：</strong></p>
+<ol>
+<li>会话级存储：数据只在当前浏览器会话期间有效。会话结束时，数据会自动清除。</li>
+<li>每个标签页独立：每个浏览器标签页或窗口都有独立的 SessionStorage，标签页之间不能共享 SessionStorage 数据。</li>
+<li>存储容量：SessionStorage 的存储空间通常与 LocalStorage 相同，通常为 5MB 或更多，具体取决于浏览器。</li>
+<li>同步 API：SessionStorage 的 API 是同步的，意味着每次读取、存储或删除数据时，操作会立即完成。</li>
+</ol>
+<h5 id="sessionStorage的使用"><a href="#sessionStorage的使用" class="headerlink" title="sessionStorage的使用"></a>sessionStorage的使用</h5><p>语法同<code>localStorage</code></p>
+<h5 id="localStorage-VS-sessionStorage-你们知道吗"><a href="#localStorage-VS-sessionStorage-你们知道吗" class="headerlink" title="localStorage VS sessionStorage 你们知道吗"></a>localStorage VS sessionStorage 你们知道吗</h5><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>SessionStorage</th>
+<th>LocalStorage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>存储容量</td>
+<td>5MB 或更多，取决于浏览器</td>
+<td>5MB 或更多，取决于浏览器</td>
+</tr>
+<tr>
+<td>生命周期</td>
+<td>仅在当前会话（标签页）有效，会话结束时删除</td>
+<td>永久存储，直到显式删除</td>
+</tr>
+<tr>
+<td>数据隔离性</td>
+<td>不同标签页、不同窗口的数据隔离</td>
+<td>同一域下的数据共享</td>
+</tr>
+<tr>
+<td>存储方式</td>
+<td>键值对，字符串</td>
+<td>键值对，字符串</td>
+</tr>
+<tr>
+<td>传输到服务器</td>
+<td>不会随每个请求自动发送</td>
+<td>会随每个 HTTP 请求自动发送到服务器</td>
+</tr>
+<tr>
+<td>API 异步性</td>
+<td>同步 API</td>
+<td>同步 API</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>临时存储会话信息，如用户登录状态、购物车等</td>
+<td>长期存储用户设置、偏好、浏览历史等</td>
+</tr>
+</tbody></table>
 
                 
               </div>
