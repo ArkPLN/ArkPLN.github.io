@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2025/04/06/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/bench.webp">
 <meta property="article:published_time" content="2025-04-06T13:20:29.000Z">
-<meta property="article:modified_time" content="2025-04-09T01:22:05.068Z">
+<meta property="article:modified_time" content="2025-04-18T13:12:36.627Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2025/04/06/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/bench.webp">
@@ -409,19 +409,20 @@
 </ol>
 <h5 id="Cookies在HTTP中的使用"><a href="#Cookies在HTTP中的使用" class="headerlink" title="Cookies在HTTP中的使用"></a>Cookies在HTTP中的使用</h5><p>在 HTTP 请求和响应中，Cookie 的使用主要通过 HTTP 头部来进行。</p>
 <ol>
-<li>服务器设置 Cookie：<br>当服务器希望在浏览器中存储一些信息时，它会通过 HTTP 响应头中的 <code>Set-Cookie</code> 字段来设置 Cookie。</li>
-</ol>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-meta">HTTP/1.1</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>text/html<br><span class="hljs-attribute">Set-Cookie</span><span class="hljs-punctuation">: </span>userId=12345; Expires=Thu, 01 Jan 2026 00:00:00 GMT; Path=/<br></code></pre></td></tr></table></figure>
-<ol start="2">
-<li>客户端发送 Cookie：当浏览器向服务器发送请求时，浏览器会自动将存储的 Cookie 通过 Cookie 头发送给服务器。例如：</li>
-</ol>
+<li><p>服务器设置 Cookie：<br>当服务器希望在浏览器中存储一些信息时，它会通过 HTTP 响应头中的 <code>Set-Cookie</code> 字段来设置 Cookie。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-meta">HTTP/1.1</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>text/html<br><span class="hljs-attribute">Set-Cookie</span><span class="hljs-punctuation">: </span>userId=12345; Expires=Thu, 01 Jan 2026 00:00:00 GMT; Path=/<br></code></pre></td></tr></table></figure></li>
+<li><p>客户端发送 Cookie：当浏览器向服务器发送请求时，浏览器会自动将存储的 Cookie 通过 Cookie 头发送给服务器。例如：</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">/index.html</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>www.example.com<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>userId=12345<br></code></pre></td></tr></table></figure>
-<h5 id="Cookie-的生命周期"><a href="#Cookie-的生命周期" class="headerlink" title="Cookie 的生命周期"></a>Cookie 的生命周期</h5><ul>
+
+<h5 id="Cookie-的生命周期"><a href="#Cookie-的生命周期" class="headerlink" title="Cookie 的生命周期"></a>Cookie 的生命周期</h5></li>
+</ol>
+<ul>
 <li><strong>会话 Cookie</strong>：没有设置 <code>Expires</code> 或 <code>Max-Age</code> 的 Cookie 是会话 Cookie，它仅在当前浏览器会话有效，浏览器关闭时会自动删除。</li>
 <li><strong>持久 Cookie</strong>：设置了 <code>Expires</code> 或 <code>Max-Age</code>，则该 Cookie 是持久化的，直到指定的时间点才会过期。</li>
 </ul>
 <h5 id="Cookies的设置"><a href="#Cookies的设置" class="headerlink" title="Cookies的设置"></a>Cookies的设置</h5><p>可以通过 <code>document.cookie</code> 来设置 Cookie。基本语法如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span> = <span class="hljs-string">&#x27;name=value; expires=expiration_date; path=path; domain=domain; secure&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
 <ul>
 <li><code>name=value</code>：Cookie 的键值对。</li>
 <li><code>expires</code>：指定过期时间，必须是有效的 UTC 格式。如果不设置，则默认为会话 Cookie。</li>
@@ -430,9 +431,12 @@
 <li><code>secure</code>：表示该 Cookie 只通过 HTTPS 协议发送。</li>
 </ul>
 <h5 id="Cookies的安全性"><a href="#Cookies的安全性" class="headerlink" title="Cookies的安全性"></a>Cookies的安全性</h5><ul>
-<li><code>HttpOnly</code>：如果设置了 <code>HttpOnly</code> 标志，该 Cookie 不能被 JavaScript 访问，避免 XSS 攻击窃取 Cookie 中的敏感信息。</li>
-<li><code>Secure</code>：如果设置了 <code>Secure</code> 标志，Cookie 只能通过 HTTPS 连接发送，避免在 HTTP 连接中泄漏。</li>
-<li><code>SameSite</code>：<code>SameSite</code> 属性可以防止跨站请求伪造攻击。它有三种值：</li>
+<li><p><code>HttpOnly</code>：如果设置了 <code>HttpOnly</code> 标志，该 Cookie 不能被 JavaScript 访问，避免 XSS 攻击窃取 Cookie 中的敏感信息。</p>
+</li>
+<li><p><code>Secure</code>：如果设置了 <code>Secure</code> 标志，Cookie 只能通过 HTTPS 连接发送，避免在 HTTP 连接中泄漏。</p>
+</li>
+<li><p><code>SameSite</code>：<code>SameSite</code> 属性可以防止跨站请求伪造攻击。它有三种值：</p>
+</li>
 </ul>
 <ol>
 <li><p>Strict：严格限制，只有在相同站点内的请求中才会发送 Cookie。</p>
@@ -460,10 +464,12 @@
 <h5 id="localStorage的使用"><a href="#localStorage的使用" class="headerlink" title="localStorage的使用"></a>localStorage的使用</h5><p>LocalStorage 使用 键值对 存储数据，你可以通过 localStorage 对象的 API 来设置、获取、删除数据。</p>
 <p>我们可以使用 <code>localStorage.setItem(key, value)</code> 方法存储数据。<br>这里的 key 是数据的键，value 是存储的数据。<br>值必须是<strong>字符串</strong>，如果要存储非字符串数据，需要先将其转换为字符串（通常使用 <code>JSON.stringify()</code>）。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 存储数据</span><br><span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;username&#x27;</span>, <span class="hljs-string">&#x27;JohnDoe&#x27;</span>);<br><span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;30&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
 <p>通过 <code>localStorage.getItem(key)</code> 方法来读取存储的数据。它会返回该 key 对应的值，如果该键不存在，则返回 null。</p>
 <p>使用 <code>localStorage.removeItem(key)</code> 来删除指定的键值对。</p>
 <p>使用 <code>localStorage.clear()</code> 清除存储在 LocalStorage 中的所有数据。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 存储对象</span><br><span class="hljs-keyword">const</span> user = &#123;<br>  <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;JohnDoe&#x27;</span>,<br>  <span class="hljs-attr">age</span>: <span class="hljs-number">30</span>,<br>&#125;;<br> <br><span class="hljs-comment">// 使用 JSON.stringify 转换对象为字符串</span><br><span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;user&#x27;</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(user));<br> <br><span class="hljs-comment">// 读取对象并使用 JSON.parse 转换回原对象</span><br><span class="hljs-keyword">const</span> storedUser = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">&#x27;user&#x27;</span>));<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(storedUser.<span class="hljs-property">username</span>); <span class="hljs-comment">// &quot;JohnDoe&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(storedUser.<span class="hljs-property">age</span>); <span class="hljs-comment">// 30</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 存储对象</span><br><span class="hljs-keyword">const</span> user = &#123;<br>  <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;JohnDoe&#x27;</span>,<br>  <span class="hljs-attr">age</span>: <span class="hljs-number">30</span>,<br>&#125;;<br><br><span class="hljs-comment">// 使用 JSON.stringify 转换对象为字符串</span><br><span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;user&#x27;</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(user));<br><br><span class="hljs-comment">// 读取对象并使用 JSON.parse 转换回原对象</span><br><span class="hljs-keyword">const</span> storedUser = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">&#x27;user&#x27;</span>));<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(storedUser.<span class="hljs-property">username</span>); <span class="hljs-comment">// &quot;JohnDoe&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(storedUser.<span class="hljs-property">age</span>); <span class="hljs-comment">// 30</span><br><br></code></pre></td></tr></table></figure>
+
 <h5 id="LocalStorage的缺点"><a href="#LocalStorage的缺点" class="headerlink" title="LocalStorage的缺点"></a>LocalStorage的缺点</h5><ol>
 <li>只能存储字符串：LocalStorage 只能存储字符串类型的数据，其他类型的数据需要进行序列化（<code>JSON.Stringify</code>）。</li>
 <li>同步操作：LocalStorage 是同步的，可能会对性能产生影响，尤其是当存储的数据量较大时。</li>
@@ -524,7 +530,7 @@
 <td>长期存储用户设置、偏好、浏览历史等</td>
 </tr>
 </tbody></table>
-
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5>
                 
               </div>
             
