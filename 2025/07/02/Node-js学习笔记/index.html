@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/npm-install%E6%B5%81%E7%A8%8B.webp">
 <meta property="article:published_time" content="2025-07-02T12:28:37.000Z">
-<meta property="article:modified_time" content="2025-07-03T15:23:41.903Z">
+<meta property="article:modified_time" content="2025-07-04T14:10:48.300Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/npm-install%E6%B5%81%E7%A8%8B.webp">
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k words
+          2.9k words
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
         
-          18 mins
+          25 mins
         
       </span>
     
@@ -568,6 +568,41 @@
 </ul>
 </li>
 </ol>
+<h2 id="CSR-SSR-SEO"><a href="#CSR-SSR-SEO" class="headerlink" title="CSR SSR SEO"></a>CSR SSR SEO</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>在node环境下无法直接操作DOM和BOM,可以通过<code>jsdom</code>实现,模拟浏览器的环境</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;node:fs&#x27;</span>)<br><span class="hljs-keyword">const</span> &#123; <span class="hljs-variable constant_">JSDOM</span> &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;jsdom&#x27;</span>)<br><br><span class="hljs-keyword">const</span> dom = <span class="hljs-keyword">new</span> <span class="hljs-title function_">JSDOM</span>(<span class="hljs-string">`&lt;!DOCTYPE html&gt;&lt;div id=&#x27;app&#x27;&gt;&lt;/div&gt;`</span>)<br><br><span class="hljs-keyword">const</span> <span class="hljs-variable language_">document</span> = dom.<span class="hljs-property">window</span>.<span class="hljs-property">document</span><br><br><span class="hljs-keyword">const</span> <span class="hljs-variable language_">window</span> = dom.<span class="hljs-property">window</span><br><br><span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;https://api.thecatapi.com/v1/images/search?limit=10&amp;page=1&#x27;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> res.<span class="hljs-title function_">json</span>()).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> app = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;app&#x27;</span>)<br>    data.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">item</span>=&gt;</span>&#123;<br>       <span class="hljs-keyword">const</span> img =  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;img&#x27;</span>)<br>       img.<span class="hljs-property">src</span> = item.<span class="hljs-property">url</span><br>       img.<span class="hljs-property">style</span>.<span class="hljs-property">width</span> = <span class="hljs-string">&#x27;200px&#x27;</span><br>       img.<span class="hljs-property">style</span>.<span class="hljs-property">height</span> = <span class="hljs-string">&#x27;200px&#x27;</span><br>       app.<span class="hljs-title function_">appendChild</span>(img)<br>    &#125;)<br>    fs.<span class="hljs-title function_">writeFileSync</span>(<span class="hljs-string">&#x27;./index.html&#x27;</span>, dom.<span class="hljs-title function_">serialize</span>())<br>&#125;)<br><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="CSR-SSR"><a href="#CSR-SSR" class="headerlink" title="CSR&#x2F;SSR"></a>CSR&#x2F;SSR</h3><p>我们上面的操作属于SSR <code>（Server-Side Rendering）</code>服务端渲染请求数据和拼装都在服务端完成，而我们的Vue,react 等框架这里不谈(nuxtjs,nextjs)，是在客户端完成渲染拼接的属于CSR<code>（Client-Side Rendering）</code>客户端渲染.</p>
+<p>CSR 和 SSR 区别</p>
+<ol>
+<li><p>页面加载方式：</p>
+<ul>
+<li>CSR：在 CSR 中，服务器返回一个初始的 HTML 页面，然后浏览器下载并执行 JavaScript 文件，JavaScript 负责动态生成并更新页面内容。这意味着初始页面加载时，内容较少，页面结构和样式可能存在一定的延迟。</li>
+<li>SSR：在 SSR 中，服务器在返回给浏览器之前，会预先在服务器端生成完整的 HTML 页面，包含了初始的页面内容。浏览器接收到的是已经渲染好的 HTML 页面，因此初始加载的速度较快。</li>
+</ul>
+</li>
+<li><p>内容生成和渲染：</p>
+<ul>
+<li>CSR：在 CSR 中，页面的内容生成和渲染是由客户端的 JavaScript 脚本负责的。当数据变化时，JavaScript 会重新生成并更新 DOM，从而实现内容的动态变化。这种方式使得前端开发更加灵活，可以创建复杂的交互和动画效果。</li>
+<li>SSR：在 SSR 中，服务器在渲染页面时会执行应用程序的代码，并生成最终的 HTML 页面。这意味着页面的初始内容是由服务器生成的，对于一些静态或少变的内容，可以提供更好的首次加载性能。</li>
+</ul>
+</li>
+<li><p>用户交互和体验：</p>
+<ul>
+<li>CSR：在 CSR 中，一旦初始页面加载完成，后续的用户交互通常是通过 AJAX 或 WebSocket 与服务器进行数据交互，然后通过 JavaScript 更新页面内容。这种方式可以提供更快的页面切换和响应速度，但对于搜索引擎爬虫和 SEO（搜索引擎优化）来说，可能需要一些额外的处理。</li>
+<li>SSR：在 SSR 中，由于页面的初始内容是由服务器生成的，因此用户交互可以直接在服务器上执行，然后服务器返回更新后的页面。这样可以提供更好的首次加载性能和对搜索引擎友好的内容。</li>
+</ul>
+</li>
+</ol>
+<p>CSR 应用例如 ToB 后台管理系统 大屏可视化 都可以采用CSR渲染不需要很高的SEO支持</p>
+<p>SSR 应用例如 内容密集型应用大部分是ToC 新闻网站 ，博客网站，电子商务，门户网站需要更高的SEO支持</p>
+<h2 id="Path"><a href="#Path" class="headerlink" title="Path"></a>Path</h2><blockquote>
+<p>path模块在不同的操作系统是有差异的(Windows&#x2F;POSIX)</p>
+</blockquote>
+<h3 id="POSIX"><a href="#POSIX" class="headerlink" title="POSIX"></a>POSIX</h3><p>Unix,like-unix,macOS,Linux,WSL都遵循POSIX标准,使用正斜杠<code>/</code></p>
+<h3 id="Win32"><a href="#Win32" class="headerlink" title="Win32"></a>Win32</h3><p>使用双反斜杠<code>\\</code></p>
+<h3 id="兼容性处理方法"><a href="#兼容性处理方法" class="headerlink" title="兼容性处理方法"></a>兼容性处理方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(path.<span class="hljs-property">win32</span>.<span class="hljs-title function_">basename</span>(<span class="hljs-string">&#x27;\\foo\\bar\\baz\\xm.html&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+
 
                 
               </div>
