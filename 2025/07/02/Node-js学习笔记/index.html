@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/npm-install%E6%B5%81%E7%A8%8B.webp">
 <meta property="article:published_time" content="2025-07-02T12:28:37.000Z">
-<meta property="article:modified_time" content="2025-07-04T14:10:48.300Z">
+<meta property="article:modified_time" content="2025-07-05T15:14:52.859Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/npm-install%E6%B5%81%E7%A8%8B.webp">
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k words
+          3.1k words
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
         
-          25 mins
+          27 mins
         
       </span>
     
@@ -595,15 +595,31 @@
 </ol>
 <p>CSR 应用例如 ToB 后台管理系统 大屏可视化 都可以采用CSR渲染不需要很高的SEO支持</p>
 <p>SSR 应用例如 内容密集型应用大部分是ToC 新闻网站 ，博客网站，电子商务，门户网站需要更高的SEO支持</p>
-<h2 id="Path"><a href="#Path" class="headerlink" title="Path"></a>Path</h2><blockquote>
+<h2 id="Path模块"><a href="#Path模块" class="headerlink" title="Path模块"></a>Path模块</h2><blockquote>
 <p>path模块在不同的操作系统是有差异的(Windows&#x2F;POSIX)</p>
 </blockquote>
 <h3 id="POSIX"><a href="#POSIX" class="headerlink" title="POSIX"></a>POSIX</h3><p>Unix,like-unix,macOS,Linux,WSL都遵循POSIX标准,使用正斜杠<code>/</code></p>
 <h3 id="Win32"><a href="#Win32" class="headerlink" title="Win32"></a>Win32</h3><p>使用双反斜杠<code>\\</code></p>
 <h3 id="兼容性处理方法"><a href="#兼容性处理方法" class="headerlink" title="兼容性处理方法"></a>兼容性处理方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(path.<span class="hljs-property">win32</span>.<span class="hljs-title function_">basename</span>(<span class="hljs-string">&#x27;\\foo\\bar\\baz\\xm.html&#x27;</span>))<br></code></pre></td></tr></table></figure>
 
-
-
+<h3 id="Path模块常用方法"><a href="#Path模块常用方法" class="headerlink" title="Path模块常用方法"></a>Path模块常用方法</h3><ol>
+<li><p><code>basename</code> :返回给定路径的文件名(含文件扩展名)</p>
+</li>
+<li><p><code>dirname</code>:返回路径的目录名</p>
+</li>
+<li><p><code>extname</code>:返回路径的扩展名(带点,形如<code>.html</code>)<br><em>如果没有,返回空字符串;如果有多个点,返回最后一个点后面的内容</em></p>
+</li>
+<li><p><code>path.join(params)</code>:将多个路径字符串合并为一个字符串</p>
+</li>
+<li><p><code>path.resolve(params)</code>:解析路径,返回绝对路径;若有多个路径参数则返回最后一个;若只有一个相对路径,返回当前工作目录的绝对路径.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(path.<span class="hljs-title function_">resolve</span>(<span class="hljs-string">&#x27;/a&#x27;</span>))<br><span class="hljs-comment">// D:\a</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(path.<span class="hljs-title function_">resolve</span>(<span class="hljs-string">&#x27;./index.js&#x27;</span>))<br><span class="hljs-comment">// D:\Project\Program\Node\index.js</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(path.<span class="hljs-title function_">resolve</span>(<span class="hljs-string">&#x27;D:/Project/Program/Node&#x27;</span>,<span class="hljs-string">&#x27;./node_modules&#x27;</span>,<span class="hljs-string">&#x27;./.bin/tldts&#x27;</span>))<br><span class="hljs-comment">// D:\Project\Program\Node\node_modules\.bin\tldts</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>path.parse()</code>:解析路径,返回对象</p>
+</li>
+<li><p><code>path.format()</code>:根据传入的对象解析路径</p>
+</li>
+</ol>
+<h2 id="OS模块"><a href="#OS模块" class="headerlink" title="OS模块"></a>OS模块</h2>
                 
               </div>
             
