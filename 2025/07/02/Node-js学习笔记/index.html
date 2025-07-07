@@ -27,8 +27,9 @@
 <meta property="og:description" content="Node.js学习笔记Node.js 是一个开源、跨平台的 JavaScript 运行时环境。 概述适合IO密集型运算，可用于前后端开发。 前端：Vue Angular React Nuxtjs 后端：  Serverless  Web应用：Express,Nextjs,koa  RPC服务：gRPC  爬虫：Puppeteer  BFF层  及时性应用：Socket.io   桌面端：  Ele">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/npm-install%E6%B5%81%E7%A8%8B.webp">
+<meta property="og:image" content="http://example.com/2025/07/02/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/re-sub.webp">
 <meta property="article:published_time" content="2025-07-02T12:28:37.000Z">
-<meta property="article:modified_time" content="2025-07-06T09:40:40.962Z">
+<meta property="article:modified_time" content="2025-07-07T10:55:49.120Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/npm-install%E6%B5%81%E7%A8%8B.webp">
@@ -237,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.1k words
+          5k words
         
       </span>
     
@@ -248,7 +249,7 @@
         
         
         
-          35 mins
+          42 mins
         
       </span>
     
@@ -699,6 +700,52 @@
 <li><code>execFileSync()</code>:同上,同步方法</li>
 <li><code>fork()</code>:创建子进程,但仅限于js模块,父子进程可相互通信</li>
 </ol>
+<h2 id="Events"><a href="#Events" class="headerlink" title="Events"></a>Events</h2><p>Node.js核心API都采用异步事件驱动架构,通过有效的方法监听事件状态的变化,在变化时做出相应的动作.</p>
+<h3 id="事件模型"><a href="#事件模型" class="headerlink" title="事件模型"></a>事件模型</h3><p><code>发布-订阅设计模式</code></p>
+<img title="" src="./Node-js学习笔记/re-sub.webp" srcset="/img/loading.gif" lazyload alt="">
+
+<p>当一个发布者有新消息时，就将这个消息发布到调度中心。调度中心就会将这个消息通知给所有订阅者。这就实现了发布者和订阅者之间的解耦，发布者和订阅者不再直接依赖于彼此，他们可以独立地扩展自己.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><br><span class="hljs-keyword">const</span> eventEmitter = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>)<br><br><span class="hljs-comment">// 发布订阅模式 off on emit once</span><br><br><span class="hljs-keyword">const</span> bus = <span class="hljs-keyword">new</span> <span class="hljs-title function_">eventEmitter</span>()<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">fn</span> = (<span class="hljs-params">name</span>)=&gt;&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name)<br>&#125;<br><br><br><span class="hljs-comment">//订阅一个事件</span><br>bus.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;test&#x27;</span>,fn)<br><span class="hljs-comment">//移除一个事件订阅</span><br>bus.<span class="hljs-title function_">off</span>(<span class="hljs-string">&#x27;test&#x27;</span>,fn)<br><span class="hljs-comment">//仅执行一次</span><br>bus.<span class="hljs-title function_">once</span>(<span class="hljs-string">&#x27;testonce&#x27;</span>,<span class="hljs-function">()=&gt;</span>&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Only run once.&quot;</span>)<br>&#125;)<br><br><span class="hljs-comment">//发布事件</span><br>bus.<span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;test&#x27;</span>,<span class="hljs-string">&quot;xm&quot;</span>)<br><br>bus.<span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;testonce&#x27;</span>)<br>bus.<span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;testonce&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>监听消息数量默认是<strong>10</strong>个,可以通过调用<code>setMaxListeners</code>传入数量.</p>
+<h2 id="Util"><a href="#Util" class="headerlink" title="Util"></a>Util</h2><p>util是Nodejs内部提供的实用工具类API.</p>
+<ol>
+<li><strong><code>util.promisify()</code></strong> :将回调函数包装为Promise类型</li>
+</ol>
+<p><em>注:</em> 如果有多个返回值,res为js对象;若只有一个返回值,res即是本身</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; exec &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:child_process&#x27;</span><br><span class="hljs-keyword">import</span> util <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:util&#x27;</span><br><br><span class="hljs-keyword">const</span> execPromise = util.<span class="hljs-title function_">promisify</span>(exec)<br><br><span class="hljs-title function_">execPromise</span>(<span class="hljs-string">&#x27;node -v&#x27;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">res</span>=&gt;</span>&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res,<span class="hljs-string">&#x27;res&#x27;</span>)<br>&#125;).<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">err</span>=&gt;</span>&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(err,<span class="hljs-string">&#x27;err&#x27;</span>)<br>&#125;)<br><br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong><code>util.callbackify</code></strong> :将promise类型的方法变成 回调函数。</li>
+<li><strong><code>util.format</code></strong>:输入格式化<ul>
+<li><code>%s</code>: <code>String</code> 将用于转换除 <code>BigInt</code>、<code>Object</code> 和 <code>-0</code> 之外的所有值。 <code>BigInt</code> 值将用 <code>n</code> 表示，没有用户定义的 <code>toString</code> 函数的对象使用具有选项 <code>&#123; depth: 0, colors: false, compact: 3 &#125;</code> 的 <code>util.inspect()</code> 进行检查。</li>
+<li><code>%d</code>: <code>Number</code> 将用于转换除 <code>BigInt</code> 和 <code>Symbol</code> 之外的所有值。</li>
+<li><code>%i</code>: <code>parseInt(value, 10)</code> 用于除 <code>BigInt</code> 和 <code>Symbol</code> 之外的所有值。</li>
+<li><code>%f</code>: <code>parseFloat(value)</code> 用于除 <code>Symbol</code> 之外的所有值。</li>
+<li><code>%j</code>: JSON。 如果参数包含循环引用，则替换为字符串 <code>&#39;[Circular]&#39;</code>。</li>
+<li><code>%o</code>: <code>Object</code>. 具有通用 JavaScript 对象格式的对象的字符串表示形式。 类似于具有选项 <code>&#123; showHidden: true, showProxy: true &#125;</code> 的 <code>util.inspect()</code>。 这将显示完整的对象，包括不可枚举的属性和代理。</li>
+<li><code>%O</code>: <code>Object</code>. 具有通用 JavaScript 对象格式的对象的字符串表示形式。 类似于没有选项的 <code>util.inspect()</code>。 这将显示完整的对象，但不包括不可枚举的属性和代理。</li>
+<li><code>%c</code>: <code>CSS</code>. 此说明符被忽略，将跳过任何传入的 CSS。</li>
+<li><code>%%</code>: 单个百分号 (<code>&#39;%&#39;</code>)。 这不消费参数。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Fs-文件模块"><a href="#Fs-文件模块" class="headerlink" title="Fs-文件模块"></a>Fs-文件模块</h2><h3 id="1-读取文件"><a href="#1-读取文件" class="headerlink" title="1. 读取文件"></a>1. 读取文件</h3><p>  <code>fs.readFile()</code>:异步方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;node:fs&#x27;</span>)<br><br><span class="hljs-comment">// 异步方法</span><br>fs.<span class="hljs-title function_">readFile</span>(<span class="hljs-string">&#x27;./index.txt&#x27;</span>,&#123;<br>    <span class="hljs-attr">encoding</span>:<span class="hljs-string">&#x27;utf-8&#x27;</span>,<br>    <span class="hljs-attr">flag</span>:<span class="hljs-string">&#x27;r&#x27;</span><br>&#125;,<span class="hljs-function">(<span class="hljs-params">err,data</span>)=&gt;</span>&#123;<br>    <span class="hljs-keyword">if</span>(err)&#123;<br>        <span class="hljs-keyword">throw</span> err<br>    &#125;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data)<br>&#125;)<br><br><br></code></pre></td></tr></table></figure>
+
+<p><code>fs.readFileSync()</code>:同步方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;node:fs&#x27;</span>)<br><br><span class="hljs-comment">// 同步方法,会导致代码阻塞</span><br><span class="hljs-keyword">const</span> res = fs.<span class="hljs-title function_">readFileSync</span>(<span class="hljs-string">&#x27;./index.txt&#x27;</span>)<br><span class="hljs-comment">// sync方法的返回值都是buffer流,需要toString方法处理后才能得到原始值</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-title function_">toString</span>())<br></code></pre></td></tr></table></figure>
+
+<p><code>fs2.readFile().then()</code>:Promise包装方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> fs2 = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;node:fs/promises&#x27;</span>)<br><br><span class="hljs-comment">//Promise方法</span><br>fs2.<span class="hljs-title function_">readFile</span>(<span class="hljs-string">&#x27;./index.txt&#x27;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">res</span>=&gt;</span>&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-title function_">toString</span>(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p><code>fs.createReadStream()</code>:流式读取文件(适合大文件)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//流式读取-大文件处理</span><br><br><span class="hljs-keyword">const</span> readStream = fs.<span class="hljs-title function_">createReadStream</span>(<span class="hljs-string">&#x27;./index.txt&#x27;</span>)<br><br>readStream.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;data&#x27;</span>,<span class="hljs-function">(<span class="hljs-params">chunk</span>)=&gt;</span>&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(chunk.<span class="hljs-title function_">toString</span>(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br>&#125;)<br><br>readStream.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;end&#x27;</span>,<span class="hljs-function">()=&gt;</span>&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;读取完成&quot;</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-文件夹操作"><a href="#2-文件夹操作" class="headerlink" title="2. 文件夹操作"></a>2. 文件夹操作</h3><p><code>fs.mkdirSync()</code>:创建文件夹,<code>recursive:true</code>允许多层文件夹嵌套</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 创建文件夹</span><br>fs.<span class="hljs-title function_">mkdirSync</span>(<span class="hljs-string">&#x27;./works/native&#x27;</span>,&#123;<br>    <span class="hljs-attr">recursive</span>:<span class="hljs-literal">true</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p><code>fs.rmdirSync()</code>:删除文件夹,若要删除单文件可用<code>fs.rmSync()</code></p>
 
                 
               </div>
