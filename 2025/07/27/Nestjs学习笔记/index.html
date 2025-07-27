@@ -1,0 +1,1001 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Nest.js学习笔记 简介Nest（NestJS）是一个用于构建高效、可扩展的 Node.js 服务端应用的框架。它采用渐进式 JavaScript，使用 TypeScript 构建并全面支持 TypeScript（同时仍允许开发者使用纯 JavaScript 编码），融合了 OOP（面向对象编程）、FP（函数式编程）和 FRP（函数响应式编程）的元素。 在底层，Nest 使用了强大的 HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nestjs学习笔记">
+<meta property="og:url" content="http://example.com/2025/07/27/Nestjs%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Nest.js学习笔记 简介Nest（NestJS）是一个用于构建高效、可扩展的 Node.js 服务端应用的框架。它采用渐进式 JavaScript，使用 TypeScript 构建并全面支持 TypeScript（同时仍允许开发者使用纯 JavaScript 编码），融合了 OOP（面向对象编程）、FP（函数式编程）和 FRP（函数响应式编程）的元素。 在底层，Nest 使用了强大的 HTTP">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-27T03:28:46.000Z">
+<meta property="article:modified_time" content="2025-07-27T10:17:34.537Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Nestjs学习笔记 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"mEwkD7geCX7RWNO8srhDE2oP-gzGzoHsz","app_key":"4EF76hyiVA1QILHZThVbfoat","server_url":"https://mewkd7ge.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Nestjs学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-27 11:28" pubdate>
+          July 27, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Nestjs学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Nest-js学习笔记"><a href="#Nest-js学习笔记" class="headerlink" title="Nest.js学习笔记"></a>Nest.js学习笔记</h1><hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Nest（NestJS）是一个用于构建高效、可扩展的 <a target="_blank" rel="noopener" href="https://nodejs.org/">Node.js</a> 服务端应用的框架。它采用渐进式 JavaScript，使用 <a target="_blank" rel="noopener" href="http://www.typescriptlang.org/">TypeScript</a> 构建并全面支持 TypeScript（同时仍允许开发者使用纯 JavaScript 编码），融合了 OOP（面向对象编程）、FP（函数式编程）和 FRP（函数响应式编程）的元素。</p>
+<p>在底层，Nest 使用了强大的 HTTP 服务器框架如 <a target="_blank" rel="noopener" href="https://expressjs.com/">Express</a>（默认），也可以配置使用 <a target="_blank" rel="noopener" href="https://github.com/fastify/fastify">Fastify</a>！</p>
+<p>Nest 在这些常见的 Node.js 框架（Express&#x2F;Fastify）之上提供了一层抽象，同时也将其 API 直接暴露给开发者。这使得开发者能够自由使用底层平台提供的众多第三方模块。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="快速安装"><a href="#快速安装" class="headerlink" title="快速安装"></a>快速安装</h3><p>默认使用Nestjs脚手架安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">pnpm i @nestjs/cli<br>nest new project-name<br></code></pre></td></tr></table></figure>
+
+<h3 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ./project-name<br>pnpm run start<br></code></pre></td></tr></table></figure>
+
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><h4 id="NestFactory"><a href="#NestFactory" class="headerlink" title="NestFactory"></a>NestFactory</h4><p><code>NestFactory</code> 暴露了几个静态方法，允许创建应用程序实例。<code>create()</code> 方法返回一个应用程序对象<code>NestApplication</code> ，该对象实现了 <code>INestApplication</code> 接口。该对象提供了一组方法，这些方法将在后续章节中描述。我们启动了 HTTP 监听器，这让应用程序可以等待入站的 HTTP 请求。</p>
+<h4 id="Platform-express-Platform-fastify"><a href="#Platform-express-Platform-fastify" class="headerlink" title="Platform-express&#x2F;Platform-fastify"></a>Platform-express&#x2F;Platform-fastify</h4><p>Nest 旨在成为一个平台无关的框架。平台独立性使得创建可重用的逻辑部分成为可能，开发者可以在几种不同类型的应用程序中利用这些部分。从技术上讲，一旦创建了适配器，Nest 就能够与任何 Node HTTP 框架一起工作(<code>AbstractHttpAdapter</code>)。开箱即用支持两个 HTTP 平台：<a target="_blank" rel="noopener" href="https://expressjs.com/">express</a> 和 <a target="_blank" rel="noopener" href="https://www.fastify.io/">fastify</a>。你可以选择最适合你需求的平台。</p>
+<h2 id="Nest-CLI"><a href="#Nest-CLI" class="headerlink" title="Nest CLI"></a>Nest CLI</h2><p><a target="_blank" rel="noopener" href="https://github.com/nestjs/nest-cli">Nest CLI</a> 是一个命令行界面工具，可帮助您初始化、开发和维护 Nest 应用程序。它以多种方式提供支持，包括项目脚手架搭建、开发模式下的服务运行，以及为生产环境构建和打包应用程序。该工具体现了最佳实践的架构模式，以鼓励构建结构良好的应用。</p>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><ol>
+<li><p><code>new</code>:搭建一个包含所有运行所需样板文件的标准模式应用程序</p>
+</li>
+<li><p><code>generate</code>:根据原理图生成和&#x2F;或修改文件</p>
+</li>
+<li><p><code>build</code>:将应用程序或工作区编译到输出文件夹中</p>
+</li>
+<li><p><code>start</code>:编译并运行应用程序（或工作区中的默认项目）</p>
+</li>
+<li><p><code>info</code>:显示已安装的 Nest 包信息及其他有用的系统信息。</p>
+</li>
+</ol>
+<h3 id="工作区"><a href="#工作区" class="headerlink" title="工作区"></a>工作区</h3><p>Nest 有两种代码组织模式：</p>
+<ul>
+<li><strong>标准模式</strong> ：适用于构建专注于单个项目的应用程序，这些应用程序拥有自己的依赖项和设置，不需要优化模块共享或复杂构建。这是默认模式。</li>
+<li><strong>monorepo 模式</strong> ：该模式将代码产物视为轻量级 <strong>monorepo</strong> 的一部分，可能更适合开发团队和&#x2F;或多项目环境。它自动化了部分构建过程，便于创建和组合模块化组件，促进代码重用，简化集成测试，便于共享项目范围内的产物（如 <code>eslint</code> 规则和其他配置策略），且比 Git 子模块等替代方案更易使用。Monorepo 模式采用<strong>工作区</strong>的概念（在 <code>nest-cli.json</code> 文件中表示）来协调 monorepo 各组件间的关系。</li>
+</ul>
+<h3 id="库"><a href="#库" class="headerlink" title="库"></a>库</h3><h4 id="NestJS-中的库（Library）与-Monorepo-结构"><a href="#NestJS-中的库（Library）与-Monorepo-结构" class="headerlink" title="NestJS 中的库（Library）与 Monorepo 结构"></a>NestJS 中的库（Library）与 Monorepo 结构</h4><p>NestJS 提供了多种方式实现模块化复用，其中之一就是<strong>库（Library）</strong>。它适合将通用功能抽离成可复用模块，尤其在 <strong>monorepo</strong> 项目结构中表现更佳。</p>
+<h4 id="库的用途"><a href="#库的用途" class="headerlink" title="库的用途"></a>库的用途</h4><ul>
+<li><p>用于组织内共享模块（如认证、日志等通用逻辑）</p>
+</li>
+<li><p>提高复用性，简化应用组装与维护</p>
+</li>
+<li><p>配合 monorepo，可直接引用最新代码，方便协作开发与测试</p>
+</li>
+</ul>
+<h4 id="库-vs-应用"><a href="#库-vs-应用" class="headerlink" title="库 vs 应用"></a>库 vs 应用</h4><ul>
+<li><p><strong>库不是独立运行的项目</strong>，必须导入到某个应用中使用</p>
+</li>
+<li><p>Nest 使用不同的构建配置管理库，如 <code>entryFile: index</code> 而不是 <code>main</code></p>
+</li>
+<li><p>每个库在 <code>libs/</code> 目录下维护，配置写入 <code>nest-cli.json</code> 和 <code>tsconfig.json</code></p>
+</li>
+</ul>
+<h4 id="创建库"><a href="#创建库" class="headerlink" title="创建库"></a>创建库</h4><p>使用 CLI 命令创建库：</p>
+<p><code>nest g library my-library</code></p>
+<ul>
+<li><p>系统会要求输入前缀（默认 <code>@app</code>），用于 import 路径别名</p>
+</li>
+<li><p>会在 <code>libs/</code> 下生成对应目录和配置</p>
+</li>
+</ul>
+<h4 id="构建库"><a href="#构建库" class="headerlink" title="构建库"></a>构建库</h4><p><code>nest build my-library</code></p>
+<h4 id="在应用中使用库"><a href="#在应用中使用库" class="headerlink" title="在应用中使用库"></a>在应用中使用库</h4><p>在应用模块中引入库模块：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">MyLibraryModule</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@app/my-library&#x27;</span>; <br><span class="hljs-meta">@Module</span>(&#123;  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">MyLibraryModule</span>],&#125;) <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> &#123;&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>此处的 <code>@app/my-library</code> 是通过 tsconfig 的路径映射实现的，Nest 在添加库时自动配置：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;paths&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span> <br>    <span class="hljs-attr">&quot;@app/my-library&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;libs/my-library/src&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;@app/my-library/*&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;libs/my-library/src/*&quot;</span><span class="hljs-punctuation">]</span><br> <span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p><a href="https://docs.nestjs.cn/cli/usages.html" target="_blank">NestCLI用法</a></p>
+<h4 id="nest-generate"><a href="#nest-generate" class="headerlink" title="nest generate"></a>nest generate</h4><p>根据原理图生成和&#x2F;或修改文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">nest generate &lt;schematic&gt; &lt;name&gt; [options]<br>nest g &lt;schematic&gt; &lt;name&gt; [options]<br></code></pre></td></tr></table></figure>
+
+<h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;schematic&gt;</code></td>
+<td>要生成的 schematic 或 collection:schematic。可用的 schematic 请参阅下表。</td>
+</tr>
+<tr>
+<td><code>&lt;name&gt;</code></td>
+<td>所生成组件的名称。</td>
+</tr>
+</tbody></table>
+<h5 id="原理图"><a href="#原理图" class="headerlink" title="原理图"></a>原理图</h5><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>别名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>app</td>
+<td></td>
+<td>在 monorepo 中生成一个新应用（如果是标准结构则转换为 monorepo）。</td>
+</tr>
+<tr>
+<td>library</td>
+<td>lib</td>
+<td>在 monorepo 中生成一个新库（如果是标准结构则转换为 monorepo）。</td>
+</tr>
+<tr>
+<td>class</td>
+<td>cl</td>
+<td>生成一个新类。</td>
+</tr>
+<tr>
+<td>controller</td>
+<td>co</td>
+<td>生成控制器声明。</td>
+</tr>
+<tr>
+<td>decorator</td>
+<td>d</td>
+<td>生成自定义装饰器。</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>f</td>
+<td>生成过滤器声明。</td>
+</tr>
+<tr>
+<td>gateway</td>
+<td>ga</td>
+<td>生成网关声明。</td>
+</tr>
+<tr>
+<td>guard</td>
+<td>gu</td>
+<td>生成守卫声明。</td>
+</tr>
+<tr>
+<td>interface</td>
+<td>itf</td>
+<td>生成一个接口。</td>
+</tr>
+<tr>
+<td>interceptor</td>
+<td>itc</td>
+<td>生成一个拦截器声明。</td>
+</tr>
+<tr>
+<td>middleware</td>
+<td>mi</td>
+<td>生成一个中间件声明。</td>
+</tr>
+<tr>
+<td>module</td>
+<td>mo</td>
+<td>生成一个模块声明。</td>
+</tr>
+<tr>
+<td>pipe</td>
+<td>pi</td>
+<td>生成管道声明。</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>pr</td>
+<td>生成提供者声明。</td>
+</tr>
+<tr>
+<td>resolver</td>
+<td>r</td>
+<td>生成解析器声明。</td>
+</tr>
+<tr>
+<td>resource</td>
+<td>res</td>
+<td>生成新的 CRUD 资源。详情请参阅 CRUD（资源）生成器 。（仅限 TS）</td>
+</tr>
+<tr>
+<td>service</td>
+<td>s</td>
+<td>生成服务声明</td>
+</tr>
+</tbody></table>
+<h2 id="Nest控制器与路由"><a href="#Nest控制器与路由" class="headerlink" title="Nest控制器与路由"></a>Nest控制器与路由</h2><p>控制器负责处理传入的<strong>请求</strong>并向客户端返回<strong>响应</strong>。</p>
+<p>控制器的目的是处理应用程序的特定请求。<strong>路由</strong>机制决定了哪个控制器将处理每个请求。通常，一个控制器具有多个路由，每个路由可以执行不同的操作。</p>
+<p>要创建基本控制器，我们使用类和<strong>装饰器</strong>。装饰器将类与必要的元数据关联起来，使 Nest 能够创建将请求连接到相应控制器的路由映射。</p>
+<h3 id="控制器-Controller"><a href="#控制器-Controller" class="headerlink" title="控制器(Controller)"></a>控制器(Controller)</h3><p>控制器负责处理传入的<strong>请求</strong>并向客户端返回<strong>响应</strong>。</p>
+<p>控制器的目的是处理应用程序的特定请求。<strong>路由</strong>机制决定了哪个控制器将处理每个请求。通常，一个控制器具有多个路由，每个路由可以执行不同的操作。</p>
+<p>要创建基本控制器，我们使用类和<strong>装饰器</strong>。装饰器将类与必要的元数据关联起来，使 Nest 能够创建将请求连接到相应控制器的路由映射。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Controller</span>, <span class="hljs-title class_">Get</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;<br><br><span class="hljs-meta">@Controller</span>(<span class="hljs-string">&#x27;cats&#x27;</span>) <span class="hljs-comment">// 设置路由前缀</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CatsController</span> &#123;<br>  <span class="hljs-meta">@Get</span>() <span class="hljs-comment">// 处理 GET /cats 请求</span><br>  <span class="hljs-title function_">findAll</span>(): <span class="hljs-built_in">string</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;This action returns all cats&#x27;</span>;<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>💡 使用 CLI 快速生成控制器：  <code>$ nest g controller [name]</code></p>
+</blockquote>
+<h4 id="路由路径组成"><a href="#路由路径组成" class="headerlink" title="路由路径组成"></a>路由路径组成</h4><p>一个处理器的完整路由由两部分组成：</p>
+<ul>
+<li><p>控制器 <em>@Controller()</em> 的路径前缀（如 <code>&#39;cats&#39;</code>）</p>
+</li>
+<li><p>方法装饰器 <em>@Get()</em> 指定的路径（如 <code>@Get(&#39;breed&#39;)</code></p>
+</li>
+</ul>
+<h4 id="路由装饰器"><a href="#路由装饰器" class="headerlink" title="路由装饰器"></a>路由装饰器</h4><table>
+<thead>
+<tr>
+<th>装饰器</th>
+<th>对应 HTTP 方法</th>
+<th>用途说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@Get()</code></td>
+<td>GET</td>
+<td>获取资源（读取数据）</td>
+</tr>
+<tr>
+<td><code>@Post()</code></td>
+<td>POST</td>
+<td>创建资源（提交数据）</td>
+</tr>
+<tr>
+<td><code>@Put()</code></td>
+<td>PUT</td>
+<td>替换资源（整体更新）</td>
+</tr>
+<tr>
+<td><code>@Patch()</code></td>
+<td>PATCH</td>
+<td>更新资源（部分更新）</td>
+</tr>
+<tr>
+<td><code>@Delete()</code></td>
+<td>DELETE</td>
+<td>删除资源</td>
+</tr>
+<tr>
+<td><code>@Options()</code></td>
+<td>OPTIONS</td>
+<td>获取通信选项</td>
+</tr>
+<tr>
+<td><code>@Head()</code></td>
+<td>HEAD</td>
+<td>类似 GET，但不返回响应体</td>
+</tr>
+</tbody></table>
+<h4 id="路由装饰器实践"><a href="#路由装饰器实践" class="headerlink" title="路由装饰器实践"></a>路由装饰器实践</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-meta">@Controller</span>(<span class="hljs-string">&#x27;users&#x27;</span>)<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> &#123;<br>  <span class="hljs-meta">@Get</span>()<br>  <span class="hljs-title function_">findAll</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;GET /users&#x27;</span>;<br>  &#125;<br><br>  <span class="hljs-meta">@Get</span>(<span class="hljs-string">&#x27;:id&#x27;</span>)<br>  <span class="hljs-title function_">findOne</span>(<span class="hljs-params"><span class="hljs-meta">@Param</span>(<span class="hljs-string">&#x27;id&#x27;</span>) <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">`GET /users/<span class="hljs-subst">$&#123;id&#125;</span>`</span>;<br>  &#125;<br><br>  <span class="hljs-meta">@Post</span>()<br>  <span class="hljs-title function_">create</span>(<span class="hljs-params"><span class="hljs-meta">@Body</span>() <span class="hljs-attr">dto</span>: <span class="hljs-title class_">CreateUserDto</span></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;POST /users&#x27;</span>;<br>  &#125;<br><br>  <span class="hljs-meta">@Put</span>(<span class="hljs-string">&#x27;:id&#x27;</span>)<br>  <span class="hljs-title function_">update</span>(<span class="hljs-params"><span class="hljs-meta">@Param</span>(<span class="hljs-string">&#x27;id&#x27;</span>) <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span>, <span class="hljs-meta">@Body</span>() <span class="hljs-attr">dto</span>: <span class="hljs-title class_">UpdateUserDto</span></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">`PUT /users/<span class="hljs-subst">$&#123;id&#125;</span>`</span>;<br>  &#125;<br><br>  <span class="hljs-meta">@Patch</span>(<span class="hljs-string">&#x27;:id&#x27;</span>)<br>  <span class="hljs-title function_">partialUpdate</span>(<span class="hljs-params"><span class="hljs-meta">@Param</span>(<span class="hljs-string">&#x27;id&#x27;</span>) <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span>, <span class="hljs-meta">@Body</span>() <span class="hljs-attr">partial</span>: <span class="hljs-title class_">Partial</span>&lt;<span class="hljs-title class_">UpdateUserDto</span>&gt;</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">`PATCH /users/<span class="hljs-subst">$&#123;id&#125;</span>`</span>;<br>  &#125;<br><br>  <span class="hljs-meta">@Delete</span>(<span class="hljs-string">&#x27;:id&#x27;</span>)<br>  <span class="hljs-title function_">remove</span>(<span class="hljs-params"><span class="hljs-meta">@Param</span>(<span class="hljs-string">&#x27;id&#x27;</span>) <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">`DELETE /users/<span class="hljs-subst">$&#123;id&#125;</span>`</span>;<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="请求方法装饰器"><a href="#请求方法装饰器" class="headerlink" title="请求方法装饰器"></a>请求方法装饰器</h4><table>
+<thead>
+<tr>
+<th>装饰器</th>
+<th>来源位置</th>
+<th>作用</th>
+<th>典型用于方法</th>
+<th>示例路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@Body()</code></td>
+<td>请求体（body）</td>
+<td>获取 POST&#x2F;PUT&#x2F;PATCH 请求中的 JSON 或表单数据</td>
+<td><code>@Post()</code>、<code>@Put()</code>、<code>@Patch()</code></td>
+<td>POST &#x2F;cats</td>
+</tr>
+<tr>
+<td><code>@Param()</code></td>
+<td>路径参数（params）</td>
+<td>获取 URL 中的动态参数值</td>
+<td><code>@Get()</code>、<code>@Put()</code>、<code>@Delete()</code></td>
+<td>GET &#x2F;cats&#x2F;:id</td>
+</tr>
+<tr>
+<td><code>@Query()</code></td>
+<td>查询参数（query）</td>
+<td>获取 URL 中 <code>?key=value</code> 格式参数</td>
+<td>通常用于 <code>@Get()</code></td>
+<td>GET &#x2F;cats?age&#x3D;3</td>
+</tr>
+<tr>
+<td><code>@Headers()</code></td>
+<td>请求头（headers）</td>
+<td>获取请求头字段</td>
+<td>任何请求</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>@Req()</code></td>
+<td>原始请求对象（Request）</td>
+<td>获取完整请求对象（Express&#x2F;Fastify）</td>
+<td>任何请求</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>@Res()</code></td>
+<td>原始响应对象（Response）</td>
+<td>手动控制响应（状态码、headers）</td>
+<td>任何请求</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>@Ip()</code></td>
+<td>客户端 IP 地址</td>
+<td>获取客户端 IP 地址</td>
+<td>任何请求</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>@HostParam()</code></td>
+<td>路由主机参数</td>
+<td>用于基于主机名的路由</td>
+<td>较少使用</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<h4 id="请求方法装饰器实践"><a href="#请求方法装饰器实践" class="headerlink" title="请求方法装饰器实践"></a>请求方法装饰器实践</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-meta">@Post</span>()<br><span class="hljs-title function_">create</span>(<span class="hljs-params"><span class="hljs-meta">@Body</span>() <span class="hljs-attr">createCatDto</span>: <span class="hljs-title class_">CreateCatDto</span></span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">`创建猫: <span class="hljs-subst">$&#123;createCatDto.name&#125;</span>`</span>;<br>&#125;<br><br><span class="hljs-meta">@Get</span>(<span class="hljs-string">&#x27;:id&#x27;</span>)<br><span class="hljs-title function_">findOne</span>(<span class="hljs-params"><span class="hljs-meta">@Param</span>(<span class="hljs-string">&#x27;id&#x27;</span>) <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span></span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">`查找 ID 为 <span class="hljs-subst">$&#123;id&#125;</span> 的猫`</span>;<br>&#125;<br><br><span class="hljs-meta">@Get</span>()<br><span class="hljs-title function_">findByAge</span>(<span class="hljs-params"><span class="hljs-meta">@Query</span>(<span class="hljs-string">&#x27;age&#x27;</span>) <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span></span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">`查找年龄为 <span class="hljs-subst">$&#123;age&#125;</span> 的猫`</span>;<br>&#125;<br><br><span class="hljs-meta">@Get</span>(<span class="hljs-string">&#x27;header-info&#x27;</span>)<br><span class="hljs-title function_">getHeader</span>(<span class="hljs-params"><span class="hljs-meta">@Headers</span>(<span class="hljs-string">&#x27;user-agent&#x27;</span>) <span class="hljs-attr">ua</span>: <span class="hljs-built_in">string</span></span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">`你的 User-Agent 是 <span class="hljs-subst">$&#123;ua&#125;</span>`</span>;<br>&#125;<br><br><span class="hljs-meta">@Get</span>(<span class="hljs-string">&#x27;ip&#x27;</span>)<br><span class="hljs-title function_">getClientIp</span>(<span class="hljs-params"><span class="hljs-meta">@Ip</span>() <span class="hljs-attr">ip</span>: <span class="hljs-built_in">string</span></span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">`客户端 IP: <span class="hljs-subst">$&#123;ip&#125;</span>`</span>;<br>&#125;<br><br><span class="hljs-meta">@Get</span>(<span class="hljs-string">&#x27;raw&#x27;</span>)<br><span class="hljs-title function_">getRawRequest</span>(<span class="hljs-params"><span class="hljs-meta">@Req</span>() <span class="hljs-attr">req</span>: <span class="hljs-title class_">Request</span></span>) &#123;<br>  <span class="hljs-keyword">return</span> req.<span class="hljs-property">headers</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="最佳实践参考"><a href="#最佳实践参考" class="headerlink" title="最佳实践参考"></a>最佳实践参考</h4><h5 id="拿客户端请求"><a href="#拿客户端请求" class="headerlink" title="拿客户端请求"></a>拿客户端请求</h5><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// cats.controller.ts</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Body</span>, <span class="hljs-title class_">Controller</span>, <span class="hljs-title class_">Post</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;<br><br><span class="hljs-meta">@Controller</span>(<span class="hljs-string">&#x27;cats&#x27;</span>)<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CatsController</span> &#123;<br>  <span class="hljs-meta">@Post</span>()<br>  <span class="hljs-title function_">create</span>(<span class="hljs-params"><span class="hljs-meta">@Body</span>() createCatDto</span>) &#123;<br>    <span class="hljs-keyword">const</span> &#123; name, age, breed &#125; = createCatDto;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">`创建了猫：<span class="hljs-subst">$&#123;name&#125;</span>, 年龄：<span class="hljs-subst">$&#123;age&#125;</span>, 品种：<span class="hljs-subst">$&#123;breed&#125;</span>`</span>;<br>  &#125;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+
+<h5 id="路径参数"><a href="#路径参数" class="headerlink" title="路径参数"></a>路径参数</h5><p>路径：<code>GET /cats/:id</code></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">//多个参数</span><br><span class="hljs-meta">@Get</span>(<span class="hljs-string">&#x27;:id/:action&#x27;</span>)<br><span class="hljs-title function_">handle</span>(<span class="hljs-params"><span class="hljs-meta">@Param</span>() <span class="hljs-attr">params</span>: &#123; id: <span class="hljs-built_in">string</span>; action: <span class="hljs-built_in">string</span> &#125;</span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">`对猫 <span class="hljs-subst">$&#123;params.id&#125;</span> 执行动作 <span class="hljs-subst">$&#123;params.action&#125;</span>`</span>;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+
+<h5 id="查询参数"><a href="#查询参数" class="headerlink" title="查询参数"></a>查询参数</h5><p>路径：<code>GET /cats?age=3&amp;breed=short</code></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-meta">@Get</span>()<br><span class="hljs-title function_">filter</span>(<span class="hljs-params"><span class="hljs-meta">@Query</span>(<span class="hljs-string">&#x27;age&#x27;</span>) <span class="hljs-attr">age</span>: <span class="hljs-built_in">string</span>, <span class="hljs-meta">@Query</span>(<span class="hljs-string">&#x27;breed&#x27;</span>) <span class="hljs-attr">breed</span>: <span class="hljs-built_in">string</span></span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">`查询年龄为 <span class="hljs-subst">$&#123;age&#125;</span>，品种为 <span class="hljs-subst">$&#123;breed&#125;</span> 的猫`</span>;<br>&#125;<br><br><span class="hljs-comment">// 或者整体接收</span><br><span class="hljs-meta">@Get</span>()<br><span class="hljs-title function_">filter</span>(<span class="hljs-params"><span class="hljs-meta">@Query</span>() <span class="hljs-attr">query</span>: &#123; age?: <span class="hljs-built_in">string</span>; breed?: <span class="hljs-built_in">string</span> &#125;</span>) &#123;<br>  <span class="hljs-keyword">return</span> query;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Nestjs学习笔记</div>
+      <div>http://example.com/2025/07/27/Nestjs学习笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 27, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/02/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Node.js学习笔记">
+                        <span class="hidden-mobile">Node.js学习笔记</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"mEwkD7geCX7RWNO8srhDE2oP-gzGzoHsz","appKey":"4EF76hyiVA1QILHZThVbfoat","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"el":"#vcomments"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
