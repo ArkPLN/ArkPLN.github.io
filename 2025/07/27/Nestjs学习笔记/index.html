@@ -27,7 +27,7 @@
 <meta property="og:description" content="Nest.js学习笔记 简介Nest（NestJS）是一个用于构建高效、可扩展的 Node.js 服务端应用的框架。它采用渐进式 JavaScript，使用 TypeScript 构建并全面支持 TypeScript（同时仍允许开发者使用纯 JavaScript 编码），融合了 OOP（面向对象编程）、FP（函数式编程）和 FRP（函数响应式编程）的元素。 在底层，Nest 使用了强大的 HTTP">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-27T03:28:46.000Z">
-<meta property="article:modified_time" content="2025-07-29T14:47:48.096Z">
+<meta property="article:modified_time" content="2025-08-01T13:31:30.046Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k words
+          3.7k words
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          25 mins
+          31 mins
         
       </span>
     
@@ -646,6 +646,82 @@
 <blockquote>
 <p>参考: <a href="https://docs.nestjs.cn/fundamentals/dependency-injection.html#%E5%B7%A5%E5%8E%82%E6%8F%90%E4%BE%9B%E8%80%85usefactory" target="_blank">工厂模式</a></p>
 </blockquote>
+<h2 id="NestModule"><a href="#NestModule" class="headerlink" title="NestModule"></a>NestModule</h2><p>模块是一个用 <code>@Module()</code> 装饰器注解的类。该装饰器提供了元数据，Nest 使用它来有效地组织和管理应用程序结构。</p>
+<p><code>@Module()</code> 装饰器接收一个带有描述模块属性的对象：</p>
+<table>
+<thead>
+<tr>
+<th>模块属性</th>
+<th>模块作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>providers</td>
+<td>将由 Nest 注入器实例化,且至少可在本模块内共享的提供者</td>
+</tr>
+<tr>
+<td>controllers</td>
+<td>本模块中定义的需要实例化的控制器集合</td>
+</tr>
+<tr>
+<td>imports</td>
+<td>导入模块的列表，这些模块导出了本模块所需的提供者</td>
+</tr>
+<tr>
+<td>exports</td>
+<td>本模块提供的 providers 子集，这些提供者应可供导入本模块的其他模块使用。可以使用提供者本身或其令牌（provide 值）</td>
+</tr>
+</tbody></table>
+<p>默认情况下，模块<strong>封装</strong>了提供者，这意味着您只能注入属于当前模块或从其他导入模块显式导出的提供者。模块导出的提供者本质上充当了该模块的公共接口或 API。</p>
+<h3 id="创建Module"><a href="#创建Module" class="headerlink" title="创建Module"></a>创建Module</h3><ol>
+<li>使用NestCLI创建</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nest g res &lt;模块名&gt;<br></code></pre></td></tr></table></figure>
+
+<p>将创建<code>&lt;模块名&gt;Module</code>模块.</p>
+<ol start="2">
+<li><code>import</code>引入,如果涉及跨模块则需<code>@Module(&#123;exports:[]&#125;)</code>转变为共享模块</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// service模块</span><br><span class="hljs-keyword">import</span> &#123;<span class="hljs-title class_">UserService</span>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./user/user.service.ts&#x27;</span><br><br><span class="hljs-meta">@Controller</span>()<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppController</span>&#123;<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-attr">appService</span>:<span class="hljs-title class_">AppService</span>,</span><br><span class="hljs-params">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-title class_">UserService</span>:<span class="hljs-title class_">UserService</span></span><br><span class="hljs-params"></span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// xxx.module.ts</span><br><br><br><span class="hljs-meta">@Module</span>(&#123;<br>    <span class="hljs-attr">exports</span>:[<span class="hljs-title class_">UserService</span>]<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>手动创建并引入依赖项</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// xx.module.ts</span><br><span class="hljs-keyword">import</span> &#123;<span class="hljs-title class_">Module</span>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span><br><br><span class="hljs-comment">//注册到全局的模块修饰符</span><br><span class="hljs-meta">@Global</span><br><span class="hljs-meta">@Module</span>(&#123;<br>    <span class="hljs-attr">provider</span>:[<br>    &#123;<br>    <span class="hljs-attr">provide</span>:<span class="hljs-string">&#x27;Config&#x27;</span>,<br>    <span class="hljs-attr">useValue</span>:&#123;<span class="hljs-attr">baseUrl</span>:<span class="hljs-string">&#x27;/api&#x27;</span>&#125;<br>&#125;<br>],<br>    <span class="hljs-attr">exports</span>:[<br>    &#123;...&#125;<br>]<br>&#125;)<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">xxModule</span>&#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对全局模块的Provider通过<code>@Inject(&#39;ProviderName&#39;) private readonly base:any</code>引入.</p>
+<h2 id="Nest中间件"><a href="#Nest中间件" class="headerlink" title="Nest中间件"></a>Nest中间件</h2><p>中间件是在路由处理程序<strong>之前</strong>调用的函数。中间件函数可以访问<a target="_blank" rel="noopener" href="https://expressjs.com/en/4x/api.html#req">请求</a>和<a target="_blank" rel="noopener" href="https://expressjs.com/en/4x/api.html#res">响应</a>对象，以及应用程序请求-响应周期中的 <code>next()</code> 中间件函数。 <strong>下一个</strong>中间件函数通常由名为 <code>next</code> 的变量表示。</p>
+<blockquote>
+<p>中间件函数可以执行以下任务：</p>
+<ul>
+<li>执行任意代码。</li>
+<li>修改请求和响应对象。</li>
+<li>结束请求-响应周期。</li>
+<li>调用堆栈中的下一个中间件函数。</li>
+<li>如果当前中间件函数没有结束请求-响应周期，它必须调用 <code>next()</code> 将控制权传递给下一个中间件函数。否则，请求将被挂起。</li>
+</ul>
+</blockquote>
+<h3 id="创建中间件"><a href="#创建中间件" class="headerlink" title="创建中间件"></a>创建中间件</h3><ol>
+<li>使用Nest CLI创建</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nest g mi &lt;中间件名&gt; <br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>手动创建</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123;<span class="hljs-title class_">Injectable</span>,<span class="hljs-title class_">NestMiddleware</span>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span><br><br><br><span class="hljs-meta">@Injectable</span>()<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Logger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">NestMiddleware</span>&#123;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="用法-2"><a href="#用法-2" class="headerlink" title="用法"></a>用法</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-meta">@Injectable</span>()<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Logger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">NestMiddleware</span>&#123;<br>    <span class="hljs-title function_">use</span>(<span class="hljs-params">req,res,next</span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Hi&#x27;</span>)<br>    <span class="hljs-comment">//若无Next则被拦截</span><br>    <span class="hljs-title function_">next</span>()<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="导入到Module"><a href="#导入到Module" class="headerlink" title="导入到Module"></a>导入到Module</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// 引入...</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserModule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">NestModule</span>&#123;<br>    <span class="hljs-title function_">configure</span>(<span class="hljs-params"><span class="hljs-attr">consumer</span>:<span class="hljs-title class_">MiddlewareConsumer</span></span>)&#123;<br>    <span class="hljs-comment">// 消费者函数注册中间件</span><br>    consumer.<span class="hljs-title function_">apply</span>(<span class="hljs-title class_">Logger</span>).<span class="hljs-title function_">forRoutes</span>(<span class="hljs-string">&#x27;User&#x27;</span>)<br><br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="全局中间件"><a href="#全局中间件" class="headerlink" title="全局中间件"></a>全局中间件</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// main.ts</span><br><br><span class="hljs-keyword">import</span> &#123;<span class="hljs-title class_">Request</span>,<span class="hljs-title class_">Response</span>,<span class="hljs-title class_">NextFunction</span>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span><br><br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">MiddlewareAll</span>(<span class="hljs-params"><span class="hljs-attr">req</span>:<span class="hljs-title class_">Request</span>,<span class="hljs-attr">res</span>:<span class="hljs-title class_">Response</span>,<span class="hljs-attr">next</span>:<span class="hljs-title class_">NextFunction</span></span>)&#123;<br>    <span class="hljs-comment">//全局中间件逻辑</span><br>&#125;<br><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">bootstrap</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">await</span> <span class="hljs-title class_">NestFactory</span>.<span class="hljs-title function_">create</span>(<span class="hljs-title class_">AppModule</span>);<br>    <span class="hljs-comment">//注册中间件</span><br>    app.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">MiddlewareAll</span>)<br>    ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
 
                 
               </div>
