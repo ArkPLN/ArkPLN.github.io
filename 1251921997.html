@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=auto>
+<html lang="en" data-default-color-scheme="auto">
 
 
 
@@ -17,7 +17,7 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="FangZhou">
-  <meta name="keywords" content="Vue,React,Nodejs,blogs,frontend,web,developer,programmer">
+  <meta name="keywords" content="typescript,javascript,ts,js,web">
   
     <meta name="description" content="TypeScript学习笔记一.TypeScript简介TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6 标准（ES6 教程）。 TypeScript 由微软开发的自由和开源的编程语言，在 JavaScript 的基础上增加了静态类型检查的超集，添加了诸多现代开发特性。 TypeScript 设计目标是开发大型应用，它可以编译成纯 JavaScript，编">
 <meta property="og:type" content="article">
@@ -27,7 +27,7 @@
 <meta property="og:description" content="TypeScript学习笔记一.TypeScript简介TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6 标准（ES6 教程）。 TypeScript 由微软开发的自由和开源的编程语言，在 JavaScript 的基础上增加了静态类型检查的超集，添加了诸多现代开发特性。 TypeScript 设计目标是开发大型应用，它可以编译成纯 JavaScript，编">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-08-02T05:14:31.000Z">
-<meta property="article:modified_time" content="2025-08-13T10:59:37.899Z">
+<meta property="article:modified_time" content="2025-08-13T11:05:34.656Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="ts">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,15 +36,15 @@
   
   <title>TypeScript学习笔记 - Ark的技术博客</title>
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
 
 
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+  <link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
 
 
 
@@ -58,12 +58,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/main.css">
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
   
 
 
@@ -79,8 +79,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
   
 
   
@@ -97,7 +97,7 @@
 
 
 
-  <meta name="google-site-verification" content="5KfTZvtlydmBIzY97rVo-caP5jljAfmD3Qs3sBzY2Go" /><style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+  <meta name="google-site-verification" content="5KfTZvtlydmBIzY97rVo-caP5jljAfmD3Qs3sBzY2Go"><style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
@@ -114,9 +114,7 @@
       <strong>Fluid</strong>
     </a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
@@ -206,8 +204,7 @@
 
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+<div id="banner" class="banner" parallax="true" style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -289,7 +286,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="TypeScript学习笔记"><a href="#TypeScript学习笔记" class="headerlink" title="TypeScript学习笔记"></a>TypeScript学习笔记</h1><h2 id="一-TypeScript简介"><a href="#一-TypeScript简介" class="headerlink" title="一.TypeScript简介"></a>一.TypeScript简介</h2><p>TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6 标准（<a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/es6-tutorial.html">ES6 教程</a>）。</p>
+                <h1 id="TypeScript学习笔记"><a href="#TypeScript学习笔记" class="headerlink" title="TypeScript学习笔记"></a>TypeScript学习笔记</h1><h2 id="一-TypeScript简介"><a href="#一-TypeScript简介" class="headerlink" title="一.TypeScript简介"></a>一.TypeScript简介</h2><p>TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6 标准（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.runoob.com/w3cnote/es6-tutorial.html">ES6 教程</a>）。</p>
 <p>TypeScript 由微软开发的自由和开源的编程语言，在 JavaScript 的基础上增加了静态类型检查的超集，添加了诸多现代开发特性。</p>
 <p>TypeScript 设计目标是开发大型应用，它可以编译成纯 JavaScript，编译出来的 JavaScript 可以运行在任何浏览器上。</p>
 <h2 id="二-为什么需要TypeScript"><a href="#二-为什么需要TypeScript" class="headerlink" title="二.为什么需要TypeScript"></a>二.为什么需要TypeScript</h2><ol>
@@ -951,7 +948,7 @@
                 
               </div>
             
-            <hr/>
+            <hr>
             <div>
               <div class="post-metas my-3">
   
@@ -995,7 +992,7 @@
             
               
               
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" rel="external nofollow noopener noreferrer">
                   <span class="hint--top hint--rounded" aria-label="BY - Attribution">
                     <i class="iconfont icon-cc-by"></i>
                   </span>
@@ -1125,8 +1122,7 @@
     
 
     
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -1155,7 +1151,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="external nofollow noopener noreferrer"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="external nofollow noopener noreferrer"><span>Fluid</span></a> 
     </div>
   
   
@@ -1192,8 +1188,8 @@
 
   <!-- Scripts -->
   
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+  <script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":100})
@@ -1204,13 +1200,13 @@
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
 
 
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -1229,7 +1225,7 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    <script src="/js/img-lazyload.js"></script>
   
 
 
@@ -1275,7 +1271,7 @@
 </script>
 
 
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+  <script src="https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js"></script>
 
   <script>Fluid.plugins.codeWidget();</script>
 
@@ -1328,9 +1324,9 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script defer src="/js/leancloud.js" ></script>
+  <script defer src="/js/leancloud.js"></script>
 
-  <script  src="/js/local-search.js" ></script>
+  <script src="/js/local-search.js"></script>
 
 
 
@@ -1338,7 +1334,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+<script src="/js/boot.js"></script>
 
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3240358922862141" crossorigin="anonymous"></script>

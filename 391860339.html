@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=auto>
+<html lang="en" data-default-color-scheme="auto">
 
 
 
@@ -17,7 +17,7 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="FangZhou">
-  <meta name="keywords" content="Vue,React,Nodejs,blogs,frontend,web,developer,programmer">
+  <meta name="keywords" content="nestjs,nodejs,web">
   
     <meta name="description" content="Nest.js学习笔记 简介Nest（NestJS）是一个用于构建高效、可扩展的 Node.js 服务端应用的框架。它采用渐进式 JavaScript，使用 TypeScript 构建并全面支持 TypeScript（同时仍允许开发者使用纯 JavaScript 编码），融合了 OOP（面向对象编程）、FP（函数式编程）和 FRP（函数响应式编程）的元素。 在底层，Nest 使用了强大的 HTTP">
 <meta property="og:type" content="article">
@@ -27,7 +27,7 @@
 <meta property="og:description" content="Nest.js学习笔记 简介Nest（NestJS）是一个用于构建高效、可扩展的 Node.js 服务端应用的框架。它采用渐进式 JavaScript，使用 TypeScript 构建并全面支持 TypeScript（同时仍允许开发者使用纯 JavaScript 编码），融合了 OOP（面向对象编程）、FP（函数式编程）和 FRP（函数响应式编程）的元素。 在底层，Nest 使用了强大的 HTTP">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-27T03:28:46.000Z">
-<meta property="article:modified_time" content="2025-08-13T10:59:22.876Z">
+<meta property="article:modified_time" content="2025-08-13T11:04:06.417Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="nestjs">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,15 +36,15 @@
   
   <title>Nestjs学习笔记 - Ark的技术博客</title>
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
 
 
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+  <link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
 
 
 
@@ -58,12 +58,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/main.css">
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
   
 
 
@@ -79,8 +79,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
   
 
   
@@ -97,7 +97,7 @@
 
 
 
-  <meta name="google-site-verification" content="5KfTZvtlydmBIzY97rVo-caP5jljAfmD3Qs3sBzY2Go" /><style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+  <meta name="google-site-verification" content="5KfTZvtlydmBIzY97rVo-caP5jljAfmD3Qs3sBzY2Go"><style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
@@ -114,9 +114,7 @@
       <strong>Fluid</strong>
     </a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
@@ -206,8 +204,7 @@
 
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+<div id="banner" class="banner" parallax="true" style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -290,8 +287,8 @@
               <div class="markdown-body">
                 
                 <h1 id="Nest-js学习笔记"><a href="#Nest-js学习笔记" class="headerlink" title="Nest.js学习笔记"></a>Nest.js学习笔记</h1><hr>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Nest（NestJS）是一个用于构建高效、可扩展的 <a target="_blank" rel="noopener" href="https://nodejs.org/">Node.js</a> 服务端应用的框架。它采用渐进式 JavaScript，使用 <a target="_blank" rel="noopener" href="http://www.typescriptlang.org/">TypeScript</a> 构建并全面支持 TypeScript（同时仍允许开发者使用纯 JavaScript 编码），融合了 OOP（面向对象编程）、FP（函数式编程）和 FRP（函数响应式编程）的元素。</p>
-<p>在底层，Nest 使用了强大的 HTTP 服务器框架如 <a target="_blank" rel="noopener" href="https://expressjs.com/">Express</a>（默认），也可以配置使用 <a target="_blank" rel="noopener" href="https://github.com/fastify/fastify">Fastify</a>！</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Nest（NestJS）是一个用于构建高效、可扩展的 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://nodejs.org/">Node.js</a> 服务端应用的框架。它采用渐进式 JavaScript，使用 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.typescriptlang.org/">TypeScript</a> 构建并全面支持 TypeScript（同时仍允许开发者使用纯 JavaScript 编码），融合了 OOP（面向对象编程）、FP（函数式编程）和 FRP（函数响应式编程）的元素。</p>
+<p>在底层，Nest 使用了强大的 HTTP 服务器框架如 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://expressjs.com/">Express</a>（默认），也可以配置使用 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/fastify/fastify">Fastify</a>！</p>
 <p>Nest 在这些常见的 Node.js 框架（Express&#x2F;Fastify）之上提供了一层抽象，同时也将其 API 直接暴露给开发者。这使得开发者能够自由使用底层平台提供的众多第三方模块。</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="快速安装"><a href="#快速安装" class="headerlink" title="快速安装"></a>快速安装</h3><p>默认使用Nestjs脚手架安装</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">pnpm i @nestjs/cli<br>nest new project-name<br></code></pre></td></tr></table></figure>
@@ -299,8 +296,8 @@
 <h3 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ./project-name<br>pnpm run start<br></code></pre></td></tr></table></figure>
 
 <h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><h4 id="NestFactory"><a href="#NestFactory" class="headerlink" title="NestFactory"></a>NestFactory</h4><p><code>NestFactory</code> 暴露了几个静态方法，允许创建应用程序实例。<code>create()</code> 方法返回一个应用程序对象<code>NestApplication</code> ，该对象实现了 <code>INestApplication</code> 接口。该对象提供了一组方法，这些方法将在后续章节中描述。我们启动了 HTTP 监听器，这让应用程序可以等待入站的 HTTP 请求。</p>
-<h4 id="Platform-express-Platform-fastify"><a href="#Platform-express-Platform-fastify" class="headerlink" title="Platform-express&#x2F;Platform-fastify"></a>Platform-express&#x2F;Platform-fastify</h4><p>Nest 旨在成为一个平台无关的框架。平台独立性使得创建可重用的逻辑部分成为可能，开发者可以在几种不同类型的应用程序中利用这些部分。从技术上讲，一旦创建了适配器，Nest 就能够与任何 Node HTTP 框架一起工作(<code>AbstractHttpAdapter</code>)。开箱即用支持两个 HTTP 平台：<a target="_blank" rel="noopener" href="https://expressjs.com/">express</a> 和 <a target="_blank" rel="noopener" href="https://www.fastify.io/">fastify</a>。你可以选择最适合你需求的平台。</p>
-<h2 id="Nest-CLI"><a href="#Nest-CLI" class="headerlink" title="Nest CLI"></a>Nest CLI</h2><p><a target="_blank" rel="noopener" href="https://github.com/nestjs/nest-cli">Nest CLI</a> 是一个命令行界面工具，可帮助您初始化、开发和维护 Nest 应用程序。它以多种方式提供支持，包括项目脚手架搭建、开发模式下的服务运行，以及为生产环境构建和打包应用程序。该工具体现了最佳实践的架构模式，以鼓励构建结构良好的应用。</p>
+<h4 id="Platform-express-Platform-fastify"><a href="#Platform-express-Platform-fastify" class="headerlink" title="Platform-express&#x2F;Platform-fastify"></a>Platform-express&#x2F;Platform-fastify</h4><p>Nest 旨在成为一个平台无关的框架。平台独立性使得创建可重用的逻辑部分成为可能，开发者可以在几种不同类型的应用程序中利用这些部分。从技术上讲，一旦创建了适配器，Nest 就能够与任何 Node HTTP 框架一起工作(<code>AbstractHttpAdapter</code>)。开箱即用支持两个 HTTP 平台：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://expressjs.com/">express</a> 和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.fastify.io/">fastify</a>。你可以选择最适合你需求的平台。</p>
+<h2 id="Nest-CLI"><a href="#Nest-CLI" class="headerlink" title="Nest CLI"></a>Nest CLI</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/nestjs/nest-cli">Nest CLI</a> 是一个命令行界面工具，可帮助您初始化、开发和维护 Nest 应用程序。它以多种方式提供支持，包括项目脚手架搭建、开发模式下的服务运行，以及为生产环境构建和打包应用程序。该工具体现了最佳实践的架构模式，以鼓励构建结构良好的应用。</p>
 <h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><ol>
 <li><p><code>new</code>:搭建一个包含所有运行所需样板文件的标准模式应用程序</p>
 </li>
@@ -350,7 +347,7 @@
 <p>此处的 <code>@app/my-library</code> 是通过 tsconfig 的路径映射实现的，Nest 在添加库时自动配置：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;paths&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span> <br>    <span class="hljs-attr">&quot;@app/my-library&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;libs/my-library/src&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;@app/my-library/*&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;libs/my-library/src/*&quot;</span><span class="hljs-punctuation">]</span><br> <span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p><a href="https://docs.nestjs.cn/cli/usages.html" target="_blank">NestCLI用法</a></p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p><a href="https://docs.nestjs.cn/cli/usages.html" target="_blank" rel="external nofollow noopener noreferrer">NestCLI用法</a></p>
 <h4 id="nest-generate"><a href="#nest-generate" class="headerlink" title="nest generate"></a>nest generate</h4><p>根据原理图生成和&#x2F;或修改文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">nest generate &lt;schematic&gt; &lt;name&gt; [options]<br>nest g &lt;schematic&gt; &lt;name&gt; [options]<br></code></pre></td></tr></table></figure>
 
@@ -645,7 +642,7 @@
 <h4 id="Provider自定义值"><a href="#Provider自定义值" class="headerlink" title="Provider自定义值"></a>Provider自定义值</h4><p>在<code>providers</code>数组下传入对象,使用<code>provide:&#39;alias&#39;,useValue:&#123;...&#125;</code>,在Controller层使用<code>@Inject(&#39;alias&#39;)</code>修饰</p>
 <h4 id="Provider工厂模式"><a href="#Provider工厂模式" class="headerlink" title="Provider工厂模式"></a>Provider工厂模式</h4><p>同上,<code>useFactory()</code></p>
 <blockquote>
-<p>参考: <a href="https://docs.nestjs.cn/fundamentals/dependency-injection.html#%E5%B7%A5%E5%8E%82%E6%8F%90%E4%BE%9B%E8%80%85usefactory" target="_blank">工厂模式</a></p>
+<p>参考: <a href="https://docs.nestjs.cn/fundamentals/dependency-injection.html#%E5%B7%A5%E5%8E%82%E6%8F%90%E4%BE%9B%E8%80%85usefactory" target="_blank" rel="external nofollow noopener noreferrer">工厂模式</a></p>
 </blockquote>
 <h2 id="NestModule"><a href="#NestModule" class="headerlink" title="NestModule"></a>NestModule</h2><p>模块是一个用 <code>@Module()</code> 装饰器注解的类。该装饰器提供了元数据，Nest 使用它来有效地组织和管理应用程序结构。</p>
 <p><code>@Module()</code> 装饰器接收一个带有描述模块属性的对象：</p>
@@ -693,7 +690,7 @@
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// xx.module.ts</span><br><span class="hljs-keyword">import</span> &#123;<span class="hljs-title class_">Module</span>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span><br><br><span class="hljs-comment">//注册到全局的模块修饰符</span><br><span class="hljs-meta">@Global</span><br><span class="hljs-meta">@Module</span>(&#123;<br>    <span class="hljs-attr">provider</span>:[<br>    &#123;<br>    <span class="hljs-attr">provide</span>:<span class="hljs-string">&#x27;Config&#x27;</span>,<br>    <span class="hljs-attr">useValue</span>:&#123;<span class="hljs-attr">baseUrl</span>:<span class="hljs-string">&#x27;/api&#x27;</span>&#125;<br>&#125;<br>],<br>    <span class="hljs-attr">exports</span>:[<br>    &#123;...&#125;<br>]<br>&#125;)<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">xxModule</span>&#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>对全局模块的Provider通过<code>@Inject(&#39;ProviderName&#39;) private readonly base:any</code>引入.</p>
-<h2 id="Nest中间件"><a href="#Nest中间件" class="headerlink" title="Nest中间件"></a>Nest中间件</h2><p>中间件是在路由处理程序<strong>之前</strong>调用的函数。中间件函数可以访问<a target="_blank" rel="noopener" href="https://expressjs.com/en/4x/api.html#req">请求</a>和<a target="_blank" rel="noopener" href="https://expressjs.com/en/4x/api.html#res">响应</a>对象，以及应用程序请求-响应周期中的 <code>next()</code> 中间件函数。 <strong>下一个</strong>中间件函数通常由名为 <code>next</code> 的变量表示。</p>
+<h2 id="Nest中间件"><a href="#Nest中间件" class="headerlink" title="Nest中间件"></a>Nest中间件</h2><p>中间件是在路由处理程序<strong>之前</strong>调用的函数。中间件函数可以访问<a target="_blank" rel="external nofollow noopener noreferrer" href="https://expressjs.com/en/4x/api.html#req">请求</a>和<a target="_blank" rel="external nofollow noopener noreferrer" href="https://expressjs.com/en/4x/api.html#res">响应</a>对象，以及应用程序请求-响应周期中的 <code>next()</code> 中间件函数。 <strong>下一个</strong>中间件函数通常由名为 <code>next</code> 的变量表示。</p>
 <blockquote>
 <p>中间件函数可以执行以下任务：</p>
 <ul>
@@ -727,7 +724,7 @@
                 
               </div>
             
-            <hr/>
+            <hr>
             <div>
               <div class="post-metas my-3">
   
@@ -771,7 +768,7 @@
             
               
               
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" rel="external nofollow noopener noreferrer">
                   <span class="hint--top hint--rounded" aria-label="BY - Attribution">
                     <i class="iconfont icon-cc-by"></i>
                   </span>
@@ -907,8 +904,7 @@
     
 
     
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -937,7 +933,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="external nofollow noopener noreferrer"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="external nofollow noopener noreferrer"><span>Fluid</span></a> 
     </div>
   
   
@@ -974,8 +970,8 @@
 
   <!-- Scripts -->
   
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+  <script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":100})
@@ -986,13 +982,13 @@
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
 
 
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -1011,7 +1007,7 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    <script src="/js/img-lazyload.js"></script>
   
 
 
@@ -1057,7 +1053,7 @@
 </script>
 
 
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+  <script src="https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js"></script>
 
   <script>Fluid.plugins.codeWidget();</script>
 
@@ -1110,9 +1106,9 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script defer src="/js/leancloud.js" ></script>
+  <script defer src="/js/leancloud.js"></script>
 
-  <script  src="/js/local-search.js" ></script>
+  <script src="/js/local-search.js"></script>
 
 
 
@@ -1120,7 +1116,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+<script src="/js/boot.js"></script>
 
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3240358922862141" crossorigin="anonymous"></script>

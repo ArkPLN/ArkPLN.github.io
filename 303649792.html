@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=auto>
+<html lang="en" data-default-color-scheme="auto">
 
 
 
@@ -17,7 +17,7 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="FangZhou">
-  <meta name="keywords" content="Vue,React,Nodejs,blogs,frontend,web,developer,programmer">
+  <meta name="keywords" content="react,frontend,web">
   
     <meta name="description" content="1.React介绍React 是一个用于构建用户界面的JavaScript库，它允许开发者以声明式的方式创建交互丰富的Web应用。React不是一个完整的框架，而是专注于构建组件化的UI层。它可以与其他库或框架（如Redux或Angular）配合使用，以构建复杂的应用程序。 2.React创建环境（以Vite为例）在Node环境下输入 1npm create vite@latest my-vite">
 <meta property="og:type" content="article">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://s21.ax1x.com/2025/02/05/pEelZ6J.png">
 <meta property="og:image" content="https://s21.ax1x.com/2025/02/10/pEnJsw4.png">
 <meta property="article:published_time" content="2025-02-06T07:59:34.000Z">
-<meta property="article:modified_time" content="2025-08-13T10:59:34.857Z">
+<meta property="article:modified_time" content="2025-08-13T11:04:21.859Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="react">
 <meta name="twitter:card" content="summary_large_image">
@@ -43,15 +43,15 @@
   
   <title>React学习笔记 - Ark的技术博客</title>
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
 
 
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+  <link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
 
 
 
@@ -65,12 +65,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/main.css">
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
   
 
 
@@ -86,8 +86,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
   
 
   
@@ -104,7 +104,7 @@
 
 
 
-  <meta name="google-site-verification" content="5KfTZvtlydmBIzY97rVo-caP5jljAfmD3Qs3sBzY2Go" /><style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+  <meta name="google-site-verification" content="5KfTZvtlydmBIzY97rVo-caP5jljAfmD3Qs3sBzY2Go"><style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
@@ -121,9 +121,7 @@
       <strong>Fluid</strong>
     </a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
@@ -213,8 +211,7 @@
 
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+<div id="banner" class="banner" parallax="true" style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -435,7 +432,7 @@
 
 
 <h3 id="受控表单绑定"><a href="#受控表单绑定" class="headerlink" title="受控表单绑定"></a>受控表单绑定</h3><p><strong>概念:</strong> 使用React组件的状态(useState)控制表单的状态,即双向绑定</p>
-<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pEkBICq"><img src="https://s21.ax1x.com/2025/01/19/pEkBICq.png" srcset="/img/loading.gif" lazyload alt="pEkBICq.png"></a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://imgse.com/i/pEkBICq"><img src="https://s21.ax1x.com/2025/01/19/pEkBICq.png" srcset="/img/loading.gif" lazyload alt="pEkBICq.png"></a></p>
 <p><strong>步骤:</strong></p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">const</span> [value,setValue] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;&#x27;</span>)<br><span class="hljs-comment">// 1.准备一个React状态值</span><br>&lt;input <br>type=<span class="hljs-string">&quot;text&quot;</span><br>value=&#123;value&#125;<br><span class="hljs-comment">// 2.通过value属性绑定React状态变量</span><br>onChange=&#123;<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> <span class="hljs-title function_">setValue</span>(e.<span class="hljs-property">target</span>.<span class="hljs-property">value</span>)&#125;<br><span class="hljs-comment">// 3.绑定onChange事件 通过参数e拿到输入框的值 反向修改到React状态中</span><br>/&gt;<br></code></pre></td></tr></table></figure>
 
@@ -545,7 +542,7 @@
 <h5 id="useReducer-分派action时传参"><a href="#useReducer-分派action时传参" class="headerlink" title="useReducer-分派action时传参"></a>useReducer-分派action时传参</h5><p>在<code>dispatch(&#123;...,payload:value&#125;)</code>中传参时，需要在<code>reducer</code>函数中使用<code>action.payload</code>接收</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">reducer</span>(<span class="hljs-params">state,action</span>)&#123;<br>  <span class="hljs-keyword">switch</span>(action.<span class="hljs-property">type</span>)&#123;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;SET&#x27;</span>:<br>      <span class="hljs-keyword">return</span> action.<span class="hljs-property">payload</span><br>    <span class="hljs-attr">default</span>:<br>      <span class="hljs-keyword">return</span> state<br>  &#125;<br><span class="hljs-comment">// ...</span><br>        &lt;button onClick=&#123;<span class="hljs-function">()=&gt;</span>&#123;<span class="hljs-title function_">dispatch</span>(&#123; <span class="hljs-attr">type</span>:<span class="hljs-string">&#x27;SET&#x27;</span>,<span class="hljs-attr">payload</span>:<span class="hljs-number">100</span> &#125;)&#125;&#125;&gt;<br>          <span class="hljs-title class_">Update</span> count to <span class="hljs-number">100</span><br>        &lt;/button&gt;<br></code></pre></td></tr></table></figure>
 
-<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pE8R458"><img src="https://s21.ax1x.com/2025/03/01/pE8R458.png" srcset="/img/loading.gif" lazyload alt="pE8R458.png"></a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://imgse.com/i/pE8R458"><img src="https://s21.ax1x.com/2025/03/01/pE8R458.png" srcset="/img/loading.gif" lazyload alt="pE8R458.png"></a></p>
 <h4 id="useMemo"><a href="#useMemo" class="headerlink" title="useMemo"></a>useMemo</h4><p><strong>作用：</strong> 在组件每次重新渲染时<strong>缓存计算的结果</strong>，由此保证只有列表内的依赖项（即需要改变的状态变量）改变时再重新计算，从而避免不必要的组件重复渲染</p>
 <p><strong>语法：</strong> <code>useMemo(()=&gt;&#123;&#125;,[state])</code></p>
 <p><strong>备注：</strong> 消耗非常大的计算</p>
@@ -596,7 +593,7 @@
 
 
 <h1 id="5-Redux"><a href="#5-Redux" class="headerlink" title="5.Redux"></a>5.Redux</h1><h2 id="Redux上手"><a href="#Redux上手" class="headerlink" title="Redux上手"></a>Redux上手</h2><h3 id="Redux快速体验"><a href="#Redux快速体验" class="headerlink" title="Redux快速体验"></a>Redux快速体验</h3><p>Redux 是 JavaScript 应用的状态容器，提供可预测的状态管理。</p>
-<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pEAsEzq"><img src="https://s21.ax1x.com/2025/01/22/pEAsEzq.png" srcset="/img/loading.gif" lazyload alt="pEAsEzq.png"></a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://imgse.com/i/pEAsEzq"><img src="https://s21.ax1x.com/2025/01/22/pEAsEzq.png" srcset="/img/loading.gif" lazyload alt="pEAsEzq.png"></a></p>
 <p><strong>使用步骤:</strong></p>
 <ol>
 <li><p>定义一个<em>reducer函数</em>(根据当前想要做的修改返回一个新的状态)</p>
@@ -623,7 +620,7 @@
 <li><p>store中的入口文件<code>index.js</code>的作用是组合modules中的所有子模块,并导出store</p>
 </li>
 </ol>
-<h3 id="Redux-React-实现counter"><a href="#Redux-React-实现counter" class="headerlink" title="Redux+React &#x3D;&gt;实现counter"></a>Redux+React &#x3D;&gt;实现counter</h3><h4 id="整体路径"><a href="#整体路径" class="headerlink" title="整体路径"></a>整体路径</h4><p><a target="_blank" rel="noopener" href="https://imgse.com/i/pEEuD1I"><img src="https://s21.ax1x.com/2025/01/24/pEEuD1I.png" srcset="/img/loading.gif" lazyload alt="pEEuD1I.png"></a></p>
+<h3 id="Redux-React-实现counter"><a href="#Redux-React-实现counter" class="headerlink" title="Redux+React &#x3D;&gt;实现counter"></a>Redux+React &#x3D;&gt;实现counter</h3><h4 id="整体路径"><a href="#整体路径" class="headerlink" title="整体路径"></a>整体路径</h4><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://imgse.com/i/pEEuD1I"><img src="https://s21.ax1x.com/2025/01/24/pEEuD1I.png" srcset="/img/loading.gif" lazyload alt="pEEuD1I.png"></a></p>
 <h4 id="创建Redux的store对象"><a href="#创建Redux的store对象" class="headerlink" title="创建Redux的store对象"></a>创建Redux的store对象</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// ./modules/counterStore.js</span><br><span class="hljs-keyword">import</span> &#123;createSlice&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@reduxjs/toolkit&#x27;</span><br><br><span class="hljs-keyword">const</span> counterStore = <span class="hljs-title function_">createSlice</span>(&#123;<br>    <span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;counter&#x27;</span>,<br>    <span class="hljs-comment">// 初始状态数据</span><br>    <span class="hljs-attr">initialState</span>:&#123;<br>        <span class="hljs-attr">count</span>:<span class="hljs-number">0</span><br>    &#125;,<br>    <span class="hljs-comment">// 修改数据同步的方法</span><br>    <span class="hljs-attr">reducers</span>:&#123;<br>        <span class="hljs-title function_">increment</span>(<span class="hljs-params">state</span>)&#123;<br>            state.<span class="hljs-property">count</span>++<br>        &#125;,<br>        <span class="hljs-title function_">decrement</span>(<span class="hljs-params">state</span>)&#123;<br>            state.<span class="hljs-property">count</span>--<br>        &#125;,<br>    &#125;,<br><br>&#125;)<br><span class="hljs-comment">// 解构创建action对象的函数</span><br><span class="hljs-keyword">const</span> &#123;increment,decrement&#125; = counterStore.<span class="hljs-property">actions</span><br><span class="hljs-comment">// 获取reducer函数</span><br><span class="hljs-keyword">const</span> counterReducer = counterStore.<span class="hljs-property">reducer</span><br><span class="hljs-comment">// 导出action对象的函数和reducer函数</span><br><span class="hljs-keyword">export</span>&#123;increment,decrement&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> counterReducer<br></code></pre></td></tr></table></figure>
 
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// index.js</span><br><span class="hljs-keyword">import</span> &#123; configureStore &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@reduxjs/toolkit&quot;</span>;<br><span class="hljs-keyword">import</span> counterReducer  <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./modules/counterStore&quot;</span>;<br><br><span class="hljs-keyword">const</span> store = <span class="hljs-title function_">configureStore</span>(&#123;<br>    <span class="hljs-attr">reducer</span>:&#123;<br>        <span class="hljs-attr">counter</span>:counterReducer<br>    &#125;<br>&#125;)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store<br></code></pre></td></tr></table></figure>
@@ -663,7 +660,7 @@
 <h4 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// 调包</span><br><span class="hljs-keyword">import</span> &#123;createBrowserRouter ,<span class="hljs-title class_">RouterProvider</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-router-dom&#x27;</span><br><br><span class="hljs-comment">// 1.创建Router实例对象,配置路由对应关系</span><br><span class="hljs-keyword">const</span> router = <span class="hljs-title function_">createBrowserRouter</span>([<br>  &#123;<br>    <span class="hljs-attr">path</span>:<span class="hljs-string">&#x27;/login&#x27;</span>,<br>    <span class="hljs-attr">element</span>:<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>我是登录<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">path</span>:<span class="hljs-string">&#x27;/article&#x27;</span>,<br>    <span class="hljs-attr">element</span>:<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>我是文章页<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  &#125;<br>])<br><span class="hljs-comment">// 2.在渲染DOM中通过RouterProvider组件的router属性传入router对象</span><br><span class="hljs-title function_">createRoot</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;root&#x27;</span>)).<span class="hljs-title function_">render</span>(<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">StrictMode</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">RouterProvider</span> <span class="hljs-attr">router</span>=<span class="hljs-string">&#123;router&#125;</span>&gt;</span></span><br><span class="language-xml"></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">RouterProvider</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">StrictMode</span>&gt;</span></span>,<br>)<br><br><br></code></pre></td></tr></table></figure>
 
 <h3 id="抽象路由模块"><a href="#抽象路由模块" class="headerlink" title="抽象路由模块"></a>抽象路由模块</h3><p><strong>在实际工程项目中的配置:</strong></p>
-<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pEelZ6J"><img src="https://s21.ax1x.com/2025/02/05/pEelZ6J.png" srcset="/img/loading.gif" lazyload alt="ReactRouter配置"></a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://imgse.com/i/pEelZ6J"><img src="https://s21.ax1x.com/2025/02/05/pEelZ6J.png" srcset="/img/loading.gif" lazyload alt="ReactRouter配置"></a></p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><br><span class="hljs-comment">// ./router/index.js</span><br><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Login</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../page/login&quot;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Article</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../page/article&quot;</span>;<br><br><span class="hljs-keyword">import</span> &#123;createBrowserRouter&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-router-dom&#x27;</span><br><br><span class="hljs-keyword">const</span> router = <span class="hljs-title function_">createBrowserRouter</span>([&#123;<br>    <span class="hljs-attr">path</span>:<span class="hljs-string">&#x27;/login&#x27;</span>,<br>    <span class="hljs-attr">element</span>:<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Login</span>/&gt;</span></span>,<br>&#125;,<br>&#123;<br>    <span class="hljs-attr">path</span>:<span class="hljs-string">&#x27;/article&#x27;</span>,<br>    <span class="hljs-attr">element</span>:<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Article</span>/&gt;</span></span>,<br>&#125;<br>])<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> router<br><br><br></code></pre></td></tr></table></figure>
 
 <p><strong>注意:</strong> </p>
@@ -711,7 +708,7 @@
 <p>形如:</p>
 <p>&#96;{</p>
 <p>    path:’*’,</p>
-<p>    element:<NotFound/></p>
+<p>    element:<notfound></notfound></p>
 <p>}&#96;</p>
 <h3 id="两种路由模式"><a href="#两种路由模式" class="headerlink" title="两种路由模式"></a>两种路由模式</h3><p>主流框架常见的路由方式有两种,<strong>history模式和hash模式</strong>.</p>
 <p>在React中分别由<code>createBrowerRoute</code>和<code>createHsahRouter</code>函数负责创建</p>
@@ -811,7 +808,7 @@
 <li><p>访问接口并调试</p>
 </li>
 </ol>
-<h3 id="整体路由设计"><a href="#整体路由设计" class="headerlink" title="整体路由设计"></a>整体路由设计</h3><p><a target="_blank" rel="noopener" href="https://imgse.com/i/pEnJsw4"><img src="https://s21.ax1x.com/2025/02/10/pEnJsw4.png" srcset="/img/loading.gif" lazyload alt="pEnJsw4.png"></a></p>
+<h3 id="整体路由设计"><a href="#整体路由设计" class="headerlink" title="整体路由设计"></a>整体路由设计</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://imgse.com/i/pEnJsw4"><img src="https://s21.ax1x.com/2025/02/10/pEnJsw4.png" srcset="/img/loading.gif" lazyload alt="pEnJsw4.png"></a></p>
 <ol>
 <li><p>2个一级路由(Layout&#x2F;New)</p>
 </li>
@@ -855,8 +852,8 @@
 
 <h3 id="useState-传递泛型参数"><a href="#useState-传递泛型参数" class="headerlink" title="useState- 传递泛型参数"></a>useState- 传递泛型参数</h3><p>useState本身是一个泛型函数，可以传入具体的自定义类型。</p>
 <blockquote>
-<p><strong>关于泛型的含义：</strong> <a target="_blank" rel="noopener" href="https://typescript.p6p.net/typescript-tutorial/generics.html">TypeScript 泛型</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.runoob.com/typescript/ts-generics.html">TypeScript 泛型 | 菜鸟教程</a></p>
+<p><strong>关于泛型的含义：</strong> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://typescript.p6p.net/typescript-tutorial/generics.html">TypeScript 泛型</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.runoob.com/typescript/ts-generics.html">TypeScript 泛型 | 菜鸟教程</a></p>
 <p><strong>简单来说：</strong> 泛型（Generics）是一种编程语言特性，允许在定义函数、类、接口等时使用占位符来表示类型，而不是具体的类型。</p>
 <p><strong>泛型函数:</strong></p>
 <figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><span class="hljs-keyword">function</span> identity&lt;T&gt;(<span class="hljs-attr">arg</span>: T): T &#123;<br>    <span class="hljs-keyword">return</span> arg;<br>&#125;<br><br><span class="hljs-comment">// 使用泛型函数</span><br><span class="hljs-keyword">let</span> result = identity&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-string">&quot;Hello&quot;</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result); <span class="hljs-comment">// 输出: Hello</span><br><br><span class="hljs-keyword">let</span> numberResult = identity&lt;<span class="hljs-built_in">number</span>&gt;(<span class="hljs-number">42</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(numberResult); <span class="hljs-comment">// 输出: 42</span><br></code></pre></td></tr></table></figure>
@@ -884,13 +881,13 @@
 <h2 id="props与TypeScript"><a href="#props与TypeScript" class="headerlink" title="props与TypeScript"></a>props与TypeScript</h2><h3 id="props-基础使用"><a href="#props-基础使用" class="headerlink" title="props - 基础使用"></a>props - 基础使用</h3><p>为组件prop添加类型，本质上是个函数的参数做<strong>类型注解</strong>，可以使用<strong>type</strong>对象类型或者<strong>interface</strong>接口来做注解</p>
 <blockquote>
 <p><strong>关于interface接口：</strong></p>
-<p><a target="_blank" rel="noopener" href="https://www.runoob.com/typescript/ts-interface.html">TypeScript 接口 | 菜鸟教程</a></p>
-<p><a target="_blank" rel="noopener" href="https://typescript.p6p.net/typescript-tutorial/interface.html">TypeScript 的 interface 接口 </a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.runoob.com/typescript/ts-interface.html">TypeScript 接口 | 菜鸟教程</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://typescript.p6p.net/typescript-tutorial/interface.html">TypeScript 的 interface 接口 </a></p>
 <p>interface 是对象的模板，可以看作是一种类型约定，中文译为“接口”。使用了某个模板的对象，就拥有了指定的类型结构。</p>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Person</span> &#123;<br>  <span class="hljs-attr">firstName</span>: <span class="hljs-built_in">string</span>;<br>  <span class="hljs-attr">lastName</span>: <span class="hljs-built_in">string</span>;<br>  <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><strong>关于type类型：</strong></p>
-<p><a target="_blank" rel="noopener" href="https://typescript.p6p.net/typescript-tutorial/types.html">TypeScript 的类型系统</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://typescript.p6p.net/typescript-tutorial/types.html">TypeScript 的类型系统</a></p>
 <p><code>type</code>命令用来定义一个类型的别名。别名可以让类型的名字变得更有意义，也能增加代码的可读性，还可以使复杂类型用起来更方便，便于以后修改变量的类型。</p>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">Age</span> = <span class="hljs-built_in">number</span>;<br><span class="hljs-keyword">let</span> <span class="hljs-attr">age</span>: <span class="hljs-title class_">Age</span> = <span class="hljs-number">55</span>;<br></code></pre></td></tr></table></figure>
 
@@ -989,7 +986,7 @@
                 
               </div>
             
-            <hr/>
+            <hr>
             <div>
               <div class="post-metas my-3">
   
@@ -1033,7 +1030,7 @@
             
               
               
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" rel="external nofollow noopener noreferrer">
                   <span class="hint--top hint--rounded" aria-label="BY - Attribution">
                     <i class="iconfont icon-cc-by"></i>
                   </span>
@@ -1169,8 +1166,7 @@
     
 
     
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -1199,7 +1195,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="external nofollow noopener noreferrer"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="external nofollow noopener noreferrer"><span>Fluid</span></a> 
     </div>
   
   
@@ -1236,8 +1232,8 @@
 
   <!-- Scripts -->
   
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+  <script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":100})
@@ -1248,13 +1244,13 @@
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
 
 
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -1273,7 +1269,7 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    <script src="/js/img-lazyload.js"></script>
   
 
 
@@ -1319,7 +1315,7 @@
 </script>
 
 
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+  <script src="https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js"></script>
 
   <script>Fluid.plugins.codeWidget();</script>
 
@@ -1372,9 +1368,9 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script defer src="/js/leancloud.js" ></script>
+  <script defer src="/js/leancloud.js"></script>
 
-  <script  src="/js/local-search.js" ></script>
+  <script src="/js/local-search.js"></script>
 
 
 
@@ -1382,7 +1378,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+<script src="/js/boot.js"></script>
 
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3240358922862141" crossorigin="anonymous"></script>
