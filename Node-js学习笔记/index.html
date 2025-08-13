@@ -22,21 +22,21 @@
     <meta name="description" content="Node.js学习笔记Node.js 是一个开源、跨平台的 JavaScript 运行时环境。 概述适合IO密集型运算(libuv和cpp底层的功劳),不适合CPU密集型计算(单线程)，可用于前后端开发。 前端：Vue Angular React Nuxtjs 后端：  Serverless  Web应用：Express,Nextjs,koa  RPC服务：gRPC  爬虫：Puppeteer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Node.js学习笔记">
-<meta property="og:url" content="http://example.com/2025/07/02/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://arkpln.github.io/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Ark的技术博客">
 <meta property="og:description" content="Node.js学习笔记Node.js 是一个开源、跨平台的 JavaScript 运行时环境。 概述适合IO密集型运算(libuv和cpp底层的功劳),不适合CPU密集型计算(单线程)，可用于前后端开发。 前端：Vue Angular React Nuxtjs 后端：  Serverless  Web应用：Express,Nextjs,koa  RPC服务：gRPC  爬虫：Puppeteer">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/npm-install%E6%B5%81%E7%A8%8B.webp">
-<meta property="og:image" content="http://example.com/2025/07/02/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/re-sub.webp">
+<meta property="og:image" content="http://arkpln.github.io/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/npm-install%E6%B5%81%E7%A8%8B.webp">
+<meta property="og:image" content="http://arkpln.github.io/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/re-sub.webp">
 <meta property="article:published_time" content="2025-07-02T12:28:37.000Z">
 <meta property="article:modified_time" content="2025-07-12T15:07:16.521Z">
 <meta property="article:author" content="FangZhou">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/npm-install%E6%B5%81%E7%A8%8B.webp">
+<meta name="twitter:image" content="http://arkpln.github.io/Node-js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/npm-install%E6%B5%81%E7%A8%8B.webp">
   
   
   
-  <title>Node.js学习笔记 - Hexo</title>
+  <title>Node.js学习笔记 - Ark的技术博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -74,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"mEwkD7geCX7RWNO8srhDE2oP-gzGzoHsz","app_key":"4EF76hyiVA1QILHZThVbfoat","server_url":"https://mewkd7ge.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"arkpln.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"mEwkD7geCX7RWNO8srhDE2oP-gzGzoHsz","app_key":"4EF76hyiVA1QILHZThVbfoat","server_url":"https://mewkd7ge.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -99,7 +99,7 @@
 
 
 
-  <style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+  <meta name="google-site-verification" content="5KfTZvtlydmBIzY97rVo-caP5jljAfmD3Qs3sBzY2Go" /><style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
@@ -829,7 +829,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Node.js学习笔记</div>
-      <div>http://example.com/2025/07/02/Node-js学习笔记/</div>
+      <div>http://arkpln.github.io/Node-js学习笔记/</div>
     </div>
     <div class="license-meta">
       
@@ -873,7 +873,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/07/27/Nestjs%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Nestjs学习笔记">
+                      <a href="/Nestjs%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Nestjs学习笔记">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Nestjs学习笔记</span>
                         <span class="visible-mobile">Previous</span>
@@ -883,7 +883,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" title="数据结构与算法">
+                      <a href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" title="数据结构与算法">
                         <span class="hidden-mobile">数据结构与算法</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
