@@ -19,22 +19,22 @@
   <meta name="author" content="FangZhou">
   <meta name="keywords" content="Vue,React,Nodejs,blogs,frontend,web,developer,programmer">
   
-    <meta name="description" content="本技术报告针对Moetalk桌面端因EasyWebSvr服务器不支持SSL&#x2F;TLS协议导致浏览器无法访问的问题，提出了使用Nginx替换后端服务器、自签名SSL证书、调整端口配置及编写批处理脚本的解决方案，有效解决了长期存在的使用障碍。">
+    <meta name="description" content="FastAPI学习笔记FastAPI 是一个现代、快速（高性能）的 Web 框架，用于使用基于标准 Python 类型提示的 Python 构建 API。 文档:FastAPI档案 介绍FastAPI 是一个现代、快速（高性能）的 Web 框架，用于使用基于标准 Python 类型提示的 Python 构建 API。 主要特点是:  快速：性能极高，与 NodeJS 和 Go 不相上下（得益于 S">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Moetalk桌面端无法正常使用的问题技术报告和解决方案">
-<meta property="og:url" content="http://arkpln.github.io/1331204612.html">
+<meta property="og:title" content="FastAPI学习笔记">
+<meta property="og:url" content="http://arkpln.github.io/668889422.html">
 <meta property="og:site_name" content="Ark的技术博客">
-<meta property="og:description" content="本技术报告针对Moetalk桌面端因EasyWebSvr服务器不支持SSL&#x2F;TLS协议导致浏览器无法访问的问题，提出了使用Nginx替换后端服务器、自签名SSL证书、调整端口配置及编写批处理脚本的解决方案，有效解决了长期存在的使用障碍。">
+<meta property="og:description" content="FastAPI学习笔记FastAPI 是一个现代、快速（高性能）的 Web 框架，用于使用基于标准 Python 类型提示的 Python 构建 API。 文档:FastAPI档案 介绍FastAPI 是一个现代、快速（高性能）的 Web 框架，用于使用基于标准 Python 类型提示的 Python 构建 API。 主要特点是:  快速：性能极高，与 NodeJS 和 Go 不相上下（得益于 S">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-09-22T13:09:22.000Z">
-<meta property="article:modified_time" content="2025-09-22T13:20:22.996Z">
+<meta property="article:published_time" content="2025-10-18T05:26:51.000Z">
+<meta property="article:modified_time" content="2025-10-18T06:47:33.474Z">
 <meta property="article:author" content="FangZhou">
-<meta property="article:tag" content="Nginx web">
+<meta property="article:tag" content="fastapi">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Moetalk桌面端无法正常使用的问题技术报告和解决方案 - Ark的技术博客</title>
+  <title>FastAPI学习笔记 - Ark的技术博客</title>
 
   <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
 
@@ -210,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Moetalk桌面端无法正常使用的问题技术报告和解决方案"></span>
+            <span id="subtitle" data-typed-text="FastAPI学习笔记"></span>
           
         </div>
 
@@ -221,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-09-22 21:09" pubdate>
-          September 22, 2025 pm
+        <time datetime="2025-10-18 13:26" pubdate>
+          October 18, 2025 pm
         </time>
       </span>
     
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k words
+          939 words
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          13 mins
+          8 mins
         
       </span>
     
@@ -281,56 +281,80 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Moetalk桌面端无法正常使用的问题技术报告和解决方案</h1>
+            <h1 id="seo-header">FastAPI学习笔记</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Moetalk桌面端无法正常使用的问题技术报告和解决方案"><a href="#Moetalk桌面端无法正常使用的问题技术报告和解决方案" class="headerlink" title="Moetalk桌面端无法正常使用的问题技术报告和解决方案"></a>Moetalk桌面端无法正常使用的问题技术报告和解决方案</h1><p><strong>作者:</strong> ArkPln <a href="%22https://github.com/arkpln%22">github</a> <a href="%22https://arkpln.github.io%22">个人博客</a></p>
-<p>本文旨在分析和尝试解决Moetalk(Windows桌面端)始终无法正常使用的问题;初步剖析了可能的技术原因,并通过使用Nginx反代和重构bat脚本的方式解决了这个问题,本人愿意尽自己的绵薄之力,希望该技术报告和改进方案可以被采纳,以充分解决长期以来Moetalk桌面离线端无法正常使用的问题,也利好各位广大热爱BA却苦于各种原因不善技术操作的二创老师们!</p>
-<h2 id="背景介绍-给不知道BA的技术用户"><a href="#背景介绍-给不知道BA的技术用户" class="headerlink" title="背景介绍(给不知道BA的技术用户)"></a>背景介绍(给不知道BA的技术用户)</h2><p>Moetalk是一款基于电子游戏《碧蓝档案》的同人剧情编辑器，集成了对话编辑、存档读取、在线预览、导入导出等功能。作为继Yuzutalk后目前使用最广泛的同人剧情编辑工具，它支持多平台使用，包括在线网页、PC桌面端和手机端，深受游戏和二创爱好者欢迎。</p>
-<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><p>    在确认客户端无法正常使用,且确认为本地服务器(主要是<strong>EasyWebSvr</strong> 启动的后端服务器)导致的问题，我开始围绕后端Web服务器程序本身开始排查。</p>
-<p>    首先我检查了<strong>EasyWebSvr</strong> 配置文件,在确认配置文件<strong>本身</strong>无误后，我转向阅读浏览器提示。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs editorconfig"># EasyWebSvr.ini<br>[WebServer]<br>RootDir=.\<br>ListenPort=80<br>MaxThreadNum=100<br>Timeout=5000<br>bAutoRun=0<br>bIconStartStop=0<br>MaxContentLength=16777216<br>MaxHeaderLength=4096<br>[Cgi]<br>EnableCgi=1<br>EnableIsapi=1<br>IsapiCache=1<br>EnablePhp=1<br>[Docs]<br>DefaultHtml=index.htm,index.html,default.htm,index.php<br>EnableDirBrowse=1<br>ShowDirAlways=0<br>[ScriptEngine]<br>[Log]<br>LogToWindow=1<br>LogWndMaxLine=50<br>LogToFile=0<br>LogFileName=<br>[StartParam]<br>bShowWnd=0<br>bStartRun=0<br><br></code></pre></td></tr></table></figure>
-
-<p>    使用默认配置启动浏览器输入地址<code>localhost</code>(http&#x2F;https协议 80端口),均显示错误<code>ERR_SSL_PROTOCOL_ERROR</code>,进一步查询得知,这种错误一般由于SSL 连接问题,且据称主要是因为<strong>系统时间异常导致</strong>,但检查系统时间并无问题,此时转向<strong>EasyWebSvr</strong>,猜测有可能是因为该后端Web服务器程序<strong>不支持SSL&#x2F;TLS协议</strong>,导致<strong>SSL&#x2F;TLS</strong>握手失败，由此导致现代浏览器无法正常访问，且确认强制http协议或IE模式下这个问题依然存在。</p>
-<p>    因此，我尝试更换了<code>nginx</code>后端作为Web服务器,并写入配置，编写配套一键启动、关闭bat脚本，最终妥善解决了该问题,以下是部署实施中遇到的问题和经验。</p>
-<ol>
-<li>文件目录问题</li>
+                <h1 id="FastAPI学习笔记"><a href="#FastAPI学习笔记" class="headerlink" title="FastAPI学习笔记"></a>FastAPI学习笔记</h1><p><strong>FastAPI</strong> 是一个现代、快速（高性能）的 Web 框架，用于使用基于标准 Python 类型提示的 Python 构建 API。</p>
+<p>文档:<a href="%22https://fastapi.org.cn/%22">FastAPI档案</a></p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>FastAPI 是一个现代、快速（高性能）的 Web 框架，用于使用基于标准 Python 类型提示的 Python 构建 API。</p>
+<p>主要特点是:</p>
+<ul>
+<li><strong>快速</strong>：性能极高，与 <strong>NodeJS</strong> 和 <strong>Go</strong> 不相上下（得益于 Starlette 和 Pydantic）。</li>
+<li><strong>编码快速</strong>：开发功能的速度提升约 200% 到 300%。*</li>
+<li><strong>更少 Bug</strong>：减少约 40% 的人为（开发者）错误。*</li>
+<li><strong>直观</strong>：出色的编辑器支持。自动完成无处不在。调试时间更少。</li>
+<li><strong>简单</strong>：设计为易于使用和学习。阅读文档的时间更少。</li>
+<li><strong>简洁</strong>：最小化代码重复。每个参数声明提供多项功能。Bug 更少。</li>
+<li><strong>健壮</strong>：获得生产就绪的代码。带有自动交互式文档。</li>
+<li><strong>基于标准</strong>：基于（并完全兼容）API 开放标准：OpenAPI（以前称为 Swagger）和 JSON Schema.</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
+<li><p>安装Python 3.10+ 和 pip</p>
+</li>
+<li><p>安装<code>fastapi</code></p>
+</li>
 </ol>
-<p>在编写<code>nginx</code>配置文件时，初步阅读项目文件目录后，我选择以’.\MoeTalk\MoeData’作为根目录，但在实际部署运行时发现，显示前端的浏览器会反复跳转卡死，通过F12开发者工具检查源代码和网络请求，可能是因为这个目录下的<code>index.html</code>下HTML内嵌的js代码<code>window.location.replace(&#39;../&#39;);</code>没有正常工作，导致路由跳转失效，页面会卡死。在更换根目录为<code>.\MoeTalk</code>后，这个问题得到解决。</p>
-<ol start="2">
-<li>SSL证书签名问题</li>
-</ol>
-<p>在编写<code>nginx</code>配置文件时，我希望可以尽可能的直接访问本地的https端口，但实际部署时发现浏览器的<code>ERR_SSL_PROTOCOL_ERROR</code>错误依然存在，后经查询资料确认，若要使用https协议，Web服务器需要提供SSL数字证书签名，此处使用了<code>openssl</code>软件完成了SSL证书自签名（尽管网页会显示非可信CA），暂定有效期至2026&#x2F;9&#x2F;16（后续也可自行续期或重新签发证书），由此保证了在默认https协议下网页可以正常访问。</p>
-<ol start="3">
-<li>本地端口占用问题</li>
-</ol>
-<p>在早期尝试运行<code>nginx</code>后端Web服务时，经常会出现nginx配置项正常，但网页无法正常打开的情况。在友人的协助下,通过<code>netstat</code>等工具，最终排查结果为可能是本地端口被其他程序占用，从而出现页面无响应或返回<code>&#123;&#39;status&#39;:404&#125;</code>的情况。其中，已经查证的有：<code>steamcommuity302.exe</code>会占用80端口,<code>kook.exe</code>会占用8443端口,此外还有其他可能的各种联网应用或网络代理工具…..由此导致了各种可能的Web后端服务器运行正常但网页显示异常的情况。此处为nginx重新分配了http和https协议端口,确保浏览器可正常访问。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>对原Moetalk（Windows桌面端）重写了Web后端服务器实现方式和bat批处理启动&#x2F;关闭脚本.</p>
-<p>以下是更新后的部分脚本&#x2F;配置代码(略去Nginx程序本体和其他无关文档)</p>
-<ol>
-<li><code>StartNginx.bat</code>:双击启动服务器,待命令行弹出后可按住<code>Ctrl</code>,鼠标左键点击任意一网页</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs batch">@echo off<br>setlocal<br><br>set NGINX_DIR=%~dp0nginx<br><br>chcp 65001 &gt;nul<br>echo Starting Nginx...<br>echo 启动后端服务...<br>cd /d %NGINX_DIR%<br>start &quot;&quot; nginx.exe<br><br>echo ==============================<br>echo Nginx started.<br>echo Root: %~dp0MoeData<br>echo Visit: http://localhost:8880<br>echo Vist: https://localhost:44300<br>echo ==============================<br>pause<br><br></code></pre></td></tr></table></figure>
-
-
-
-<ol start="2">
-<li><code>ShutNginx.bat</code>:双击关闭服务器,待命令行弹出关闭Nginx后,按任意键即可完成Nginx服务器关闭</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs batch">@echo off<br>chcp 65001 &gt;nul<br>set NGINX_DIR=%~dp0nginx<br>cd  /d %NGINX_DIR% <br>taskkill /F /IM nginx.exe<br>echo Nginx stopped.<br>echo Nginx已关闭.<br>pause<br><br></code></pre></td></tr></table></figure>
-
-
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">pip install <span class="hljs-string">&quot;fastapi[standard]&quot;</span><br></code></pre></td></tr></table></figure>
 
 <ol start="3">
-<li><code>nginx.conf</code>:位于<code>.\nginx\conf</code>下,是Nginx的配置文件,一般不需要修改.</li>
+<li>编写文件<code>main.py</code></li>
 </ol>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">worker_processes</span>  <span class="hljs-number">1</span>;<br><br><span class="hljs-section">events</span> &#123;<br>    <span class="hljs-attribute">worker_connections</span>  <span class="hljs-number">1024</span>;<br>&#125;<br><br><span class="hljs-section">http</span> &#123;<br>    <span class="hljs-attribute">include</span>       mime.types;<br>    <span class="hljs-attribute">default_type</span>  application/octet-stream;<br><br>    <span class="hljs-attribute">sendfile</span>        <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">keepalive_timeout</span>  <span class="hljs-number">65</span>;<br><br>    <span class="hljs-comment"># HTTP 80</span><br>    <span class="hljs-section">server</span> &#123;<br>        <span class="hljs-attribute">listen</span>       <span class="hljs-number">8880</span>;<br>        <span class="hljs-attribute">server_name</span>  localhost;<br><br>        <span class="hljs-attribute">root</span>   ../../MoeTalk;<br>        <span class="hljs-attribute">index</span>  index.htm index.html default.htm;<br><br>        <span class="hljs-section">location</span> / &#123;<br>            <span class="hljs-attribute">autoindex</span> <span class="hljs-literal">on</span>;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment"># HTTPS 443</span><br>    <span class="hljs-section">server</span> &#123;<br>        <span class="hljs-attribute">listen</span>              <span class="hljs-number">44300</span> ssl;<br>        <span class="hljs-attribute">server_name</span>         localhost;<br>`   <span class="hljs-comment"># SSL Config</span><br>        <span class="hljs-attribute">ssl_certificate</span>     server.crt;<br>        <span class="hljs-attribute">ssl_certificate_key</span> server.key;<br><br>        <span class="hljs-attribute">ssl_protocols</span>       TLSv1.<span class="hljs-number">2</span> TLSv1.<span class="hljs-number">3</span>;<br>        <span class="hljs-attribute">ssl_ciphers</span>         HIGH:!aNULL:!MD5;<br><br>        <span class="hljs-attribute">root</span>   ../../MoeTalk;<br>        <span class="hljs-attribute">index</span>  index.htm index.html default.htm;<br><br>        <span class="hljs-section">location</span> / &#123;<br>            <span class="hljs-attribute">autoindex</span> <span class="hljs-literal">on</span>;<br>        &#125;<br>    &#125;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Union</span><br><br><span class="hljs-keyword">from</span> fastapi <span class="hljs-keyword">import</span> FastAPI<br><br>app = FastAPI()<br><br><br><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_root</span>():<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;Hello&quot;</span>: <span class="hljs-string">&quot;World&quot;</span>&#125;<br><br><br><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/items/&#123;item_id&#125;&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_item</span>(<span class="hljs-params">item_id: <span class="hljs-built_in">int</span>, q: <span class="hljs-type">Union</span>[<span class="hljs-built_in">str</span>, <span class="hljs-literal">None</span>] = <span class="hljs-literal">None</span></span>):<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;item_id&quot;</span>: item_id, <span class="hljs-string">&quot;q&quot;</span>: q&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p><strong>启动:</strong> 完全解压后双击<code>StartNginx.bat</code>,待命令行弹出后可按住<code>Ctrl</code>,鼠标左键点击任意一网页即可.</p>
-<p><strong>关闭:</strong> 双击<code>ShutNginx.bat</code>关闭服务器,待命令行弹出关闭Nginx后,按任意键即可完成Nginx服务器关闭.</p>
-<h2 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h2><p>在此感谢Moetalk开发和维护人(团队)的持续支持,感谢友人和Deepseek提供的技术支持和问题排查协助,感谢Nginx和openssl开发和开源团队.</p>
+<ol start="4">
+<li>运行项目</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">fastapi dev main.py<br></code></pre></td></tr></table></figure>
+
+<h2 id="路径参数"><a href="#路径参数" class="headerlink" title="路径参数"></a>路径参数</h2><p>使用 Python 格式字符串的相同语法声明路径“参数”或“变量”</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> fastapi <span class="hljs-keyword">import</span> FastAPI<br><br>app = FastAPI()<br><br><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/items/&#123;item_id&#125;&quot;</span></span>)</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">read_item</span>(<span class="hljs-params">item_id</span>):<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;item_id&quot;</span>: item_id&#125;<br></code></pre></td></tr></table></figure>
+
+<p>路径参数 <code>item_id</code> 的值将作为参数 <code>item_id</code> 传递给你的函数。</p>
+<p>此时输入<code>localhost:8000/item_id/1000</code>,则返回<code>&#123;&quot;item_id&quot;:1000&#125;</code></p>
+<h3 id="带参数的路径参数"><a href="#带参数的路径参数" class="headerlink" title="带参数的路径参数"></a>带参数的路径参数</h3><p>可以使用标准的 Python 类型注解在函数中声明路径参数的类型</p>
+<p>在此示例中，<code>item_id</code> 被声明为 <code>int</code> 类型，python将提供类型检查和自动补全</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> fastapi <span class="hljs-keyword">import</span> FastAPI<br><br>app = FastAPI()<br><br><br><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/items/&#123;item_id&#125;&quot;</span></span>)</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">read_item</span>(<span class="hljs-params">item_id: <span class="hljs-built_in">int</span></span>):<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;item_id&quot;</span>: item_id&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="相同路径的顺序问题"><a href="#相同路径的顺序问题" class="headerlink" title="相同路径的顺序问题"></a>相同路径的顺序问题</h3><p>在创建路径操作时，你可能会遇到固定路径的情况。</p>
+<p>比如 <code>/users/me</code>，我们假设它是用来获取当前用户数据的。</p>
+<p>然后你可能还有一个路径 <code>/users/&#123;user_id&#125;</code>，通过某个用户 ID 获取特定用户的数据。</p>
+<p>由于路径操作是按顺序评估的，你需要确保 <code>/users/me</code> 的路径在 <code>/users/&#123;user_id&#125;</code> 之前声明</p>
+<p><strong>简单来说:</strong> 相同路径参数,常量优先</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> fastapi <span class="hljs-keyword">import</span> FastAPI<br><br>app = FastAPI()<br><br><br><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/users/me&quot;</span></span>)</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">read_user_me</span>():<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;user_id&quot;</span>: <span class="hljs-string">&quot;the current user&quot;</span>&#125;<br><br><br><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/users/&#123;user_id&#125;&quot;</span></span>)</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">read_user</span>(<span class="hljs-params">user_id: <span class="hljs-built_in">str</span></span>):<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;user_id&quot;</span>: user_id&#125;<br></code></pre></td></tr></table></figure>
+
+<p>否则，<code>/users/&#123;user_id&#125;</code> 的路径也会匹配 <code>/users/me</code>，它会“认为”收到了一个值为 <code>&quot;me&quot;</code> 的 <code>user_id</code> 参数。</p>
+<p><strong>注意:</strong> 不能重新定义同一个路径参数</p>
+<h3 id="预定值-Enum"><a href="#预定值-Enum" class="headerlink" title="预定值(Enum)"></a>预定值(Enum)</h3><p>导入 <code>Enum</code> 并创建一个继承自 <code>str</code> 和 <code>Enum</code> 的子类。</p>
+<p>通过继承 <code>str</code>，API 文档将能够知道这些值必须是 <code>string</code> 类型，并能够正确渲染。</p>
+<p><strong>参考文档：</strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.python.org/zh-cn/3.12/howto/enum.html">Python Enum Docs</a></p>
+<blockquote>
+<p> <strong>枚举类</strong>是 Python 提供的一种数据类型，用于定义一组固定的常量。它可以提高代码的可读性和安全性，避免值的误用。枚举类通过 <em>enum</em> 模块实现，支持多种功能，如成员访问、值比较、自定义属性等。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ModelName</span>(<span class="hljs-built_in">str</span>, Enum):<br>    alexnet = <span class="hljs-string">&quot;alexnet&quot;</span><br>    resnet = <span class="hljs-string">&quot;resnet&quot;</span><br>    lenet = <span class="hljs-string">&quot;lenet&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="包含路径的路径参数"><a href="#包含路径的路径参数" class="headerlink" title="包含路径的路径参数"></a>包含路径的路径参数</h3><p>假设你有一个路径为 <code>/files/&#123;file_path&#125;</code> 的_路径操作。</p>
+<p>但是你需要 <code>file_path</code> 本身包含一个路径，例如 <code>home/johndoe/myfile.txt</code>。</p>
+<p>因此，该文件的 URL 将类似于：<code>/files/home/johndoe/myfile.txt</code>。</p>
+<p><strong>解决方案:</strong> 直接使用<code>Starlette</code>的一个选项，你可以使用如下 URL 声明一个<strong>包含路径的</strong>路径参数.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> fastapi <span class="hljs-keyword">import</span> FastAPI<br><br>app = FastAPI()<br><br><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/files/&#123;file_path:path&#125;&quot;</span></span>)</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">read_file</span>(<span class="hljs-params">file_path: <span class="hljs-built_in">str</span></span>):<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;file_path&quot;</span>: file_path&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
 
                 
               </div>
@@ -339,11 +363,32 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/python-fastapi-backend/" class="category-chain-item">python,fastapi,backend</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Nginx-web/" class="print-no-link">#Nginx web</a>
+        <a href="/tags/fastapi/" class="print-no-link">#fastapi</a>
       
     </div>
   
@@ -355,8 +400,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Moetalk桌面端无法正常使用的问题技术报告和解决方案</div>
-      <div>http://arkpln.github.io/1331204612.html</div>
+      <div>FastAPI学习笔记</div>
+      <div>http://arkpln.github.io/668889422.html</div>
     </div>
     <div class="license-meta">
       
@@ -368,7 +413,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>September 22, 2025</div>
+          <div>October 18, 2025</div>
         </div>
       
       
@@ -400,18 +445,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/668889422.html" title="FastAPI学习笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">FastAPI学习笔记</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/1251921997.html" title="TypeScript学习笔记">
-                        <span class="hidden-mobile">TypeScript学习笔记</span>
+                      <a href="/1331204612.html" title="Moetalk桌面端无法正常使用的问题技术报告和解决方案">
+                        <span class="hidden-mobile">Moetalk桌面端无法正常使用的问题技术报告和解决方案</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
