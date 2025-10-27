@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://arkpln.github.io/bench.webp">
 <meta property="article:published_time" content="2025-04-06T13:20:29.000Z">
-<meta property="article:modified_time" content="2025-08-13T11:01:07.119Z">
+<meta property="article:modified_time" content="2025-10-27T15:03:46.198Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="frontend">
 <meta name="twitter:card" content="summary_large_image">
@@ -408,7 +408,8 @@
 <h5 id="Cookies在HTTP中的使用"><a href="#Cookies在HTTP中的使用" class="headerlink" title="Cookies在HTTP中的使用"></a>Cookies在HTTP中的使用</h5><p>在 HTTP 请求和响应中，Cookie 的使用主要通过 HTTP 头部来进行。</p>
 <ol>
 <li><p>服务器设置 Cookie：<br>当服务器希望在浏览器中存储一些信息时，它会通过 HTTP 响应头中的 <code>Set-Cookie</code> 字段来设置 Cookie。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-meta">HTTP/1.1</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>text/html<br><span class="hljs-attribute">Set-Cookie</span><span class="hljs-punctuation">: </span>userId=12345; Expires=Thu, 01 Jan 2026 00:00:00 GMT; Path=/<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-meta">HTTP/1.1</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>text/html<br><span class="hljs-attribute">Set-Cookie</span><span class="hljs-punctuation">: </span>userId=12345; Expires=Thu, 01 Jan 2026 00:00:00 GMT; Path=/<br></code></pre></td></tr></table></figure>
+</li>
 <li><p>客户端发送 Cookie：当浏览器向服务器发送请求时，浏览器会自动将存储的 Cookie 通过 Cookie 头发送给服务器。例如：</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">/index.html</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>www.example.com<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>userId=12345<br></code></pre></td></tr></table></figure>
 
@@ -537,52 +538,45 @@
 </blockquote>
 <h4 id="Array的描述"><a href="#Array的描述" class="headerlink" title="Array的描述"></a>Array的描述</h4><p>在 JavaScript 中，数组不是<em>原始类型</em>，而是具有以下核心特征的<code>Array</code>对象(引用类型)：</p>
 <ul>
-<li><strong>JavaScript 数组是可调整大小的，并且可以包含不同的数据类型。</strong>（当不需要这些特征时，可以使用类型化数组。）</li>
-<li><strong>JavaScript 数组不是关联数组</strong>，因此，不能使用任意字符串作为索引访问数组元素，但必须使用非负整数（或它们各自的字符串形式）作为索引访问。</li>
-<li><strong>JavaScript 数组的索引从 0 开始</strong>：数组的第一个元素在索引 0 处，第二个在索引 1 处，以此类推，最后一个元素是数组的 length 属性减去 1 的值。</li>
-<li><strong>JavaScript 数组复制操作创建浅拷贝。</strong>（所有 JavaScript 对象的标准内置复制操作都会创建浅拷贝，而不是深拷贝）。<blockquote>
-<p><strong>关于深浅拷贝</strong><br>浅拷贝（Shallow Copy）</p>
-<p>浅拷贝创建一个新对象，但只<strong>复制原始对象的引用类型字段的地址</strong>，而不复制引用指向的对象本身。这意味着新对象和原始对象的引用类型字段将指向相同的对象。如果原始对象中的字段是基本数据类型，则这些字段的值会被复制到新对象中。由于引用类型字段共享，<strong>对新对象的修改可能会影响原始对象。</strong></p>
-<p>深拷贝（Deep Copy）</p>
-<p>深拷贝则<strong>创建一个全新的对象</strong>，并递归地复制原始对象的所有字段，包括引用指向的对象。这种方法会复制整个对象结构，确保新对象和原始对象之间的所有关系都是独立的。因此，<strong>对新对象的修改不会影响到原始对象。</strong></p>
+<li><p><strong>JavaScript 数组是可调整大小的，并且可以包含不同的数据类型。</strong>（当不需要这些特征时，可以使用类型化数组。）</p>
+</li>
+<li><p><strong>JavaScript 数组不是关联数组</strong>，因此，不能使用任意字符串作为索引访问数组元素，但必须使用非负整数（或它们各自的字符串形式）作为索引访问。</p>
+</li>
+<li><p><strong>JavaScript 数组的索引从 0 开始</strong>：数组的第一个元素在索引 0 处，第二个在索引 1 处，以此类推，最后一个元素是数组的 length 属性减去 1 的值。</p>
+</li>
+<li><p><strong>JavaScript 数组复制操作创建浅拷贝。</strong>（所有 JavaScript 对象的标准内置复制操作都会创建浅拷贝，而不是深拷贝）。</p>
+<blockquote>
+<p><strong>关于深浅拷贝</strong><br>浅拷贝（Shallow Copy）<br>浅拷贝创建一个新对象，但只<strong>复制原始对象的引用类型字段的地址</strong>，而不复制引用指向的对象本身。这意味着新对象和原始对象的引用类型字段将指向相同的对象。如果原始对象中的字段是基本数据类型，则这些字段的值会被复制到新对象中。由于引用类型字段共享，<strong>对新对象的修改可能会影响原始对象。</strong><br>深拷贝（Deep Copy）<br>深拷贝则<strong>创建一个全新的对象</strong>，并递归地复制原始对象的所有字段，包括引用指向的对象。这种方法会复制整个对象结构，确保新对象和原始对象之间的所有关系都是独立的。因此，<strong>对新对象的修改不会影响到原始对象。</strong></p>
 </blockquote>
 </li>
 </ul>
 <h4 id="Array的数组索引"><a href="#Array的数组索引" class="headerlink" title="Array的数组索引"></a>Array的数组索引</h4><p>Array 对象不能使用任意字符串作为元素索引（如关联数组），必须使用非负整数（或它们的字符串形式）。<br>JavaScript 语法要求使用方括号表示法来访问以数字开头的属性，形如:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> arr = [<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>];<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr[<span class="hljs-number">0</span>])<br><span class="hljs-comment">//或者</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr[<span class="hljs-string">&#x27;0&#x27;</span>])<br></code></pre></td></tr></table></figure>
+
 <p><strong>注意：</strong> JavaScript 引擎通过隐式的<code>toString</code>，将 years[2] 中的 2 强制转换为字符串。因此，’2’ 和 ‘02’ 将指向 years 对象上的两个不同的槽位。<br>只有<code>years[&#39;2&#39;]</code>是一个实际的数组索引。而<code>years[&#39;02&#39;]</code>是一个在数组迭代中不会被访问的任意字符串属性。</p>
 <h4 id="Array的数组方法"><a href="#Array的数组方法" class="headerlink" title="Array的数组方法"></a>Array的数组方法</h4><h5 id="1-检测方法"><a href="#1-检测方法" class="headerlink" title="1. 检测方法"></a>1. 检测方法</h5><ol>
-<li><code>Array.isArray()</code><br>判断传入的值是否是一个数组。</li>
-</ol>
+<li><p><code>Array.isArray()</code><br>判断传入的值是否是一个数组。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// true</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br><span class="hljs-comment">// false</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(&#123;<span class="hljs-attr">foo</span>: <span class="hljs-number">123</span>&#125;)<br><span class="hljs-comment">// false</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(<span class="hljs-string">&#x27;foobar&#x27;</span>)   <br><span class="hljs-comment">// false</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(<span class="hljs-literal">undefined</span>)  <br></code></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><code>typeof</code></li>
-</ol>
+</li>
+<li><p><code>typeof</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-string">&quot;a&quot;</span>]); <span class="hljs-comment">// &quot;object&quot;</span><br></code></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><code>Object.prototype.toString.call()</code> 适用于所有类型的详细判断</li>
-</ol>
+</li>
+<li><p><code>Object.prototype.toString.call()</code> 适用于所有类型的详细判断</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Object</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">toString</span>.<span class="hljs-title function_">call</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-string">&quot;a&quot;</span>])); <span class="hljs-comment">// &quot;[object Array]&quot;</span><br></code></pre></td></tr></table></figure>
-
-<ol start="4">
-<li><code>constructor</code>属性</li>
+</li>
+<li><p><code>constructor</code>属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> i = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-string">&quot;a&quot;</span>];<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i.<span class="hljs-property">constructor</span>.<span class="hljs-property">name</span>); <span class="hljs-comment">// &quot;Array&quot;</span><br></code></pre></td></tr></table></figure></li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> i = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-string">&quot;a&quot;</span>];<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i.<span class="hljs-property">constructor</span>.<span class="hljs-property">name</span>); <span class="hljs-comment">// &quot;Array&quot;</span><br></code></pre></td></tr></table></figure>
-
 <h5 id="2-创建数组方法"><a href="#2-创建数组方法" class="headerlink" title="2. 创建数组方法"></a>2. 创建数组方法</h5><ol>
-<li><code>Array.from()</code><br><code>Array.from()</code>方法用于将类数组对象和可迭代对象转为真正的数组，并且返回一个新的，浅拷贝的数组实例。</li>
-</ol>
+<li><p><code>Array.from()</code><br><code>Array.from()</code>方法用于将类数组对象和可迭代对象转为真正的数组，并且返回一个新的，浅拷贝的数组实例。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 报错</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(<span class="hljs-literal">undefined</span>)<br><span class="hljs-comment">// 报错</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(<span class="hljs-literal">null</span>)<br><span class="hljs-comment">// [&quot;f&quot;, &quot;o&quot;, &quot;o&quot;]</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;foo&#x27;</span>))<br><span class="hljs-comment">// []</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;&#x27;</span>))<br><span class="hljs-comment">// []</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(<span class="hljs-number">123</span>))<br><span class="hljs-comment">// []</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(<span class="hljs-title class_">NaN</span>))<br></code></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><code>Array.of()</code><br>Array.of()创建一个包含所有传入参数的数组，不考虑参数的数量或类型，返回一个新数组。</li>
+</li>
+<li><p><code>Array.of()</code><br>Array.of()创建一个包含所有传入参数的数组，不考虑参数的数量或类型，返回一个新数组。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>()                  <span class="hljs-comment">// []</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>(<span class="hljs-literal">undefined</span>)         <span class="hljs-comment">// [undefined]</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>(<span class="hljs-literal">null</span>)              <span class="hljs-comment">// [null]</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>(<span class="hljs-title class_">NaN</span>)               <span class="hljs-comment">// [NaN]</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>(<span class="hljs-number">1</span>)                 <span class="hljs-comment">// [1]</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)              <span class="hljs-comment">// [1, 2]</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])           <span class="hljs-comment">// [[1,2,3]]</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>(&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>&#125;)   <span class="hljs-comment">// [&#123;id:1&#125;, &#123;id:2&#125;]</span><br></code></pre></td></tr></table></figure></li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>()                  <span class="hljs-comment">// []</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>(<span class="hljs-literal">undefined</span>)         <span class="hljs-comment">// [undefined]</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>(<span class="hljs-literal">null</span>)              <span class="hljs-comment">// [null]</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>(<span class="hljs-title class_">NaN</span>)               <span class="hljs-comment">// [NaN]</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>(<span class="hljs-number">1</span>)                 <span class="hljs-comment">// [1]</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)              <span class="hljs-comment">// [1, 2]</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])           <span class="hljs-comment">// [[1,2,3]]</span><br><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">of</span>(&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>&#125;)   <span class="hljs-comment">// [&#123;id:1&#125;, &#123;id:2&#125;]</span><br></code></pre></td></tr></table></figure>
-
 <h5 id="3-遍历（迭代）方法"><a href="#3-遍历（迭代）方法" class="headerlink" title="3. 遍历（迭代）方法"></a>3. 遍历（迭代）方法</h5><ol>
-<li><code>forEach()</code><br>对数组中的每一项运行指定的函数。这个方法返回<code>undefined</code>，即使你return了一个值。<ol>
+<li><p><code>forEach()</code><br>对数组中的每一项运行指定的函数。这个方法返回<code>undefined</code>，即使你return了一个值。</p>
+<ol>
 <li><p>Array.forEach()参数语法：</p>
 <table>
 <thead>
@@ -638,7 +632,6 @@
 </li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> arr = [&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">3</span>&#125;]<br><span class="hljs-keyword">const</span> newArr = arr.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">el,index,arr</span>) =&gt;</span> &#123;<br>  el.<span class="hljs-property">age</span> = <span class="hljs-number">20</span><br>  <span class="hljs-keyword">return</span> el<br>&#125;);<br><span class="hljs-comment">// [&#123;id: 1,age: 20&#125;,&#123;id: 2,age: 20&#125;,&#123;id: 3,age: 20&#125;]</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(newArr);<br></code></pre></td></tr></table></figure>
-
 
 <ol start="3">
 <li><p><code>filter()</code><br>对数组中的每一项运行指定的函数，返回该函数会返回true的项组成的新的数组。如果没有任何数组元素通过测试，则返回空数组。</p>
@@ -697,18 +690,18 @@
 </tbody></table>
 </li>
 <li><p>第二个参数（可选）：当执行回调函数时用作 this 的值。</p>
-</li>
-</ol>
-   <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> arr = [&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">3</span>&#125;]<br><span class="hljs-keyword">const</span> someResult = arr.<span class="hljs-title function_">some</span>(<span class="hljs-function">(<span class="hljs-params">el,index,arr</span>) =&gt;</span> &#123;<br><span class="hljs-keyword">return</span> el.<span class="hljs-property">id</span> === <span class="hljs-number">1</span><br>&#125;);<br><span class="hljs-comment">// true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(someResult)<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> arr = [&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-attr">id</span>: <span class="hljs-number">3</span>&#125;]<br><span class="hljs-keyword">const</span> someResult = arr.<span class="hljs-title function_">some</span>(<span class="hljs-function">(<span class="hljs-params">el,index,arr</span>) =&gt;</span> &#123;<br><span class="hljs-keyword">return</span> el.<span class="hljs-property">id</span> === <span class="hljs-number">1</span><br>&#125;);<br><span class="hljs-comment">// true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(someResult)<br><br></code></pre></td></tr></table></figure>
+
 <ol start="5">
 <li><code>every()</code><br>检测数组所有元素是否都符合判断条件。</li>
+</ol>
+</li>
 </ol>
 <p>对数组中的每一项运行指定的函数，如果该函数对每一项都返回true，则返回true。若收到一个空数组，此方法在一切情况下都会返回true。如果数组中检测到有一个元素不满足，则返回 false，且剩余的元素不会再进行检测。</p>
 <h3 id="JavaScript中比较常考的点"><a href="#JavaScript中比较常考的点" class="headerlink" title="JavaScript中比较常考的点"></a>JavaScript中比较常考的点</h3><h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><ol>
 <li><p>在Number与String运算时，<strong>只有</strong><code>+</code>操作时Number会隐式转换为String，其余情况下都是String隐式转换为Number</p>
 </li>
-<li><p>在JavaScript中，数据类型分两大类：</p>
-<p><strong>原始类型(Primitive Types)：</strong></p>
+<li><p>在JavaScript中，数据类型分两大类：<br><strong>原始类型(Primitive Types)：</strong></p>
 <table>
 <thead>
 <tr>
@@ -802,6 +795,27 @@
             <hr>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/frontend/" class="category-chain-item">frontend</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
     <div class="post-meta">
