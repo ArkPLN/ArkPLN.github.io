@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Zustand实战应用笔记</title>
+    <link href="/2955613371.html"/>
+    <url>/2955613371.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="Zustand实战应用笔记"><a href="#Zustand实战应用笔记" class="headerlink" title="Zustand实战应用笔记"></a>Zustand实战应用笔记</h1><h2 id="引言-为什么要状态管理-为什么选择Zustand"><a href="#引言-为什么要状态管理-为什么选择Zustand" class="headerlink" title="引言(为什么要状态管理&#x2F;为什么选择Zustand)"></a>引言(为什么要状态管理&#x2F;为什么选择Zustand)</h2><p>在开发项目的过程中,发现随着我项目后期体量的逐步上升,通过针对一个大类创建多个ts文件和类型文件的简单方式已经开始有些力不从心，特别是复杂的类型注解，相互之间的依赖和大量工厂函数需要管理，因此需要适当做出工程优化，对类型系统和涉及项目需要的各自函数加以进一步封装和管理，综合考虑技术栈和操作难度，这里选择了Zustand并尝试使用该状态管理库探索项目的工程优化迭代，原因有三。</p><ol><li><p>与Redux相比更简洁，单模块依赖，不需要额外的RTK等其他库的二次封装</p></li><li><p>使用方法更简单，语法符合直觉，无须Provider注入，与React的Hooks函数写法相吻合</p></li><li><p>对TypeScript兼容性好，便于与项目已有的类型注解相衔接</p></li></ol><h2 id="全面用法"><a href="#全面用法" class="headerlink" title="全面用法"></a>全面用法</h2><blockquote><p>官网文档在此: <a href="https://zustand.docs.pmnd.rs/getting-started/">Zustand Official Docs</a></p></blockquote><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用<code>pnpm</code>安装到项目中</p><blockquote><p>话说真的还有人在用自带的npm吗，速度真的很慢好吗？？</p></blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pnpm install zustand<br></code></pre></td></tr></table></figure><h3 id="创建Store"><a href="#创建Store" class="headerlink" title="创建Store"></a>创建Store</h3><ol><li>引入<code>zustand</code></li></ol><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; create &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;zustand&#x27;</span><br></code></pre></td></tr></table></figure><ol start="2"><li>使用<code>create()</code> 方法创建<code>useBoundStore</code> 对象</li></ol><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">const</span> useTestStore = <span class="hljs-title function_">create</span>(<span class="hljs-function">(<span class="hljs-params">set</span>)=&gt;</span>(&#123;<br>    <span class="hljs-attr">test</span>: <span class="hljs-string">&#x27;test&#x27;</span>,<br>    <span class="hljs-attr">setTest</span>: <span class="hljs-function">(<span class="hljs-params">test</span>) =&gt;</span> <span class="hljs-title function_">set</span>(&#123; test &#125;),<br>&#125;))<br></code></pre></td></tr></table></figure><p><em>注意:</em> <strong><code>set</code></strong> 表示更新状态的函数。它允许你修改store中的状态值，或者接受一个函数，该函数接收当前状态作为参数，返回新的状态，起到一个类似<strong>扳机</strong>的作用。</p><ol start="3"><li>导出<code>useStore</code>对象(<strong>跨文件的情况</strong>)</li></ol><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// 解构导出</span><br><span class="hljs-keyword">export</span> &#123; useTestStore &#125;;<br><br><br><span class="hljs-comment">// 如果只有一个useStore对象,那么default也是可以的</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> useTestStore<br></code></pre></td></tr></table></figure><ol start="4"><li>调用<code>useStore</code></li></ol><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123;useTestStore&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./store/index&#x27;</span><br><br><br><span class="hljs-keyword">const</span> test = <span class="hljs-title function_">useTestStore</span>(<span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> state.<span class="hljs-property">test</span>);<br></code></pre></td></tr></table></figure><p><strong>特别注意,对TypeScript来说，需要额外的类型注解处理以避免IDE或ts-check爆黄的情况</strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>frontend</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>react</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Flutter学习笔记</title>
     <link href="/1134849698.html"/>
     <url>/1134849698.html</url>
