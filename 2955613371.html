@@ -27,7 +27,7 @@
 <meta property="og:description" content="探索项目工程实践下React配合Zustand的状态管理功能和更复杂的需求实现。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-11-10T14:15:09.000Z">
-<meta property="article:modified_time" content="2025-11-10T14:57:06.170Z">
+<meta property="article:modified_time" content="2025-11-11T09:36:51.601Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="react">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          496 words
+          576 words
         
       </span>
     
@@ -326,6 +326,22 @@
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123;useTestStore&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./store/index&#x27;</span><br><br><br><span class="hljs-keyword">const</span> test = <span class="hljs-title function_">useTestStore</span>(<span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> state.<span class="hljs-property">test</span>);<br></code></pre></td></tr></table></figure>
 
 <p><strong>特别注意,对TypeScript来说，需要额外的类型注解处理以避免IDE或ts-check爆黄的情况</strong></p>
+<ol>
+<li>创建<code>storeState</code> <code>interface</code></li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> testState &#123;<br>    <span class="hljs-comment">// state属性</span><br>    <span class="hljs-attr">test</span>: <span class="hljs-built_in">string</span>;<br>    <span class="hljs-comment">// state方法</span><br>    <span class="hljs-attr">setTest</span>: <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">test</span>: <span class="hljs-built_in">string</span></span>) =&gt;</span> <span class="hljs-built_in">void</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>将类型注解应用于<code>create()</code> 方法的泛型上</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">const</span> useTestStore = create&lt;testState&gt;(<span class="hljs-function">(<span class="hljs-params">set</span>)=&gt;</span>(&#123;<br>    <span class="hljs-attr">test</span>: <span class="hljs-string">&#x27;test&#x27;</span>,<br>    <span class="hljs-attr">setTest</span>: <span class="hljs-function">(<span class="hljs-params">test</span>) =&gt;</span> <span class="hljs-title function_">set</span>(&#123; test &#125;),<br>&#125;))<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>使用对象时对<code>state</code>类型注解</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123;useTestStore,testState&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./store/index&#x27;</span><br><br><br><span class="hljs-keyword">const</span> test = <span class="hljs-title function_">useTestStore</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">state</span>: testState</span>) =&gt;</span> state.<span class="hljs-property">test</span>);<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(test);<br></code></pre></td></tr></table></figure>
+
+
 
                 
               </div>
