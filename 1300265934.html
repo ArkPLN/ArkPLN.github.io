@@ -17,24 +17,24 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="FangZhou">
-  <meta name="keywords" content="react,web,nodejs,frontend">
+  <meta name="keywords" content="nodejs,nextjs,react">
   
-    <meta name="description" content="探索项目工程实践下React配合Zustand的状态管理功能和更复杂的需求实现。">
+    <meta name="description" content="Next.js学习笔记前言为什么选择Next.js 用的人多  SSR服务端渲染技术  SEO搜索引擎优化  AI产品研发[AI-SDK]   前置知识条件: HTML,CSS,JavaScript  TypeScript  React  Node.js   视频链接: Next.js(16) + AI 搭建项目脚手架安装使用npm脚手架搭建 1npx create-next-app@latest">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zustand实战应用笔记">
-<meta property="og:url" content="http://arkpln.github.io/2955613371.html">
+<meta property="og:title" content="Nextjs学习笔记">
+<meta property="og:url" content="http://arkpln.github.io/1300265934.html">
 <meta property="og:site_name" content="Ark的技术博客">
-<meta property="og:description" content="探索项目工程实践下React配合Zustand的状态管理功能和更复杂的需求实现。">
+<meta property="og:description" content="Next.js学习笔记前言为什么选择Next.js 用的人多  SSR服务端渲染技术  SEO搜索引擎优化  AI产品研发[AI-SDK]   前置知识条件: HTML,CSS,JavaScript  TypeScript  React  Node.js   视频链接: Next.js(16) + AI 搭建项目脚手架安装使用npm脚手架搭建 1npx create-next-app@latest">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-11-10T14:15:09.000Z">
-<meta property="article:modified_time" content="2025-12-08T08:13:26.251Z">
+<meta property="article:published_time" content="2025-12-24T11:02:55.000Z">
+<meta property="article:modified_time" content="2025-12-26T09:26:42.999Z">
 <meta property="article:author" content="FangZhou">
-<meta property="article:tag" content="react">
+<meta property="article:tag" content="nextjs">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Zustand实战应用笔记 - Ark的技术博客</title>
+  <title>Nextjs学习笔记 - Ark的技术博客</title>
 
   <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
 
@@ -210,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Zustand实战应用笔记"></span>
+            <span id="subtitle" data-typed-text="Nextjs学习笔记"></span>
           
         </div>
 
@@ -221,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-11-10 22:15" pubdate>
-          November 10, 2025 pm
+        <time datetime="2025-12-24 19:02" pubdate>
+          December 24, 2025 pm
         </time>
       </span>
     
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          579 words
+          1k words
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          5 mins
+          9 mins
         
       </span>
     
@@ -281,67 +281,151 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Zustand实战应用笔记</h1>
+            <h1 id="seo-header">Nextjs学习笔记</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Zustand实战应用笔记"><a href="#Zustand实战应用笔记" class="headerlink" title="Zustand实战应用笔记"></a>Zustand实战应用笔记</h1><h2 id="引言-为什么要状态管理-为什么选择Zustand"><a href="#引言-为什么要状态管理-为什么选择Zustand" class="headerlink" title="引言(为什么要状态管理&#x2F;为什么选择Zustand)"></a>引言(为什么要状态管理&#x2F;为什么选择Zustand)</h2><p>在开发项目的过程中,发现随着我项目后期体量的逐步上升,通过针对一个大类创建多个ts文件和类型文件的简单方式已经开始有些力不从心，特别是复杂的类型注解，相互之间的依赖和大量工厂函数需要管理，因此需要适当做出工程优化，对类型系统和涉及项目需要的各自函数加以进一步封装和管理，综合考虑技术栈和操作难度，这里选择了Zustand并尝试使用该状态管理库探索项目的工程优化迭代，原因有三。</p>
+                <h1 id="Next-js学习笔记"><a href="#Next-js学习笔记" class="headerlink" title="Next.js学习笔记"></a>Next.js学习笔记</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="为什么选择Next-js"><a href="#为什么选择Next-js" class="headerlink" title="为什么选择Next.js"></a>为什么选择Next.js</h3><ol>
+<li><p>用的人多</p>
+</li>
+<li><p>SSR服务端渲染技术</p>
+</li>
+<li><p>SEO搜索引擎优化</p>
+</li>
+<li><p>AI产品研发[AI-SDK]</p>
+</li>
+</ol>
+<h3 id="前置知识条件"><a href="#前置知识条件" class="headerlink" title="前置知识条件:"></a>前置知识条件:</h3><ol>
+<li><p>HTML,CSS,JavaScript</p>
+</li>
+<li><p>TypeScript</p>
+</li>
+<li><p>React</p>
+</li>
+<li><p>Node.js</p>
+</li>
+</ol>
+<p><strong>视频链接:</strong> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.bilibili.com/video/BV1P9CxBsEUA">Next.js(16) + AI</a></p>
+<h2 id="搭建项目"><a href="#搭建项目" class="headerlink" title="搭建项目"></a>搭建项目</h2><h3 id="脚手架安装"><a href="#脚手架安装" class="headerlink" title="脚手架安装"></a>脚手架安装</h3><p>使用npm脚手架搭建</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npx create-next-app@latest <span class="hljs-comment">#npm 包管理器</span><br></code></pre></td></tr></table></figure>
+
+<p>或者:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pnpm dlx create-next-app@latest <span class="hljs-comment">#pnpm包管理器</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="关键配置项"><a href="#关键配置项" class="headerlink" title="关键配置项"></a>关键配置项</h3><ol>
+<li><p><code>TypeScript</code>:现代前端项目工程化语言,用于取代JavaScript提供更好的类型检查</p>
+</li>
+<li><p><code>Linter</code>:根据方案识别并报告 ECMAScript&#x2F;JavaScript 代码问题的工具，其目的是使代码风格更加一致并避免错误。</p>
+</li>
+<li><p><code>React Compiler</code>:自动完成React应用中组件和Hooks的缓存化,于25年10月7日发布首个稳定版</p>
+</li>
+<li><p><code>TailwindCSS</code>:CSS原子化</p>
+</li>
+<li><p><code>App Router</code>:项目的路由系统</p>
+</li>
+</ol>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
+<li><p><code>node_modules</code>:npm依赖</p>
+</li>
+<li><p><code>src/app</code>:应用代码</p>
+<ul>
+<li><p><code>layout.tsx</code>:根布局组件</p>
+</li>
+<li><p><code>page.tsx</code>:主页,应用页面</p>
+</li>
+</ul>
+</li>
+<li><p><code>next.config.ts</code>:项目配置文件</p>
+</li>
+<li><p><code>package.json</code>:项目依赖配置</p>
+</li>
+<li><p><code>postcss.config.mjs</code>:PostCSS配置</p>
+</li>
+<li><p><code>tsconfig.json</code>:TypeScript配置文件</p>
+</li>
+</ul>
+<h3 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h3><ul>
+<li><strong>启动</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pnpm run dev<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>编译生成环境</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pnpm run build<br></code></pre></td></tr></table></figure>
+
+<h3 id="OneMoreThings"><a href="#OneMoreThings" class="headerlink" title="OneMoreThings"></a>OneMoreThings</h3><ol>
+<li>什么是Turbopack?</li>
+</ol>
+<p>使用Rust编写的打包工具,性能是webpack的700倍</p>
+<p>好处?</p>
 <ol>
-<li><p>与Redux相比更简洁，单模块依赖，不需要额外的RTK等其他库的二次封装</p>
+<li><p>统一环境,统一依赖图关系</p>
 </li>
-<li><p>使用方法更简单，语法符合直觉，无须Provider注入，与React的Hooks函数写法相吻合</p>
+<li><p>惰性打包,只打包开发服务器请求的内容,减少首次启动时间</p>
 </li>
-<li><p>对TypeScript兼容性好，便于与项目已有的类型注解相衔接</p>
+<li><p>增量计算,多线程计算+函数级缓存,一旦完成就不再重新重复计算直到函数被更新</p>
+</li>
+<li><p>什么是React Compiler?</p>
 </li>
 </ol>
-<h2 id="全面用法"><a href="#全面用法" class="headerlink" title="全面用法"></a>全面用法</h2><blockquote>
-<p>官网文档在此: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://zustand.docs.pmnd.rs/getting-started/">Zustand Official Docs</a></p>
-</blockquote>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用<code>pnpm</code>安装到项目中</p>
-<blockquote>
-<p>话说真的还有人在用自带的npm吗，速度真的很慢好吗？？</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pnpm install zustand<br></code></pre></td></tr></table></figure>
-
-<h3 id="创建Store"><a href="#创建Store" class="headerlink" title="创建Store"></a>创建Store</h3><ol>
-<li>引入<code>zustand</code></li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; create &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;zustand&#x27;</span><br></code></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>使用<code>create()</code> 方法创建<code>useBoundStore</code> 对象</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">const</span> useTestStore = <span class="hljs-title function_">create</span>(<span class="hljs-function">(<span class="hljs-params">set</span>)=&gt;</span>(&#123;<br>    <span class="hljs-attr">test</span>: <span class="hljs-string">&#x27;test&#x27;</span>,<br>    <span class="hljs-attr">setTest</span>: <span class="hljs-function">(<span class="hljs-params">test</span>) =&gt;</span> <span class="hljs-title function_">set</span>(&#123; test &#125;),<br>&#125;))<br></code></pre></td></tr></table></figure>
-
-<p><em>注意:</em> <strong><code>set</code></strong> 表示更新状态的函数。它允许你修改store中的状态值，或者接受一个函数，该函数接收当前状态作为参数，返回新的状态，起到一个类似<strong>扳机</strong>的作用。</p>
+<p>自动添加<code>useMemo</code>,<code>useCallback</code>,<code>React.memo</code>,减少心智负担.</p>
+<p>可通过添加<code>babel-plugin-react-compiler</code>依赖,在nextConfig中设置开启.</p>
 <ol start="3">
-<li>导出<code>useStore</code>对象(<strong>跨文件的情况</strong>)</li>
+<li>什么是App Router?什么是Page Router?</li>
 </ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// 解构导出</span><br><span class="hljs-keyword">export</span> &#123; useTestStore &#125;;<br><br><br><span class="hljs-comment">// 如果只有一个useStore对象,那么default也是可以的</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> useTestStore<br></code></pre></td></tr></table></figure>
+<ul>
+<li>都是基于文件系统的路由</li>
+</ul>
+<p>在传统的框架中,路由需要通过路由表手动配置,而Next.js使用了自动的配置方式</p>
+<ul>
+<li><p><code>Page Router</code>: 将<code>pages</code>目录下所有的<code>jsx/tsx</code>文件都转换成路由,如<code>pages/index.tsx</code>会转换成<code>/</code>.<strong>问题:</strong> 不能把任何组件写到<code>pages</code>目录下,需要通过<code>_Component</code>的方式才能排除路由</p>
+</li>
+<li><p><code>App Router</code>: 根据约束定义:</p>
+<ul>
+<li><p><code>src/app/page.tsx</code>: &#x2F; 首页</p>
+</li>
+<li><p><code>layout.tsx</code>: 布局组件</p>
+</li>
+<li><p><code>template.tsx</code>: 模版组件</p>
+</li>
+<li><p><code>loading.tsx</code>:加载组件</p>
+</li>
+<li><p><code>error.tsx</code>:错误组件</p>
+</li>
+<li><p><code>not-found.tsx</code>:404组件</p>
+</li>
+<li><p><code>/subpage/page.tsx</code>: <code>/subpage</code>子路由页面</p>
+</li>
+</ul>
+</li>
+<li><p><code>Page Router</code>读取数据使用<code>getServerSideProps</code>,<code>getStaticProps</code>,<code>getStaticPaths</code>等函数,而<code>App Router</code>则不需要,使用<code>fetch</code>即可</p>
+</li>
+</ul>
+<h2 id="路由导航"><a href="#路由导航" class="headerlink" title="路由导航"></a>路由导航</h2><p>路由导航指的是在Nextjs中实现页面跳转的方式,在Next.js中共有四种方式提供跳转.</p>
+<ul>
+<li><p><code>Link</code>组件</p>
+</li>
+<li><p><code>useRouter</code>Hooks函数(客户端组件)</p>
+</li>
+<li><p><code>redirect</code>函数(服务端组件)</p>
+</li>
+<li><p><code>History API</code> Web API标准</p>
+</li>
+</ul>
+<h3 id="Link组件"><a href="#Link组件" class="headerlink" title="Link组件"></a>Link组件</h3><p><code>&lt;Link&gt;</code>是一个内置组件,在a标签的基础上拓展了<code>prefetch</code>,<code>scroll</code>等功能</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Link</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next/link&quot;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">About</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black&quot;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;flex min-h-screen w-full max-w-3xl flex-col items-center justify-center py-32 px-16 bg-white dark:bg-black sm:items-start&quot;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50&quot;</span>&gt;</span></span><br><span class="language-xml">          This is the About Page.</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml"></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&#x27;/&#x27;</span></span></span><br><span class="hljs-tag"><span class="language-xml">        <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]&quot;</span>&gt;</span></span><br><span class="language-xml">        Home</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<ol start="4">
-<li>调用<code>useStore</code></li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123;useTestStore&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./store/index&#x27;</span><br><br><br><span class="hljs-keyword">const</span> test = <span class="hljs-title function_">useTestStore</span>(<span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> state.<span class="hljs-property">test</span>);<br></code></pre></td></tr></table></figure>
+<h4 id="携带查询参数"><a href="#携带查询参数" class="headerlink" title="携带查询参数"></a>携带查询参数</h4><p>写法: <code>href=&#123;&#123;pathname:'/about/me',query:&#123;id:1&#125;&#125;&#125;</code></p>
+<p>获取查询参数:<code>useSearchParams()</code></p>
+<p>使用<code>searchParams.get()</code>&#x2F;<code>searchParams.getAll()</code>获取查询参数</p>
+<p>使用<code>...has()</code>判断查询字段是否存在</p>
+<p><em><code>useSerachParams</code>是客户端函数,只能在客户端组件生效</em></p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><span class="hljs-string">&#x27;use client&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Link</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next/link&quot;</span>;<br><span class="hljs-keyword">import</span> &#123;useSearchParams&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;next/navigation&#x27;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">About</span>(<span class="hljs-params"></span>) &#123;<br><br>    <span class="hljs-keyword">const</span> searchParams = <span class="hljs-title function_">useSearchParams</span>();<br>    <span class="hljs-keyword">const</span> id = searchParams.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;id&#x27;</span>); <span class="hljs-comment">//返回字符串 </span><br>    <span class="hljs-keyword">const</span> ids = searchParams.<span class="hljs-title function_">getAll</span>(<span class="hljs-string">&#x27;id&#x27;</span>); <span class="hljs-comment">//返回数组</span><br>    <span class="hljs-keyword">const</span> isId = searchParams.<span class="hljs-title function_">has</span>(<span class="hljs-string">&#x27;id&#x27;</span>) <span class="hljs-comment">//返回布尔值</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Query id:&#x27;</span>, id);<br><br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black&quot;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;flex min-h-screen w-full max-w-3xl flex-col items-center justify-center py-32 px-16 bg-white dark:bg-black sm:items-start&quot;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50&quot;</span>&gt;</span></span><br><span class="language-xml">          This is the About Page.</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml"></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&#x27;/&#x27;</span></span></span><br><span class="hljs-tag"><span class="language-xml">        <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]&quot;</span>&gt;</span></span><br><span class="language-xml">        Home</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><strong>特别注意,对TypeScript来说，需要额外的类型注解处理以避免IDE或ts-check爆黄的情况</strong></p>
-<ol>
-<li>创建<code>storeState</code> <code>interface</code></li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> testState &#123;<br>    <span class="hljs-comment">// state属性</span><br>    <span class="hljs-attr">test</span>: <span class="hljs-built_in">string</span>;<br>    <span class="hljs-comment">// state方法</span><br>    <span class="hljs-attr">setTest</span>: <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">test</span>: <span class="hljs-built_in">string</span></span>) =&gt;</span> <span class="hljs-built_in">void</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="prefetch预加载"><a href="#prefetch预加载" class="headerlink" title="prefetch预加载"></a>prefetch预加载</h4><p>语法:<code>prefetch:&#123;true&#125;</code></p>
 
-<ol start="2">
-<li>将类型注解应用于<code>create()</code> 方法的泛型上</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">const</span> useTestStore = create&lt;testState&gt;(<span class="hljs-function">(<span class="hljs-params">set</span>)=&gt;</span>(&#123;<br>    <span class="hljs-attr">test</span>: <span class="hljs-string">&#x27;test&#x27;</span>,<br>    <span class="hljs-attr">setTest</span>: <span class="hljs-function">(<span class="hljs-params">test</span>) =&gt;</span> <span class="hljs-title function_">set</span>(&#123; test &#125;),<br>&#125;))<br></code></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>使用对象时对<code>state</code>类型注解</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123;useTestStore,testState&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./store/index&#x27;</span><br><br><br><span class="hljs-keyword">const</span> test = <span class="hljs-title function_">useTestStore</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">state</span>: testState</span>) =&gt;</span> state.<span class="hljs-property">test</span>);<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(test);<br></code></pre></td></tr></table></figure>
-
-<h3 id="调用Store"><a href="#调用Store" class="headerlink" title="调用Store"></a>调用Store</h3>
                 
               </div>
             
@@ -349,32 +433,11 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/frontend/" class="category-chain-item">frontend</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/react/" class="print-no-link">#react</a>
+        <a href="/tags/nextjs/" class="print-no-link">#nextjs</a>
       
     </div>
   
@@ -386,8 +449,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Zustand实战应用笔记</div>
-      <div>http://arkpln.github.io/2955613371.html</div>
+      <div>Nextjs学习笔记</div>
+      <div>http://arkpln.github.io/1300265934.html</div>
     </div>
     <div class="license-meta">
       
@@ -399,7 +462,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 10, 2025</div>
+          <div>December 24, 2025</div>
         </div>
       
       
@@ -431,18 +494,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/1300265934.html" title="Nextjs学习笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Nextjs学习笔记</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/1134849698.html" title="Flutter学习笔记">
-                        <span class="hidden-mobile">Flutter学习笔记</span>
+                      <a href="/2955613371.html" title="Zustand实战应用笔记">
+                        <span class="hidden-mobile">Zustand实战应用笔记</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
