@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://arkpln.github.io/images/nextjs.webp">
 <meta property="article:published_time" content="2025-12-24T11:02:55.000Z">
-<meta property="article:modified_time" content="2026-01-07T09:07:35.923Z">
+<meta property="article:modified_time" content="2026-01-08T14:03:20.721Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="nextjs">
 <meta name="twitter:card" content="summary_large_image">
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          13k words
+          18k words
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          108 mins
+          147 mins
         
       </span>
     
@@ -693,8 +693,194 @@
 </li>
 </ul>
 <p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://nextjs.org/docs/app/api-reference/file-conventions/proxy#matcher">请求器Matcher| Next.js</a></p>
-<h3 id="处理跨域"><a href="#处理跨域" class="headerlink" title="处理跨域"></a>处理跨域</h3><pre><code class="language-ts">
+<h3 id="处理跨域"><a href="#处理跨域" class="headerlink" title="处理跨域"></a>处理跨域</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// ./src/proxy.ts</span><br><span class="hljs-keyword">import</span> &#123;<span class="hljs-title class_">NextRequest</span>, <span class="hljs-title class_">NextResponse</span>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;next/server&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">ProxyConfig</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;next/server&#x27;</span>;<br><br><span class="hljs-keyword">const</span> corsHeaders = &#123;<br>    <span class="hljs-string">&#x27;Access-Control-Allow-Origin&#x27;</span>: <span class="hljs-string">&#x27;*&#x27;</span>,<br>    <span class="hljs-string">&#x27;Access-Control-Allow-Methods&#x27;</span>: <span class="hljs-string">&#x27;GET,POST,PUT,DELETE,OPTIONS&#x27;</span>,<br>    <span class="hljs-string">&#x27;Access-Control-Allow-Headers&#x27;</span>: <span class="hljs-string">&#x27;Content-Type, Authorization&#x27;</span>,<br>&#125;;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">proxy</span>(<span class="hljs-params"><span class="hljs-attr">request</span>: <span class="hljs-title class_">NextRequest</span></span>) &#123;<br>    <span class="hljs-keyword">const</span> response = <span class="hljs-title class_">NextResponse</span>.<span class="hljs-title function_">next</span>();<br>    <span class="hljs-keyword">const</span> cookies = request.<span class="hljs-property">headers</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;cookie&#x27;</span>) || <span class="hljs-string">&#x27;&#x27;</span>;<br>    <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">entries</span>(corsHeaders).<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">[key, value]</span>) =&gt;</span> &#123;<br>        response.<span class="hljs-property">headers</span>.<span class="hljs-title function_">set</span>(key, value);<br>    &#125;);<br><br>    <span class="hljs-keyword">if</span>(cookies)&#123;<br>        <span class="hljs-keyword">return</span> response;&#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title class_">NextResponse</span>.<span class="hljs-title function_">redirect</span>(<span class="hljs-keyword">new</span> <span class="hljs-title function_">URL</span>(<span class="hljs-string">&#x27;/&#x27;</span>, request.<span class="hljs-property">url</span>));<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(request.<span class="hljs-property">url</span>)<br>&#125;<br><br><span class="hljs-comment">// matcher: &#x27;/home/:path*&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> config = &#123;<br>    <span class="hljs-attr">matcher</span>: <span class="hljs-string">&#x27;/proxy/:path*&#x27;</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="渲染基础"><a href="#渲染基础" class="headerlink" title="渲染基础"></a>渲染基础</h2><p>本章我们学习 <code>CSR</code> <code>SSR</code> <code>SSG</code> 三种渲染方式,以及<code>Hydration</code>水合的概念。</p>
+<h3 id="CSR"><a href="#CSR" class="headerlink" title="CSR"></a>CSR</h3><p>CSR是<code>Client Side Rendering</code>的缩写，即客户端渲染。像我们使用的<code>Vue</code> <code>React</code> <code>Angular</code> 等框架，都是CSR。</p>
+<p>工作流程如下：</p>
+<p>浏览器请求服务器 -&gt; 服务器返回HTML&#x2F;JS&#x2F;CSS等文件 -&gt; JS动态渲染生成DOM -&gt; 浏览器渲染DOM</p>
+<pre><code class=" mermaid">flowchart TD
+    A[浏览器请求服务器] --&gt; B[服务器返回HTML/JS/CSS文件]
+
+    subgraph C [浏览器处理]
+        C1[JS动态渲染生成DOM] --&gt; C2[浏览器渲染DOM]
+    end
+
+    B --&gt; C
+
+    C2 --&gt; D[页面显示完成]
 </code></pre>
+
+<p>优点：</p>
+<ul>
+<li>交互流畅，可直接响应</li>
+<li>前后端分离，前端注重UI，后端注重数据</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>首屏加载慢，因为需要下载JS&#x2F;CSS等文件</li>
+<li>SEO不友好，因为JS动态渲染<code>(现在爬虫普遍已经支持JS抓取了)</code></li>
+</ul>
+<p>适合场景：</p>
+<ul>
+<li>后台管理系统开发(后台系统不需要SEO，也不需要首屏加载速度)</li>
+<li>单页面应用开发(SPA)</li>
+</ul>
+<h3 id="SSR"><a href="#SSR" class="headerlink" title="SSR"></a>SSR</h3><p>SSR是<code>Server Side Rendering</code>的缩写，即服务端渲染。像我们使用的<code>Next.js</code> <code>Nuxt.js</code>等框架，都是SSR。</p>
+<p>例如我们有一个电商网站，需要保证用户搜索关键词能搜到 <code>xx商品</code>, 还要注意 用户还可能是<code>弱网环境</code>,在地铁 电梯等，所以我们可以直接把API放到服务器请求，然后渲染成HTML页面返回给浏览器。</p>
+<p>工作流程如下：</p>
+<pre><code class=" mermaid">flowchart TD
+    A[浏览器请求服务器] --&gt; B[服务器]
+
+    subgraph B [服务器处理]
+        B1[内部调用API接口] --&gt; B2[渲染HTML页面]
+    end
+
+    B --&gt; C[返回HTML页面到浏览器]
+
+    C --&gt; D&#123;浏览器并行处理&#125;
+    D --&gt; E[加载JS/CSS等文件]
+    D --&gt; F[解析HTML页面]
+
+    E --&gt; G[执行hydration&lt;br/&gt;水合过程]
+    F --&gt; G
+
+    G --&gt; H[页面完全交互就绪]
+</code></pre>
+
+<p>优点：</p>
+<ul>
+<li>首屏加载快，因为服务器已经渲染了HTML页面</li>
+<li>SEO友好，搜索引擎能爬取到完整内容</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>开发成本高，需要懂服务端知识，全栈开发。</li>
+<li>服务器承担渲染工作，如果用户访问量大，对服务器配置要求高，增大成本</li>
+</ul>
+<p>适合场景：</p>
+<ul>
+<li>电商网站开发</li>
+<li>博客网站开发</li>
+<li>官网&#x2F;首页等</li>
+</ul>
+<h3 id="SSG"><a href="#SSG" class="headerlink" title="SSG"></a>SSG</h3><p>SSG是<code>Static Site Generation</code>的缩写，即静态站点生成。像我们使用的<code>Vitepress</code> <code>Astro</code>等框架，都是SSG。</p>
+<p>例如我们需要一个查看文档的网站，例如<code>Vue</code> <code>React</code> 等文档，大家看到的都是一样的，所以我们在构建的时候，直接编译成静态文件，连接口都不用请求了，如果在部署CDN&#x2F;Nginx等服务器，基本可以实现秒开。</p>
+<p>工作流程如下：</p>
+<p>项目构建 <code>npm run build</code> -&gt; 生成静态文件（每个路由对应一个 HTML） -&gt; 部署到CDN&#x2F;Nginx等服务器 -&gt; 浏览器请求服务器 -&gt; 服务器返回HTML页面 -&gt; hydration</p>
+<pre><code class=" mermaid">flowchart TD
+    subgraph A [构建阶段]
+        A1[项目构建 npm run build] --&gt; A2[生成静态文件&lt;br/&gt;每个路由对应一个HTML]
+    end
+
+    A2 --&gt; B[部署到CDN/Nginx等服务器]
+
+    subgraph C [请求响应阶段]
+        C1[浏览器请求服务器] --&gt; C2[服务器返回预生成的HTML页面]
+    end
+
+    B --&gt; C
+
+    C2 --&gt; D[执行hydration&lt;br/&gt;水合过程]
+    D --&gt; E[页面完全交互就绪]
+</code></pre>
+
+
+
+<p>优点：</p>
+<ul>
+<li>首屏加载极快（CDN 分发静态文件，无需服务器实时渲染）</li>
+<li>服务器压力小（CDN 直接承载请求，无需服务器执行 JS）</li>
+<li>SEO 最优（静态 HTML 含完整数据，搜索引擎爬取无压力）</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>不适用于动态数据（数据更新需要重新构建部署，如实时股价、实时评论）</li>
+<li>详情页面如果过多(构建时间会长)</li>
+</ul>
+<p>适合场景：</p>
+<ul>
+<li>技术文档</li>
+<li>静态营销页</li>
+<li>静态新闻站</li>
+</ul>
+<h3 id="Hydration-水合"><a href="#Hydration-水合" class="headerlink" title="Hydration(水合)"></a>Hydration(水合)</h3><p>简单来说就是HTML他是静态的，需要通过JS才能变成动态的，不然HTML是没有任何交互效果的，当JS下载完成在赋予HTML交互效果的阶段称之为<code>水合</code>。</p>
+<p>以Next.js水合为例(详细版本):</p>
+<p>服务端操作:</p>
+<ul>
+<li>Next.js 服务器接收到用户请求。</li>
+<li>服务器执行 React 组件代码，获取数据（比如从 API 接口请求文章列表）。</li>
+<li>服务器将 React 组件渲染成静态 HTML 字符串（包含了文章列表的所有内容）。</li>
+<li>服务器将这个 HTML 字符串返回给浏览器。</li>
+</ul>
+<p>客户端操作:</p>
+<ul>
+<li>浏览器接收到 HTML，立即解析并展示给用户（此时用户能看到文章列表，但点击 “查看详情” 按钮没有反应）</li>
+<li>浏览器开始下载页面所需的 JS 文件（包括 React 核心库、组件代码等）</li>
+<li>JS 下载完成后，React 会执行 ReactDOM.hydrateRoot() 方法（在 React 18+ 中）</li>
+<li>hydrateRoot() 会对比浏览器中的真实 DOM 和 React 组件的虚拟 DOM：<ul>
+<li>如果结构一致，React 会给真实 DOM 绑定事件监听器。</li>
+<li>如果发现差异（比如服务器和客户端数据不一致），React 会发出警告，并以客户端渲染的结果为准。</li>
+</ul>
+</li>
+<li>水合完成后，页面变成可交互的动态页面（用户可以点击按钮、滚动加载更多内容等）</li>
+</ul>
+<pre><code class=" mermaid">flowchart TD
+    subgraph Server [服务端操作]
+        S1[Next.js服务器接收请求]
+        S2[执行React组件获取数据]
+        S3[渲染为静态HTML]
+        S4[返回HTML到浏览器]
+        S1 --&gt; S2 --&gt; S3 --&gt; S4
+    end
+
+    S4 --&gt; B[浏览器解析HTML&lt;br/&gt;显示静态内容&lt;br/&gt;无交互功能]
+
+    B --&gt; C1[下载JS文件&lt;br/&gt;React/组件代码]
+
+    subgraph Hydration [React水合过程]
+        H1[执行hydrateRoot方法]
+        H2[对比DOM结构]
+        H3&#123;结构一致?&#125;
+        H4[绑定事件监听器]
+        H5[以客户端渲染为准]
+
+        H1 --&gt; H2 --&gt; H3
+        H3 -- 是 --&gt; H4
+        H3 -- 否 --&gt; H5
+    end
+
+    C1 --&gt; Hydration
+    H4 --&gt; F[页面完全可交互]
+    H5 --&gt; FRSC(React Server Components)
+</code></pre>
+
+<h2 id="RSC-服务器组件"><a href="#RSC-服务器组件" class="headerlink" title="RSC(服务器组件)"></a>RSC(服务器组件)</h2><p>RSC(服务器组件)是React19<code>正式引入</code>的一种新的组件类型，它可以在服务器端渲染，也可以在客户端渲染。</p>
+<p>像传统的<code>SSR</code>他是在服务器提前把页面渲染好，然后返回给浏览器，然后进行水合，<code>CSR</code>则是在客户端渲染，而<code>RSC</code>则是吸取两方优势，分为<code>服务器组件</code>和<code>客户端组件</code>。</p>
+<p>举个例子:</p>
+<p>例如我们有一个官网的页面，上面都是静态内容，但下面留言框是需要交互的。</p>
+<p><img src="https://nextjs-docs-henna-six.vercel.app/7.gif" srcset="/img/loading.gif" lazyload alt="官网案例"></p>
+<p>此时我们就可以拆分成两个组件:</p>
+<ul>
+<li><p>服务器组件: 上面都是静态内容，例如正文，标题，图片等，这类组件之所以适合在服务端执行，核心原因在于服务端渲染HTML+CSS的速度更快，生成的内容对搜索引擎完全可见，且无需客户端额外处理交互逻辑，完美匹配静态内容的需求。</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs tsx">  <span class="hljs-comment">//Next.js 默认服务器组件</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">HomePage</span>(<span class="hljs-params"></span>) &#123;<br>  <br>    <span class="hljs-keyword">return</span> (<br>        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Home Page<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>    )<br>  <br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>客户端组件: 下面留言框是需要交互的，例如交互功能，如点赞按钮、计数器、表单等。这类组件需要依赖浏览器DOM事件、状态管理（useState）、副作用（useEffect）等客户端能力，必须在客户端完成渲染和水合（即添加事件处理程序的过程）才能实现交互效果</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs tsx">  <span class="hljs-string">&#x27;use client&#x27;</span> <span class="hljs-comment">//声明这是一个客户端组件</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">HomePage</span>(<span class="hljs-params"></span>) &#123;<br>  <br>    <span class="hljs-keyword">return</span> (<br>        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Home Page<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>    )<br>  <br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="渲染-RSC-Payload"><a href="#渲染-RSC-Payload" class="headerlink" title="渲染(RSC Payload)"></a>渲染(RSC Payload)</h3><p>SSR模式是在服务器直接渲染成<code>HTML</code>页面，返回给浏览器的，而<code>RSC</code>他是一种特殊的紧凑的格式</p>
+<p>那为什么这么做呢？因为我们的组件可以进行嵌套服务器组件嵌套客户端组件&gt;</p>
+<p>黄色节点表示<code>服务器组件</code>，虚线节点表示<code>客户端组件</code> <img src="https://nextjs-docs-henna-six.vercel.app/_astro/2.ClwIpdJb_wEauX.webp" srcset="/img/loading.gif" lazyload alt="RSC渲染"></p>
+<p>在这个结构中，Next.js就会标记哪些是客户端组件并且预留好位置，但是不会进行水合。</p>
+<p>那么Next.js发现客户端组件也会在服务器生成这个结构，那干脆直接服务器里面把客户端组件进行预渲染(不包含交互)，这样我们就能快速看到数据，等他加载完成后再进行水合，所以客户端组件也会在服务器进行一次<code>预渲染</code>。</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li><p>将组件拆分成客户端组件和服务器组件，可以有效的减少<code>bundle</code>体积，因为<code>服务器组件</code>已经在服务器渲染好了，所以没必要打入<code>bundle</code>中,也就是说服务器组件所依赖的包都不会打进去，大大减少了<code>bundle</code>体积。</p>
+</li>
+<li><p>局部水合，像传统的SSR同构模式, 所有的页面都要在客户端进行水合，而<code>RSC</code>将组件拆分出来，只会把客户端组件进行水合，避免了全量水合带来的性能损耗。</p>
+</li>
+<li><p>流式加载，我们的HTML页面本来就支持流式加载，所以服务器组件可以边渲染边返回，提高了FCP(首次内容绘制)性能。</p>
+</li>
+</ul>
 
                 
               </div>
