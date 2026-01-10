@@ -194,7 +194,7 @@
   </url>
   
   <url>
-    <loc>http://arkpln.github.io/tags/nestjs/</loc>
+    <loc>http://arkpln.github.io/tags/nextjs/</loc>
     <lastmod>2026-01-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -208,7 +208,14 @@
   </url>
   
   <url>
-    <loc>http://arkpln.github.io/tags/nextjs/</loc>
+    <loc>http://arkpln.github.io/tags/react/</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://arkpln.github.io/tags/nestjs/</loc>
     <lastmod>2026-01-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -216,13 +223,6 @@
   
   <url>
     <loc>http://arkpln.github.io/tags/vue/</loc>
-    <lastmod>2026-01-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://arkpln.github.io/tags/react/</loc>
     <lastmod>2026-01-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
