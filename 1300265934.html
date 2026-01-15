@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://arkpln.github.io/images/nextjs.webp">
 <meta property="article:published_time" content="2025-12-24T11:02:55.000Z">
-<meta property="article:modified_time" content="2026-01-08T14:03:20.721Z">
+<meta property="article:modified_time" content="2026-01-15T10:30:40.659Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="nextjs">
 <meta name="twitter:card" content="summary_large_image">
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          18k words
+          21k words
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          147 mins
+          178 mins
         
       </span>
     
@@ -881,6 +881,186 @@
 <li><p>流式加载，我们的HTML页面本来就支持流式加载，所以服务器组件可以边渲染边返回，提高了FCP(首次内容绘制)性能。</p>
 </li>
 </ul>
+<h2 id="服务端组件与客户端组件"><a href="#服务端组件与客户端组件" class="headerlink" title="服务端组件与客户端组件"></a>服务端组件与客户端组件</h2><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><span class="hljs-comment">// 服务端组件</span><br><span class="hljs-keyword">import</span> fs <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:fs&#x27;</span> <span class="hljs-comment">//引入fs模块</span><br><span class="hljs-keyword">import</span> mysql, &#123; <span class="hljs-title class_">RowDataPacket</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;mysql2/promise&#x27;</span> <span class="hljs-comment">//操作数据库 仅供演示 非最佳实践</span><br><span class="hljs-keyword">const</span> pool = mysql.<span class="hljs-title function_">createPool</span>(&#123;<br>    <span class="hljs-attr">host</span>: <span class="hljs-string">&#x27;localhost&#x27;</span>,<br>    <span class="hljs-attr">user</span>: <span class="hljs-string">&#x27;root&#x27;</span>,<br>    <span class="hljs-attr">password</span>: <span class="hljs-string">&#x27;123456&#x27;</span>,<br>    <span class="hljs-attr">database</span>: <span class="hljs-string">&#x27;catering&#x27;</span>,<br>&#125;)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">ServerPage</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">const</span> [rows] = <span class="hljs-keyword">await</span> pool.<span class="hljs-property">query</span>&lt;<span class="hljs-title class_">RowDataPacket</span>[]&gt;(<span class="hljs-string">&#x27;SELECT * FROM goods&#x27;</span>)<br>    <span class="hljs-keyword">const</span> data = fs.<span class="hljs-title function_">readFileSync</span>(<span class="hljs-string">&#x27;data.json&#x27;</span>, <span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>    <span class="hljs-keyword">const</span> json = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(data)<br>    <span class="hljs-keyword">return</span> (<br>        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Server Page<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml">            &#123;json.age&#125;///&#123;json.name&#125;///&#123;json.city&#125;</span><br><span class="language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span><br><span class="language-xml">            &#123;rows.map((item: any) =&gt; (</span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;item.id&#125;</span>&gt;</span>&#123;item.name&#125;-&#123;item.goodsPrice&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">            ))&#125;</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>    )<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="服务端组件的优点"><a href="#服务端组件的优点" class="headerlink" title="服务端组件的优点"></a>服务端组件的优点</h3><ul>
+<li><p>安全性:在服务端组件访问的API key不会暴露给客户端</p>
+</li>
+<li><p>体积：服务端组件在服务端渲染，所以不会打包到客户端</p>
+</li>
+<li><p>全栈：可以在服务端组件访问数据库，调用Nodejs的API，体积更小</p>
+</li>
+<li><p><strong>FCP</strong>：因为服务端组件是流式传输，提高了FCP的性能(看HTTP请求头<code>Transfer-Encoding: chunked</code>)</p>
+</li>
+</ul>
+<h3 id="无法使用服务端组件的条件"><a href="#无法使用服务端组件的条件" class="headerlink" title="无法使用服务端组件的条件"></a>无法使用服务端组件的条件</h3><ol>
+<li><p>需要交互性的场景</p>
+<ul>
+<li><p>事件处理：onClick、onChange、onSubmit 等</p>
+</li>
+<li><p>状态管理：useState、useReducer</p>
+</li>
+<li><p>生命周期副作用：useEffect、useLayoutEffect</p>
+</li>
+<li><p>DOM 引用：useRef 用于 DOM 元素</p>
+</li>
+</ul>
+</li>
+<li><p>浏览器专属 API</p>
+</li>
+<li><p>特定 React Hooks</p>
+<ul>
+<li>useState</li>
+<li>useReducer</li>
+<li>useEffect、useLayoutEffect</li>
+<li>useImperativeHandle</li>
+<li>自定义 hooks 依赖上述 hooks</li>
+</ul>
+</li>
+<li><p>第三方库依赖浏览器环境</p>
+<ul>
+<li>图表库（如 D3.js、Chart.js）</li>
+<li>地图库（如 Leaflet、Google Maps）</li>
+<li>富文本编辑器</li>
+<li>动画库（如 Framer Motion、GSAP）</li>
+</ul>
+</li>
+<li><p>路由相关的 hooks: <code>useRouter()</code>、<code>usePathname()</code>、<code>useSearchParams()</code>.(使用 <code>navigation</code> 替代或移入客户端组件)</p>
+</li>
+<li><p>动态数据取决于客户端状态</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><span class="hljs-comment">// ❌ 不能依赖实时客户端数据</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">Component</span>(<span class="hljs-params"></span>) &#123;<br><span class="hljs-keyword">const</span> [time, setTime] = <span class="hljs-title function_">useState</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()); <span class="hljs-comment">// 需要客户端</span><br><span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#123;time.toLocaleTimeString()&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="客户端组件"><a href="#客户端组件" class="headerlink" title="客户端组件"></a>客户端组件</h3><p>在<code>jsx/tsx</code>头部添加<code>&#39;use client&#39;</code>标志即可</p>
+<p><strong>注:</strong> </p>
+<ul>
+<li><p>在浏览器环境下,首次加载客户端组件会自动的进行<strong>预渲染</strong>,尝试渲染DOM界面以备<code>React</code>水合，再次刷新或加载时则不会再进行预渲染。</p>
+</li>
+<li><p>客户端组件并不能嵌套服务端组件（原因是服务端组件可能调用了Node.js运行时或其他第三方依赖的函数，但浏览器并不具备与Node.js一致的运行时。）</p>
+</li>
+<li><p>部分API可能是通用的例如<code>fetch</code></p>
+</li>
+</ul>
+<h3 id="区分服务端和客户端的fetch"><a href="#区分服务端和客户端的fetch" class="headerlink" title="区分服务端和客户端的fetch"></a>区分服务端和客户端的<code>fetch</code></h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i server-only<br></code></pre></td></tr></table></figure>
+
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;server-only&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">useTest</span>(<span class="hljs-params"><span class="hljs-attr">type</span>:<span class="hljs-number">0</span>|<span class="hljs-number">1</span></span>)&#123;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">type</span> === <span class="hljs-number">0</span>)&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;https://api.github.com&#x27;</span>)<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span>     <span class="hljs-title class_">WebSocket</span>(<span class="hljs-string">&#x27;wss://api.github.com&#x27;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="缓存组件-Cache-Components"><a href="#缓存组件-Cache-Components" class="headerlink" title="缓存组件(Cache Components)"></a>缓存组件(Cache Components)</h2><h3 id="什么是Cache-Components"><a href="#什么是Cache-Components" class="headerlink" title="什么是Cache Components"></a>什么是Cache Components</h3><p>Cache Components 是Next.js(16)版本特有的机制，实现了<code>静态内容</code> <code>动态内容</code> <code>缓存内容</code>的混合编排。保留了静态内容的加载速度，又具备动态渲染的灵活性，解决了<code>静态内容(加载快但无法实时更新数据)</code>和<code>动态内容(加载慢但可以实时更新数据)</code>权衡的问题。</p>
+<ul>
+<li><p>静态内容: 构建(<code>npm run build</code>)时进行预渲染，例如 <code>「本地文件」「模块导入」「纯计算」（无网络请求、无用户相关数据）</code>,会被直接编译成<code>HTML</code>瞬间加载、立即响应。</p>
+</li>
+<li><p>动态内容：用户发起请求时才开始渲染的内容，依赖 “实时数据” 或 “用户个性化信息”，每次请求都可能生成不同结果，不会被缓存。例如<code>「实时数据源」（如实时接口、数据库实时查询）或「用户请求上下文」（如 Cookie、请求头、URL 参数）</code>。</p>
+</li>
+<li><p>缓存内容：缓存内容的本质就是缓存动态数据，缓存之后会被纳入<code>静态外壳(Static Shell)</code>,静态外壳就类似于<code>毛坯房</code>，会提前把结构搭建好，后续在通过(流式传输)填充里面的动态内容。</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>传统方案</th>
+<th>Cache Components</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>静态页面：数据无法实时更新</td>
+<td>支持缓存内容重新验证，动态内容流式补充</td>
+</tr>
+<tr>
+<td>动态页面：初始加载慢、服务器压力大</td>
+<td>静态外壳优先返回，动态内容并行渲染</td>
+</tr>
+<tr>
+<td>客户端渲染：bundle 体积大、首屏慢</td>
+<td>服务器预渲染核心内容，客户端仅补充动态部分</td>
+</tr>
+</tbody></table>
+<h3 id="启用方法"><a href="#启用方法" class="headerlink" title="启用方法"></a>启用方法</h3><p>须更新到<code>Next.js 16+</code> </p>
+<p>在<code>next.cofig.ts</code>中 设置</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> &#123; <span class="hljs-title class_">NextConfig</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next&quot;</span>;<br><br><br><span class="hljs-keyword">const</span> <span class="hljs-attr">nextConfig</span>: <span class="hljs-title class_">NextConfig</span> = &#123;<br>    <span class="hljs-attr">cacheComponent</span>: <span class="hljs-literal">true</span>,<br>&#125;;<br><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> nextConfig;<br></code></pre></td></tr></table></figure>
+
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>对可能产生不同结果的动态内容如<code>Math.random()</code>，须使用<code>await connection()</code>避免缓存组件渲染错误，该组件<strong>必须</strong>被父组件<code>&lt;Suspense&gt;&lt;/Suspense&gt;</code>包裹。</li>
+</ul>
+<h3 id="缓存内容"><a href="#缓存内容" class="headerlink" title="缓存内容"></a>缓存内容</h3><p>对动态请求进行缓存,在动态请求的函数前一行使用<code>&#39;use cache&#39;</code>的注解字段。</p>
+<p>如果需要预设缓存时间，可以调用<code>cacheLife(profile)</code>函数来制定缓存时间。</p>
+<h4 id="cacheLife函数"><a href="#cacheLife函数" class="headerlink" title="cacheLife函数"></a><code>cacheLife</code>函数</h4><blockquote>
+<p>引用地址：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://nextjs.org/docs/app/api-reference/functions/cacheLife">Functions: cacheLife | Next.js</a></p>
+</blockquote>
+<p>缓存配置文件通过三个与时间相关的属性来控制缓存行为：</p>
+<ul>
+<li><p><code>stale</code>：客户端在未与服务器通信的情况下，可以使用缓存数据的最长时间</p>
+</li>
+<li><p><code>revalidate</code>：在这段时间之后，下一次请求会触发后台数据的更新（即数据的重新加载）</p>
+</li>
+<li><p><code>expire</code>: 如果在这段时间内没有收到任何请求，系统会等待新的请求到来，以便获取最新的内容</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><code>stale</code><br>客户端方面： 客户端可以在不与服务器通信的情况下使用缓存的数据多长时间。<br>在这段时间内，客户端路由器会立即显示缓存中的内容，而无需发送任何网络请求。当这个缓存有效期结束后，路由器必须在下一次用户导航或发送请求时与服务器进行通信以获取最新数据。<br>这种方式可以实现快速的页面加载（因为数据来自客户端缓存），但缓存中的数据可能会过时。</p>
+</li>
+<li><p><code>revalidate</code><br>服务器在后台重新生成缓存内容的频率。<br>当请求在此时间段之后到达时，服务器：</p>
+<ol>
+<li>立即提供缓存版本（如果可用）</li>
+<li>在后台重新生成内容</li>
+<li>使用新内容更新缓存<br>类似于 增量静态再生（ISR）</li>
+</ol>
+</li>
+<li><p><code>expire</code><br>  缓存内容必须重新生成之前的最大时间。<br>  在此无流量的时段过后，服务器将在下一个请求时同步重新生成内容，当你同时设置 <code>revalidate</code> 和 <code>expire</code> 时，<code>expire</code> 的值必须大于 <code>revalidate</code>。Next.js 会验证此配置，并对无效配置抛出错误。</p>
+</li>
+</ul>
+<h4 id="catchLife预设参数"><a href="#catchLife预设参数" class="headerlink" title="catchLife预设参数"></a><code>catchLife</code>预设参数</h4><table>
+<thead>
+<tr>
+<th>Profile</th>
+<th>适用场景</th>
+<th>stale</th>
+<th>revalidate</th>
+<th>expire</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>seconds</td>
+<td>实时数据（股票、比分）</td>
+<td>30秒</td>
+<td>1秒</td>
+<td>1分钟</td>
+</tr>
+<tr>
+<td>minutes</td>
+<td>频繁更新（社交动态）</td>
+<td>5分钟</td>
+<td>1分钟</td>
+<td>1小时</td>
+</tr>
+<tr>
+<td>hours</td>
+<td>每日多次更新（库存、天气）</td>
+<td>5分钟</td>
+<td>1小时</td>
+<td>1天</td>
+</tr>
+<tr>
+<td>days</td>
+<td>每日更新（博客文章）</td>
+<td>5分钟</td>
+<td>1天</td>
+<td>1周</td>
+</tr>
+<tr>
+<td>weeks</td>
+<td>每周更新（播客）</td>
+<td>5分钟</td>
+<td>1周</td>
+<td>30天</td>
+</tr>
+<tr>
+<td>max</td>
+<td>很少变化（法律页面）</td>
+<td>5分钟</td>
+<td>30天</td>
+<td>1年</td>
+</tr>
+</tbody></table>
 
                 
               </div>
