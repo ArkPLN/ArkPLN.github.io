@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://arkpln.github.io/images/nextjs.webp">
 <meta property="article:published_time" content="2025-12-24T11:02:55.000Z">
-<meta property="article:modified_time" content="2026-01-15T10:36:13.664Z">
+<meta property="article:modified_time" content="2026-01-19T15:59:28.452Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="nextjs">
 <meta name="twitter:card" content="summary_large_image">
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          21k words
+          23k words
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          179 mins
+          196 mins
         
       </span>
     
@@ -1062,6 +1062,70 @@
 </tr>
 </tbody></table>
 <p><em>感觉改编一下就可以当JS手撕题了？</em></p>
+<h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><h3 id="Image组件"><a href="#Image组件" class="headerlink" title="Image组件"></a>Image组件</h3><p><code>&lt;Image&gt;</code>是<code>Next.js</code>的内置组件，相较于原生的<code>img</code>实现了更多的拓展功能，相较于原生标签，它的优势在于：</p>
+<ul>
+<li><p><strong>尺寸优化</strong>：对现代图片格式支持更好，根据设备自动提供正确的尺寸，自动对本地图像进行优化<code>webp</code></p>
+</li>
+<li><p><strong>视觉稳定性</strong>：防止图片加载导致的布局位移</p>
+</li>
+<li><p><strong>懒加载</strong>：利用浏览器原生特性实现懒加载，可按需添加占位符</p>
+</li>
+<li><p><strong>灵活性</strong>：按需调整图像大小，即便是远程服务器上的图像也可以</p>
+</li>
+</ul>
+<h4 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h4><blockquote>
+<p><strong>参考:</strong> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://nextjs.org/docs/app/api-reference/components/image">Components: Image Component | Next.js</a></p>
+</blockquote>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Image</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;next/image&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">Page</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Image</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/profile.png&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">width</span>=<span class="hljs-string">&#123;500&#125;</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">height</span>=<span class="hljs-string">&#123;500&#125;</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Picture of the author&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">    /&gt;</span></span><br>  )<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>loading</code>：用于控制图片的加载时机。</p>
+<ul>
+<li><code>lazy</code>：将图片的加载延迟到它距离视口达到某个预设距离时才进行。</li>
+<li><code>eager</code>：无论图片在页面上的位置如何，都会立即加载该图片。</li>
+</ul>
+</li>
+<li><p><code>preload</code>：预加载</p>
+</li>
+<li><p><code>width=&#123;&#125; height=&#123;&#125;</code>：设置宽高【<strong>必填</strong>】</p>
+</li>
+<li><p><code>src=&quot;path/to/pic&quot;</code>：资源路径，通过多种方式引入。</p>
+<ul>
+<li>字符串路径URL</li>
+<li>通过<code>import img1 from @public/1.png</code>的方式引入，随后传入引用对象。</li>
+<li>使用<code>await</code>异步获取对象，使用<code>img.default</code>属性获取。<code>const img1 = await import(&#39;@public/1.png&#39;)</code></li>
+</ul>
+</li>
+<li><p><code>sizes</code>：用于定义图像在不同屏幕分辨率（即“断点”）下的显示尺寸。浏览器会根据这些尺寸信息，从生成的 <code>srcset</code> 文件中选择最合适的图像版本进行显示。</p>
+</li>
+<li><p><code>quality</code>：该值是一个介于<code>1-100</code>之间的整数，用于设置优化后图像的质量。数值越高，文件大小和视觉效果越好；数值越低，文件大小会减小，但图像的清晰度可能会受到影响。</p>
+</li>
+</ul>
+<h4 id="跨域配置"><a href="#跨域配置" class="headerlink" title="跨域配置"></a>跨域配置</h4><p>Next.js框架下默认不能直接获取跨域网址的图像,需要额外在<code>next.config.ts</code>中配置。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> &#123; <span class="hljs-title class_">NextConfig</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next&quot;</span>;<br><br><span class="hljs-keyword">const</span> <span class="hljs-attr">nextConfig</span>: <span class="hljs-title class_">NextConfig</span> = &#123;<br>  <span class="hljs-comment">/* config options here */</span><br>  <span class="hljs-attr">images</span>:&#123;<br>    <span class="hljs-attr">remotePatterns</span>:[<br>      &#123;<br>        <span class="hljs-attr">protocol</span>: <span class="hljs-string">&#x27;https&#x27;</span>,<br>        <span class="hljs-attr">hostname</span>: <span class="hljs-string">&#x27;s21.ax1x.com&#x27;</span>,<br>        <span class="hljs-attr">port</span>: <span class="hljs-string">&#x27;&#x27;</span>,<br>        <span class="hljs-attr">pathname</span>: <span class="hljs-string">&#x27;/**&#x27;</span>,<br>      &#125;<br>    ]<br>  &#125;<br>&#125;;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> nextConfig;<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>详情参见：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://nextjs.org/docs/messages/next-image-unconfigured-host">next&#x2F;image未配置host</a></p>
+<p>对于像 <code>https://example.org/images/example?v=1234</code> 这样的 URL，其各个部分必须符合您所配置的模式要求</p>
+<ul>
+<li><strong>协议（Protocol）</strong>：<code>http</code> 与 <code>https</code> 必须完全匹配。</li>
+<li><strong>主机名（Hostname）</strong>：<code>example.org</code> 与 <code>www.example.org</code> 以及像 <code>assets.example.org</code> 这样的子域名是不同的。</li>
+<li><strong>端口（Port）</strong>：如果存在（例如 <code>:3000</code>），则必须将其包含在内。</li>
+<li><strong>路径名（Pathname）</strong>：该路径必须被你的通配符规则所覆盖；例如，可以使用 <code>/**</code> 或 <code>/images/**</code>。</li>
+<li><strong>搜索</strong>：如果在模式中指定了该参数，那么它必须与整个搜索字符串完全匹配（包括开头的 <code>?</code>）。搜索过程中不支持使用通配符（globs）。</li>
+</ul>
+</blockquote>
+<h4 id="策略配置"><a href="#策略配置" class="headerlink" title="策略配置"></a>策略配置</h4><ul>
+<li><code>deviceSizes</code>：允许你指定一组设备屏幕宽度的阈值。当 <code>next/image</code> 组件使用 <code>sizes</code> 属性时，这些宽度值会被用来确保为用户设备提供合适的图片。如果没有提供任何配置，将使用以下默认值：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>  <span class="hljs-attr">images</span>: &#123;<br>    <span class="hljs-attr">deviceSizes</span>: [<span class="hljs-number">640</span>, <span class="hljs-number">750</span>, <span class="hljs-number">828</span>, <span class="hljs-number">1080</span>, <span class="hljs-number">1200</span>, <span class="hljs-number">1920</span>, <span class="hljs-number">2048</span>, <span class="hljs-number">3840</span>],<br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>imageSizes</code>：允许你指定一组图片的宽度值。这些宽度值会与 <code>设备尺寸</code> 数组合并，从而形成用于生成图片 <code>srcset</code> 的完整尺寸数组。如果没有提供任何配置，将使用以下默认值：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>  <span class="hljs-attr">images</span>: &#123;<br>    <span class="hljs-attr">imageSizes</span>: [<span class="hljs-number">32</span>, <span class="hljs-number">48</span>, <span class="hljs-number">64</span>, <span class="hljs-number">96</span>, <span class="hljs-number">128</span>, <span class="hljs-number">256</span>, <span class="hljs-number">384</span>],<br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>imageSizes</code> 仅用于那些提供了 <code>sizes</code> 属性的图片；该属性表示该图片的宽度小于屏幕的完整宽度。因此，<code>imageSizes</code> 中列出的所有尺寸都必须小于 <code>deviceSizes</code> 中的最小尺寸。</p>
 
                 
               </div>
