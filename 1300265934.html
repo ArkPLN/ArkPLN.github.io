@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://arkpln.github.io/images/nextjs.webp">
 <meta property="article:published_time" content="2025-12-24T11:02:55.000Z">
-<meta property="article:modified_time" content="2026-01-20T12:31:03.552Z">
+<meta property="article:modified_time" content="2026-01-21T12:21:08.471Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="nextjs">
 <meta name="twitter:card" content="summary_large_image">
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          23k words
+          25k words
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          196 mins
+          205 mins
         
       </span>
     
@@ -1126,6 +1126,121 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>  <span class="hljs-attr">images</span>: &#123;<br>    <span class="hljs-attr">imageSizes</span>: [<span class="hljs-number">32</span>, <span class="hljs-number">48</span>, <span class="hljs-number">64</span>, <span class="hljs-number">96</span>, <span class="hljs-number">128</span>, <span class="hljs-number">256</span>, <span class="hljs-number">384</span>],<br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><code>imageSizes</code> 仅用于那些提供了 <code>sizes</code> 属性的图片；该属性表示该图片的宽度小于屏幕的完整宽度。因此，<code>imageSizes</code> 中列出的所有尺寸都必须小于 <code>deviceSizes</code> 中的最小尺寸。</p>
+<h3 id="Font组件"><a href="#Font组件" class="headerlink" title="Font组件"></a>Font组件</h3><p><code>next/font</code>模块内置了字体优化功能，目的是防止<strong>CLS</strong>布局偏移，支持<code>Google Fonts</code>和导入本地字体。</p>
+<blockquote>
+<ul>
+<li><p><strong>什么是CLS:</strong> <strong>CLS（累计布局偏移）</strong> 是 Google 提出的 <strong>Core Web Vitals（核心网页性能指标）</strong> 之一，用于衡量<strong>页面在生命周期内发生“非用户主动触发”的布局位移程度</strong>。</p>
+</li>
+<li><p><strong>为什么会发生CLS:</strong> 浏览器在初次布局时，无法准确预知某些资源最终占用的空间</p>
+</li>
+<li><p><strong>发生CLS的可能原因:</strong></p>
+</li>
+</ul>
+<ol>
+<li><p>字体加载</p>
+</li>
+<li><p>图片&#x2F;视频未声明尺寸(Next.js要求非本地<code>src</code>源的Image必须要宽高的原因)</p>
+</li>
+<li><p>DOM的异步更新</p>
+</li>
+<li><p>动态样式 &#x2F; JS 操作布局</p>
+</li>
+</ol>
+<ul>
+<li><p><strong>CLS的消极影响：</strong> </p>
+<ul>
+<li><p>用户体验不佳，易误操作</p>
+</li>
+<li><p>SEO 排名下降，转化率下降</p>
+</li>
+<li><p>CLS本身就伴随着可能的技术问题</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Next.js如何解决CLS问题：</strong></p>
+</li>
+</ul>
+<ol>
+<li><p>构建期分析字体 Metrics，提取字体关键参数，计算字体空间分布</p>
+</li>
+<li><p>生成字体等效fallback css</p>
+</li>
+<li><p>字体内联 + 本地托管，不依赖第三方CDN，允许preload和tree-shaking</p>
+</li>
+<li><p>SSR注入字体样式</p>
+</li>
+</ol>
+</blockquote>
+<h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h4><ol>
+<li>通过<code>next/font/google</code>引入内置谷歌字体</li>
+</ol>
+<blockquote>
+<p><strong>预览字体:</strong> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://fonts.google.com/">https://fonts.google.com/</a></p>
+</blockquote>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Fira</span>_Code &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next/font/google&quot;</span>;<br><span class="hljs-keyword">const</span> firaCode = <span class="hljs-title class_">Fira</span>_Code(&#123;<br>  <span class="hljs-attr">subsets</span>: [<span class="hljs-string">&#x27;latin&#x27;</span>],<br>  <span class="hljs-attr">weight</span>: [<span class="hljs-string">&#x27;400&#x27;</span>, <span class="hljs-string">&#x27;700&#x27;</span>],<br>  <span class="hljs-attr">variable</span>: <span class="hljs-string">&#x27;--font-fira-code&#x27;</span>,<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>中文字符集支持</li>
+</ol>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><ul>
+<li><p><code>width</code>:字宽（传入数组表可变）</p>
+</li>
+<li><p><code>subsets:[]</code>:字符集,<code>latin</code>表示拉丁语系，<code>cyrillic</code>西里尔字母，<code>greek</code>希腊字母</p>
+</li>
+<li><p><code>style</code>: 字体风格</p>
+</li>
+<li><p><code>display</code>:字体加载策略</p>
+<ul>
+<li><p><code>auto</code>:默认策略，block</p>
+</li>
+<li><p><code>block</code>: 空白3s -&gt; 默认字体 -&gt;自定义字体</p>
+</li>
+<li><p><code>swap</code>:默认字体 -&gt; 自定义字体</p>
+</li>
+<li><p><code>fallback</code>: 空白100ms-&gt;备用字体,3s内加载完毕则切换</p>
+</li>
+<li><p><code>optional</code>: 空白100ms，100ms内加载完成则使用，否则使用备用字体。</p>
+</li>
+</ul>
+</li>
+<li><p>本地加载</p>
+</li>
+</ul>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><br><span class="hljs-keyword">import</span> fontlocal <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;next/font/local&#x27;</span><br><span class="hljs-keyword">const</span> myFont = <span class="hljs-title function_">fontlocal</span>(&#123;<br><br>    <span class="hljs-attr">src</span>:<span class="hljs-string">&#x27;./font/xxx.ttf&#x27;</span>,<br>    <span class="hljs-attr">display</span>:<span class="hljs-string">&#x27;swap&#x27;</span><br><br>&#125;)<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 
               </div>
