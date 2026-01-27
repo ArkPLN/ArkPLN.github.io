@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://arkpln.github.io/images/cn.jpg">
 <meta property="article:published_time" content="2026-01-26T03:43:02.000Z">
-<meta property="article:modified_time" content="2026-01-27T10:32:49.410Z">
+<meta property="article:modified_time" content="2026-01-27T10:59:27.816Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="network">
 <meta name="twitter:card" content="summary_large_image">
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.8k words
+          4.9k words
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          41 mins
+          42 mins
         
       </span>
     
@@ -502,7 +502,9 @@
 <blockquote>
 <p>一、核心概念：什么是 OPTIONS 请求？<br><code>OPTIONS 是 HTTP 的一种请求方法，用于获取服务器支持的通信选项。</code></p>
 <p>在浏览器 <strong>CORS（跨域资源共享）</strong> 场景中，OPTIONS 被用作 “预检请求”（Preflight Request）</p>
-<h2 id="预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。二、两种-CORS-请求类型"><a href="#预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。二、两种-CORS-请求类型" class="headerlink" title="预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。二、两种 CORS 请求类型"></a>预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。<br>二、两种 CORS 请求类型</h2><table>
+<p>预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。<br>二、两种 CORS 请求类型</p>
+<hr>
+<table>
 <thead>
 <tr>
 <th>类型</th>
@@ -549,7 +551,9 @@
 </ul>
 <h3 id="4-无自定义头部"><a href="#4-无自定义头部" class="headerlink" title="4. 无自定义头部"></a>4. 无自定义头部</h3><p>不能添加如 <code>X-Custom-Header</code>、<code>Authorization</code> 等自定义头部</p>
 <h3 id="5-无-ReadableStream-对象"><a href="#5-无-ReadableStream-对象" class="headerlink" title="5. 无 ReadableStream 对象"></a>5. 无 ReadableStream 对象</h3><p>请求中不能使用 <code>ReadableStream</code></p>
-<h2 id="✅-举例：普通表单提交、简单的-GET-请求四、复杂请求（触发预检的场景）"><a href="#✅-举例：普通表单提交、简单的-GET-请求四、复杂请求（触发预检的场景）" class="headerlink" title="✅ 举例：普通表单提交、简单的 GET 请求四、复杂请求（触发预检的场景）"></a><code>✅ 举例：普通表单提交、简单的 GET 请求</code><br>四、复杂请求（触发预检的场景）</h2><p>只要 <strong>违反上述任一条件</strong>，就是复杂请求：</p>
+<p><code>✅ 举例：普通表单提交、简单的 GET 请求</code><br>四、复杂请求（触发预检的场景）</p>
+<hr>
+<p>只要 <strong>违反上述任一条件</strong>，就是复杂请求：</p>
 <table>
 <thead>
 <tr>
@@ -629,6 +633,12 @@
 </tr>
 </tbody></table>
 <h4 id="缓存规则"><a href="#缓存规则" class="headerlink" title="缓存规则"></a>缓存规则</h4><p>   先强制，后协商；<br>   强制不过期，直接本地拿；<br>   强制过期问服务器，ETag 优先来比对；<br>   ETag 相同 304，不同就下新资源。</p>
+<h3 id="HTML渲染"><a href="#HTML渲染" class="headerlink" title="HTML渲染"></a>HTML渲染</h3><ol>
+<li><p>HTML解析器把超文本和标签解析为DOM树</p>
+</li>
+<li><p>把CSS样式表转化为浏览器可以理解的styleSheet,属性值标准化,再处理集成和层叠,成为CSSOM的构建过程计算出DOM节点的样式</p>
+</li>
+</ol>
 
                 
               </div>
