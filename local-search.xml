@@ -8,7 +8,7 @@
     <link href="/3712793328.html"/>
     <url>/3712793328.html</url>
     
-    <content type="html"><![CDATA[<h1 id="计算机网络沉淀心得"><a href="#计算机网络沉淀心得" class="headerlink" title="计算机网络沉淀心得"></a>计算机网络沉淀心得</h1><h2 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h2><h3 id="结构总述"><a href="#结构总述" class="headerlink" title="结构总述"></a>结构总述</h3><ul><li><p>网络接口层&#x2F;数据链路层</p><ul><li><p>物理层 -&gt; IEEE820.1</p></li><li><p>数据链路层 -&gt; FDDO,Ethernet,PPP</p></li></ul></li><li><p>网络层</p><ul><li>网络层 -&gt; IP,ICMP,ARP,RIP</li></ul></li><li><p>传输层</p><ul><li>传输层 -&gt;TCP,UDP</li></ul></li><li><p>应用层</p><ul><li><p>会话层 -&gt;SSL,TLS</p></li><li><p>表示层 -&gt; JPEG,ASCII,DECOIC,加密</p></li><li><p>应用层 -&gt; HTTP,FTP,SNMP,DNS</p></li></ul></li></ul><h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>物理层是直接与物理介质打交道的</p><p>在这一层<em>光,电,无线电波</em>获取传送信号,电压,转换成数字信号,在这一层主要传输<strong>比特流</strong></p><p>物理层设备:</p><ul><li><p>网卡</p></li><li><p>网线</p></li><li><p>集线器,中继器</p></li><li><p>调制解调器</p></li></ul><p>物理层信道:</p><ul><li><p>明线(有线导线)</p></li><li><p>对称电缆</p></li><li><p>同轴电缆(最广泛)</p></li><li><p>光纤(光信号传导信号)</p></li><li><p>无线电波(WiFi,卫星)</p></li></ul><h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p><strong>功能:</strong> 建立逻辑连接,进行硬件地址选址,差错检验.将比特组合成字节进而合成帧（<strong>数据帧</strong>）,使用MAC地址访问介质,发现错误但不能纠正。</p><p><strong>MAC地址：</strong> 每个网卡的唯一标识</p><p>设备:</p><ul><li>交换机</li></ul><h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>网络层是最复杂的一层，在这一层就定义了我们的IP。该层控制数据链路层与传输层之间的信息转发，建立、维持和终止网络的连接。具体地说，数据链路层的数据在这一层被转换为数据包，然后通过路径选择、分段组合、顺序、进&#x2F;出路由等控制，将信息从一个网络设备传送到另一个网络设备</p><p><strong>IP网址的原因:</strong></p><p>在数据链路层，如果所有的使用互联网的用户在同一个网段中，会产生广播风暴，所以要将用户进行划分，让他们在不同的网段中，自己在自己的小网段中广播。而互联网就是这无数的子网络构成的一个巨型网络。</p><p>在网络层中引入了一套新的地址，让我们能够区分不同的网段。这套地址就叫做“网络地址”，简称“网址”。于是，”网络层”出现以后，每台计算机有了两种地址，一种是MAC地址，另一种是网络地址。两种地址之间没有任何联系，MAC地址是绑定在网卡上的，网络地址则是管理员分配的，它们只是随机组合在一起。</p><p>网络地址帮助我们确定计算机所在的子网络，MAC地址则将数据包送到该子网络中的目标网卡。因此，从逻辑上可以推断，必定是先处理网络地址，然后再处理MAC地址。</p><p><strong>功能:</strong> </p><ul><li><p>寻址：对网络层而言使用IP地址来唯一标识互联网上的设备，网络层依靠IP地址进行相互通信（类似于数据链路层的MAC地址）</p></li><li><p>路由：在同一个网络中的内部通信并不需要网络层设备，仅仅靠数据链路层就可以完成相互通信，对于不同的网络之间相互通信则必须借助路由器等三层设备。</p></li></ul><p><strong>设备:</strong></p><ul><li>路由器</li></ul><p><strong>协议:</strong></p><ul><li><p>IPv4</p></li><li><p>IPv6</p></li></ul><h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p><strong>功能：</strong></p><ul><li><p>定义端口号</p></li><li><p>控流</p></li><li><p>校验</p></li></ul><p><strong>协议：</strong></p><ul><li><p>TCP：面向连接的可靠协议，三次握手四次挥手</p></li><li><p>UDP：不可靠协议，但效率更高</p></li></ul><h3 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h3><p><strong>功能:</strong></p><p>会话层，是在发送方和接收方之间进行通信时创建、维持、之后终止或断开连接的地方，与电话通话有点相似。</p><p>会话层定义了一种机制，允许发送方和接收方启动或停止请求会话，以及当双方发生拥塞时仍然能保持对话。</p><p>会话层包含了一种称为检查点（Checkpoint）的机制来维持可靠会话。</p><p>检查点定义了一个最接近成功通信的点，并且定义了当发生内容丢失或损坏时需要回滚以便恢复丢失或损坏数据的点，即断点下载的原理。</p><p>这一层经常被叫<strong>报文</strong></p><h3 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h3><p><strong>功能：</strong></p><p>安全、压缩、编解码相关的功能和标准。</p><ul><li><p>ASCII，utf-8</p></li><li><p>JPEG</p></li></ul><p>这一层经常被叫<strong>报文</strong></p><h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p><strong>功能：</strong> 负责为用户和应用程序提供网络服务，直接与用户交互。常见的协议有 HTTP（超文本传输协议）、FTP（文件传输协议）、SMTP（邮件传输协议）等。</p><p><strong>协议:</strong></p><ul><li><p>HTTP&#x2F;HTTPS</p></li><li><p>DNS</p></li><li><p>SMTP</p></li><li><p>WebSocket</p></li><li><p>SSH</p></li></ul><h2 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h2><p><a href="https://imgchr.com/i/pZR9Z7T"><img src="https://s41.ax1x.com/2026/01/26/pZR9Z7T.webp" alt="pZR9Z7T.webp"></a></p><ol><li><p>seq(sequence number)，序列号随机生成</p></li><li><p>ack(acknowledgement number)确认号ack&#x3D;seq + 1</p></li><li><p>ACK(acknowledgement)确认序列号有效</p></li><li><p>SYN(Synchronous)发起新连接</p></li></ol><p><strong>过程:</strong></p><ol><li><p>首先客户端会发送一个段：<code>SYN</code>报文，想跟<code>服务端</code>进行连接，并且会携带一个序列号<code>seq</code>，下次发送的数据序列号还会进行+1。此时客户端发送<code>SYN = 1 seq=x</code></p></li><li><p>服务端收到了SYN + seq 字段之后，服务端也会生成一个对应服务端seq序列号，这时候就会携带ACK确认号，表示之前的SYN 收到了，还会有一个小写的ack 把 客户端的seq + 1,此时服务端发送<code>SYN = 1,ACK = 1,seq = y,ack=x+1</code></p></li><li><p>客户端收到服务端的响应之后会发送一个ACK确定序列号有效,并且还会发送seq，这里的seq会通过算法计算出来是否跟服务端的ack值相等，然后会发送一个新的ack这里的ack是服务端的seq值+1，确保一切正常。此时客户端发送<code>ACK= 1 seq = x+1,ack = y+1</code></p></li></ol><p><strong>总结：</strong></p><p>TCP 三次握手用于在数据传输前建立可靠连接，主要目的是确认双方的收发能力并同步初始序列号。<br>第一次握手由客户端发送 SYN，请求建立连接；<br>第二次握手服务器回复 SYN+ACK，确认客户端请求并发送自己的初始序列号；<br>第三次握手客户端发送 ACK，确认服务器的 SYN。<br>至此双方都确认了彼此的发送和接收能力，连接正式建立。</p><h2 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h2><p><a href="https://imgchr.com/i/pZRCgqx"><img src="https://s41.ax1x.com/2026/01/26/pZRCgqx.webp" alt="pZRCgqx.webp"></a></p><ol><li><p>seq(sequence number)，序列号随机生成</p></li><li><p>ack（acknowledgement number）确认号ack &#x3D; seq + 1</p></li><li><p>ACK（acknowledgement）确认序列号有效</p></li><li><p>SYN(synchronous)发起新连接</p></li><li><p>FIN(FINISH)完成</p></li><li><p>断开连接服务端和客户端都可以主动发起我们拿客户端举例，客户端进行断开操作先发送<code>FIN</code>包生成客户端的<code>seq</code>序列号随后进入<code>wait1</code>状态,这是第一次挥手。客户端发送<code>FIN=1 seq=u</code></p></li><li><p>服务端收到FIN包表示自己进入了关闭等待状态，然后向客户端使用ack验证，验证成功打上ACK标记，随后生成服务端的<code>seq值</code>发送给客户端，这是第二次挥手，服务端此时还可以发送未完成的数据。服务端发送<code>ACK=1 ack=u+1</code></p></li><li><p>等待服务端所有任务操作完成之后服务端开始进入最后确认状态，向客户端发送<code>FIN包</code>,并且验证ack，使用客户端第一次的<code>seq + 1</code>去验证，验证成功打上ACK标记，并且生成一个新的序列号seq发送给客户端，这是第三次挥手。客户端发送<code>FIN seq=v ack=u+1</code></p></li><li><p>客户端收到之后进入超时等待状态<code>2MSL（1-4分钟）</code>，经过等到后客户端关闭连接，而服务端收到信息验证完成ack成功之后打上<code>ACk</code>标记随后将关闭连接。服务端发送<code>ACK=1 seq=u+1 ack=v+1 </code></p></li></ol><p><strong>TIME_WAIT 的两个核心作用</strong></p><ol><li>确保最后一个 ACK 能被服务器接收</li></ol><ul><li><p>如果服务器没收到 ACK，会重发 FIN</p></li><li><p>客户端在 TIME_WAIT 状态仍能正确响应</p></li></ul><ol start="2"><li>防止旧连接的报文污染新连接</li></ol><ul><li><p>等待网络中所有“旧报文”自然消失</p></li><li><p>时间长度 &#x3D; <strong>2 × MSL（最大报文生存时间）</strong></p></li></ul><p><strong>总结:</strong></p><p>TCP 四次挥手用于可靠地释放连接。由于 TCP 是全双工协议，连接的两个方向需要分别关闭。<br>主动关闭方首先发送 FIN 表示不再发送数据；被动关闭方回复 ACK 确认；待其数据发送完毕后再发送 FIN；最后主动关闭方发送 ACK 确认。<br>主动关闭方进入 TIME_WAIT 状态，以确保连接可靠关闭并防止旧报文干扰新连接。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="计算机网络沉淀心得"><a href="#计算机网络沉淀心得" class="headerlink" title="计算机网络沉淀心得"></a>计算机网络沉淀心得</h1><h2 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h2><h3 id="结构总述"><a href="#结构总述" class="headerlink" title="结构总述"></a>结构总述</h3><ul><li><p>网络接口层&#x2F;数据链路层</p><ul><li><p>物理层 -&gt; IEEE820.1</p></li><li><p>数据链路层 -&gt; FDDO,Ethernet,PPP</p></li></ul></li><li><p>网络层</p><ul><li>网络层 -&gt; IP,ICMP,ARP,RIP</li></ul></li><li><p>传输层</p><ul><li>传输层 -&gt;TCP,UDP</li></ul></li><li><p>应用层</p><ul><li><p>会话层 -&gt;SSL,TLS</p></li><li><p>表示层 -&gt; JPEG,ASCII,DECOIC,加密</p></li><li><p>应用层 -&gt; HTTP,FTP,SNMP,DNS</p></li></ul></li></ul><h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>物理层是直接与物理介质打交道的</p><p>在这一层<em>光,电,无线电波</em>获取传送信号,电压,转换成数字信号,在这一层主要传输<strong>比特流</strong></p><p>物理层设备:</p><ul><li><p>网卡</p></li><li><p>网线</p></li><li><p>集线器,中继器</p></li><li><p>调制解调器</p></li></ul><p>物理层信道:</p><ul><li><p>明线(有线导线)</p></li><li><p>对称电缆</p></li><li><p>同轴电缆(最广泛)</p></li><li><p>光纤(光信号传导信号)</p></li><li><p>无线电波(WiFi,卫星)</p></li></ul><h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p><strong>功能:</strong> 建立逻辑连接,进行硬件地址选址,差错检验.将比特组合成字节进而合成帧（<strong>数据帧</strong>）,使用MAC地址访问介质,发现错误但不能纠正。</p><p><strong>MAC地址：</strong> 每个网卡的唯一标识</p><p>设备:</p><ul><li>交换机</li></ul><h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>网络层是最复杂的一层，在这一层就定义了我们的IP。该层控制数据链路层与传输层之间的信息转发，建立、维持和终止网络的连接。具体地说，数据链路层的数据在这一层被转换为数据包，然后通过路径选择、分段组合、顺序、进&#x2F;出路由等控制，将信息从一个网络设备传送到另一个网络设备</p><p><strong>IP网址的原因:</strong></p><p>在数据链路层，如果所有的使用互联网的用户在同一个网段中，会产生广播风暴，所以要将用户进行划分，让他们在不同的网段中，自己在自己的小网段中广播。而互联网就是这无数的子网络构成的一个巨型网络。</p><p>在网络层中引入了一套新的地址，让我们能够区分不同的网段。这套地址就叫做“网络地址”，简称“网址”。于是，”网络层”出现以后，每台计算机有了两种地址，一种是MAC地址，另一种是网络地址。两种地址之间没有任何联系，MAC地址是绑定在网卡上的，网络地址则是管理员分配的，它们只是随机组合在一起。</p><p>网络地址帮助我们确定计算机所在的子网络，MAC地址则将数据包送到该子网络中的目标网卡。因此，从逻辑上可以推断，必定是先处理网络地址，然后再处理MAC地址。</p><p><strong>功能:</strong> </p><ul><li><p>寻址：对网络层而言使用IP地址来唯一标识互联网上的设备，网络层依靠IP地址进行相互通信（类似于数据链路层的MAC地址）</p></li><li><p>路由：在同一个网络中的内部通信并不需要网络层设备，仅仅靠数据链路层就可以完成相互通信，对于不同的网络之间相互通信则必须借助路由器等三层设备。</p></li></ul><p><strong>设备:</strong></p><ul><li>路由器</li></ul><p><strong>协议:</strong></p><ul><li><p>IPv4</p></li><li><p>IPv6</p></li></ul><h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p><strong>功能：</strong></p><ul><li><p>定义端口号</p></li><li><p>控流</p></li><li><p>校验</p></li></ul><p><strong>协议：</strong></p><ul><li><p>TCP：面向连接的可靠协议，三次握手四次挥手</p></li><li><p>UDP：不可靠协议，但效率更高</p></li></ul><h3 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h3><p><strong>功能:</strong></p><p>会话层，是在发送方和接收方之间进行通信时创建、维持、之后终止或断开连接的地方，与电话通话有点相似。</p><p>会话层定义了一种机制，允许发送方和接收方启动或停止请求会话，以及当双方发生拥塞时仍然能保持对话。</p><p>会话层包含了一种称为检查点（Checkpoint）的机制来维持可靠会话。</p><p>检查点定义了一个最接近成功通信的点，并且定义了当发生内容丢失或损坏时需要回滚以便恢复丢失或损坏数据的点，即断点下载的原理。</p><p>这一层经常被叫<strong>报文</strong></p><h3 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h3><p><strong>功能：</strong></p><p>安全、压缩、编解码相关的功能和标准。</p><ul><li><p>ASCII，utf-8</p></li><li><p>JPEG</p></li></ul><p>这一层经常被叫<strong>报文</strong></p><h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p><strong>功能：</strong> 负责为用户和应用程序提供网络服务，直接与用户交互。常见的协议有 HTTP（超文本传输协议）、FTP（文件传输协议）、SMTP（邮件传输协议）等。</p><p><strong>协议:</strong></p><ul><li><p>HTTP&#x2F;HTTPS</p></li><li><p>DNS</p></li><li><p>SMTP</p></li><li><p>WebSocket</p></li><li><p>SSH</p></li></ul><h2 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h2><p><a href="https://imgchr.com/i/pZR9Z7T"><img src="https://s41.ax1x.com/2026/01/26/pZR9Z7T.webp" alt="pZR9Z7T.webp"></a></p><ol><li><p>seq(sequence number)，序列号随机生成</p></li><li><p>ack(acknowledgement number)确认号ack&#x3D;seq + 1</p></li><li><p>ACK(acknowledgement)确认序列号有效</p></li><li><p>SYN(Synchronous)发起新连接</p></li></ol><p><strong>过程:</strong></p><ol><li><p>首先客户端会发送一个段：<code>SYN</code>报文，想跟<code>服务端</code>进行连接，并且会携带一个序列号<code>seq</code>，下次发送的数据序列号还会进行+1。此时客户端发送<code>SYN = 1 seq=x</code></p></li><li><p>服务端收到了SYN + seq 字段之后，服务端也会生成一个对应服务端seq序列号，这时候就会携带ACK确认号，表示之前的SYN 收到了，还会有一个小写的ack 把 客户端的seq + 1,此时服务端发送<code>SYN = 1,ACK = 1,seq = y,ack=x+1</code></p></li><li><p>客户端收到服务端的响应之后会发送一个ACK确定序列号有效,并且还会发送seq，这里的seq会通过算法计算出来是否跟服务端的ack值相等，然后会发送一个新的ack这里的ack是服务端的seq值+1，确保一切正常。此时客户端发送<code>ACK= 1 seq = x+1,ack = y+1</code></p></li></ol><p><strong>总结：</strong></p><p>TCP 三次握手用于在数据传输前建立可靠连接，主要目的是确认双方的收发能力并同步初始序列号。<br>第一次握手由客户端发送 SYN，请求建立连接；<br>第二次握手服务器回复 SYN+ACK，确认客户端请求并发送自己的初始序列号；<br>第三次握手客户端发送 ACK，确认服务器的 SYN。<br>至此双方都确认了彼此的发送和接收能力，连接正式建立。</p><h2 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h2><p><a href="https://imgchr.com/i/pZRCgqx"><img src="https://s41.ax1x.com/2026/01/26/pZRCgqx.webp" alt="pZRCgqx.webp"></a></p><ol><li><p>seq(sequence number)，序列号随机生成</p></li><li><p>ack（acknowledgement number）确认号ack &#x3D; seq + 1</p></li><li><p>ACK（acknowledgement）确认序列号有效</p></li><li><p>SYN(synchronous)发起新连接</p></li><li><p>FIN(FINISH)完成</p></li><li><p>断开连接服务端和客户端都可以主动发起我们拿客户端举例，客户端进行断开操作先发送<code>FIN</code>包生成客户端的<code>seq</code>序列号随后进入<code>wait1</code>状态,这是第一次挥手。客户端发送<code>FIN=1 seq=u</code></p></li><li><p>服务端收到FIN包表示自己进入了关闭等待状态，然后向客户端使用ack验证，验证成功打上ACK标记，随后生成服务端的<code>seq值</code>发送给客户端，这是第二次挥手，服务端此时还可以发送未完成的数据。服务端发送<code>ACK=1 ack=u+1</code></p></li><li><p>等待服务端所有任务操作完成之后服务端开始进入最后确认状态，向客户端发送<code>FIN包</code>,并且验证ack，使用客户端第一次的<code>seq + 1</code>去验证，验证成功打上ACK标记，并且生成一个新的序列号seq发送给客户端，这是第三次挥手。客户端发送<code>FIN seq=v ack=u+1</code></p></li><li><p>客户端收到之后进入超时等待状态<code>2MSL（1-4分钟）</code>，经过等到后客户端关闭连接，而服务端收到信息验证完成ack成功之后打上<code>ACk</code>标记随后将关闭连接。服务端发送<code>ACK=1 seq=u+1 ack=v+1 </code></p></li></ol><p><strong>TIME_WAIT 的两个核心作用</strong></p><ol><li>确保最后一个 ACK 能被服务器接收</li></ol><ul><li><p>如果服务器没收到 ACK，会重发 FIN</p></li><li><p>客户端在 TIME_WAIT 状态仍能正确响应</p></li></ul><ol start="2"><li>防止旧连接的报文污染新连接</li></ol><ul><li><p>等待网络中所有“旧报文”自然消失</p></li><li><p>时间长度 &#x3D; <strong>2 × MSL（最大报文生存时间）</strong></p></li></ul><p><strong>总结:</strong></p><p>TCP 四次挥手用于可靠地释放连接。由于 TCP 是全双工协议，连接的两个方向需要分别关闭。<br>主动关闭方首先发送 FIN 表示不再发送数据；被动关闭方回复 ACK 确认；待其数据发送完毕后再发送 FIN；最后主动关闭方发送 ACK 确认。<br>主动关闭方进入 TIME_WAIT 状态，以确保连接可靠关闭并防止旧报文干扰新连接。</p><h2 id="浏览器输入url后发生了什么"><a href="#浏览器输入url后发生了什么" class="headerlink" title="浏览器输入url后发生了什么"></a>浏览器输入url后发生了什么</h2><h3 id="URL-统一资源定位符"><a href="#URL-统一资源定位符" class="headerlink" title="URL(统一资源定位符)"></a>URL(统一资源定位符)</h3><p><code>http:</code>:访问协议</p><p><code>www.server.com</code>:服务器名称&#x2F;域名</p><p><code>/dir1/</code>:路径名,目录名</p><p><code>file1.html</code>:文件名</p><h3 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h3><p>DNS将IP地址与域名进行映射,便于用户记忆和访问.</p><p>浏览器自身DNS-&gt;操作系统DNS-&gt;本地host文件-&gt;向域名服务器发送请求</p><p><strong>过程:</strong></p><ol><li><p>请求发起后浏览器首先会解析这个域名，首先查看本地硬盘的hosts文件，查看是否存在这个域名对应的规则，如果有的话，就直接使用hosts文件里面的IP地址</p></li><li><p>如果在本地的hosts文件中没有找到对应的IP地址，浏览器会发出一个DNS请求到本地DNS服务器，本地DNS服务器一般由ISP（网络接入服务商）提供。</p></li><li><p>查询你输入的网址的DNS请求到达本地DNS服务器后，本地DNS服务器会首先查询它的缓存记录，如果缓存命中则直接返回结果，此过程是递归方式进行查询，如果没有，本地服务器还需要向DNS根服务器进行查询。</p></li><li><p>根DNS服务器没有记录具体的域名和IP地址的对应关系，而是告诉本地DNS服务器可以到域服务器上继续查询,并给出域服务器的地址,这个过程是迭代的过程。</p></li></ol><blockquote><p>一、核心概念：什么是 OPTIONS 请求？<br><code>OPTIONS 是 HTTP 的一种请求方法，用于获取服务器支持的通信选项。</code></p><p>在浏览器 <strong>CORS（跨域资源共享）</strong> 场景中，OPTIONS 被用作 “预检请求”（Preflight Request）</p><h2 id="预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。二、两种-CORS-请求类型"><a href="#预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。二、两种-CORS-请求类型" class="headerlink" title="预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。二、两种 CORS 请求类型"></a>预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。<br>二、两种 CORS 请求类型</h2><table><thead><tr><th>类型</th><th>英文</th></tr></thead><tbody><tr><td><strong>简单请求</strong></td><td>Simple Request</td></tr><tr><td><strong>复杂请求</strong></td><td>Complex Request &#x2F; Preflighted Request</td></tr></tbody></table><h2 id="三、简单请求的判定标准（必须同时满足）"><a href="#三、简单请求的判定标准（必须同时满足）" class="headerlink" title="三、简单请求的判定标准（必须同时满足）"></a>三、简单请求的判定标准（<strong>必须同时满足</strong>）</h2><h3 id="1-方法限制"><a href="#1-方法限制" class="headerlink" title="1. 方法限制"></a>1. 方法限制</h3><p>只能是以下之一：</p><ul><li><p><code>GET</code></p></li><li><p><code>HEAD</code></p></li><li><p><code>POST</code></p></li></ul><h3 id="2-头部限制"><a href="#2-头部限制" class="headerlink" title="2. 头部限制"></a>2. 头部限制</h3><p>只能包含 <strong>CORS 安全列出的头部</strong>：</p><ul><li><p><code>Accept</code></p></li><li><p><code>Accept-Language</code></p></li><li><p><code>Content-Language</code></p></li><li><p><code>Content-Type</code>（但值受限，见下）</p></li></ul><h3 id="3-Content-Type-限制（如果是-POST）"><a href="#3-Content-Type-限制（如果是-POST）" class="headerlink" title="3. Content-Type 限制（如果是 POST）"></a>3. Content-Type 限制（如果是 POST）</h3><p>只能是：</p><ul><li><p><code>application/x-www-form-urlencoded</code></p></li><li><p><code>multipart/form-data</code></p></li><li><p><code>text/plain</code></p></li></ul><h3 id="4-无自定义头部"><a href="#4-无自定义头部" class="headerlink" title="4. 无自定义头部"></a>4. 无自定义头部</h3><p>不能添加如 <code>X-Custom-Header</code>、<code>Authorization</code> 等自定义头部</p><h3 id="5-无-ReadableStream-对象"><a href="#5-无-ReadableStream-对象" class="headerlink" title="5. 无 ReadableStream 对象"></a>5. 无 ReadableStream 对象</h3><p>请求中不能使用 <code>ReadableStream</code></p><h2 id="✅-举例：普通表单提交、简单的-GET-请求四、复杂请求（触发预检的场景）"><a href="#✅-举例：普通表单提交、简单的-GET-请求四、复杂请求（触发预检的场景）" class="headerlink" title="✅ 举例：普通表单提交、简单的 GET 请求四、复杂请求（触发预检的场景）"></a><code>✅ 举例：普通表单提交、简单的 GET 请求</code><br>四、复杂请求（触发预检的场景）</h2><p>只要 <strong>违反上述任一条件</strong>，就是复杂请求：</p><table><thead><tr><th>场景</th><th>示例</th></tr></thead><tbody><tr><td>使用非简单方法</td><td><code>PUT</code>、<code>DELETE</code>、<code>PATCH</code></td></tr><tr><td>发送 JSON 数据</td><td><code>Content-Type: application/json</code></td></tr><tr><td>携带自定义头部</td><td><code>Authorization: Bearer token</code></td></tr><tr><td>使用特殊头部</td><td><code>X-Requested-With</code> 等</td></tr></tbody></table></blockquote><h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><h4 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h4><p><strong>浏览器强制缓存服务端提供的资源</strong></p><p>通过配置响应头的<code>cache-control</code>字段的<code>max-age</code>和<code>Expires</code>字段来决定</p><table><thead><tr><th>头部</th><th>语法</th><th>特点</th><th>状态码</th></tr></thead><tbody><tr><td><strong>Expires</strong></td><td><code>Expires: Wed, 21 Oct 2026 07:28:00 GMT</code></td><td>HTTP&#x2F;1.0 产物，绝对时间，受本地时间影响</td><td>200 (from disk cache)</td></tr><tr><td><strong>Cache-Control</strong></td><td><code>Cache-Control: max-age=31536000</code></td><td>HTTP&#x2F;1.1 标准，相对时间（秒），更可靠</td><td>200 (from memory&#x2F;disk cache)</td></tr></tbody></table><h4 id="协商缓存-1"><a href="#协商缓存-1" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>当服务端发现资源最后修改时间<code>Last-Modified</code>和<code>If-modified-since</code>值相等，代表资源从该时间后再未改变过。</p><p>服务端于是返回304（Not Modified）状态码，表示资源没有改变，并且响应体为空。浏览器拿到后，就知道原本可能过期的缓存其实还可以继续使用。</p><p>如果资源改变了，就会返回200，且响应体带上最新资源。Etag 的值没有规定一般是文件hash，当然你也可以设置版本号之类的去对比 </p><p>E-Tag一般规定为文件hash,也可以设置版本号。</p><table><thead><tr><th>头部</th><th>语法</th><th>验证方式</th><th>精度</th><th>状态码</th></tr></thead><tbody><tr><td><strong>Last-Modified</strong></td><td><code>Last-Modified: Tue, 15 Nov 2024 12:45:26 GMT</code></td><td>对比修改时间</td><td>秒级</td><td>304 &#x2F; 200</td></tr><tr><td><strong>ETag</strong></td><td><code>ETag: &quot;33a64df5-8d5c-4c7a-9c3f-2e1b8d6f5a4c&quot;</code></td><td>对比内容指纹（哈希）</td><td>毫秒级</td><td>304 &#x2F; 200</td></tr></tbody></table><h4 id="缓存规则"><a href="#缓存规则" class="headerlink" title="缓存规则"></a>缓存规则</h4><p>   先强制，后协商；<br>   强制不过期，直接本地拿；<br>   强制过期问服务器，ETag 优先来比对；<br>   ETag 相同 304，不同就下新资源。</p>]]></content>
     
     
     <categories>
@@ -140,9 +140,9 @@
       
       <tag>react</tag>
       
-      <tag>state-management</tag>
-      
       <tag>zustand</tag>
+      
+      <tag>state-management</tag>
       
     </tags>
     
@@ -198,15 +198,15 @@
     
     <tags>
       
+      <tag>web-framework</tag>
+      
+      <tag>backend</tag>
+      
       <tag>fastapi</tag>
       
       <tag>python</tag>
       
-      <tag>web-framework</tag>
-      
       <tag>api</tag>
-      
-      <tag>backend</tag>
       
     </tags>
     
@@ -266,9 +266,9 @@
       
       <tag>javascript</tag>
       
-      <tag>frontend</tag>
-      
       <tag>typing</tag>
+      
+      <tag>frontend</tag>
       
     </tags>
     
@@ -293,9 +293,9 @@
     
     <tags>
       
-      <tag>backend</tag>
-      
       <tag>nodejs</tag>
+      
+      <tag>backend</tag>
       
       <tag>nestjs</tag>
       
@@ -326,9 +326,9 @@
     
     <tags>
       
-      <tag>backend</tag>
-      
       <tag>nodejs</tag>
+      
+      <tag>backend</tag>
       
       <tag>javascript</tag>
       
@@ -460,11 +460,11 @@
       
       <tag>react</tag>
       
+      <tag>state-management</tag>
+      
       <tag>hooks</tag>
       
       <tag>components</tag>
-      
-      <tag>state-management</tag>
       
     </tags>
     
@@ -489,13 +489,13 @@
     
     <tags>
       
-      <tag>web-framework</tag>
-      
-      <tag>backend</tag>
-      
       <tag>express</tag>
       
       <tag>nodejs</tag>
+      
+      <tag>web-framework</tag>
+      
+      <tag>backend</tag>
       
     </tags>
     
@@ -520,11 +520,11 @@
     
     <tags>
       
+      <tag>frontend</tag>
+      
       <tag>components</tag>
       
       <tag>vue</tag>
-      
-      <tag>frontend</tag>
       
       <tag>javascript-framework</tag>
       

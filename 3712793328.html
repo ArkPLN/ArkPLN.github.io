@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://arkpln.github.io/images/cn.jpg">
 <meta property="article:published_time" content="2026-01-26T03:43:02.000Z">
-<meta property="article:modified_time" content="2026-01-26T08:38:01.145Z">
+<meta property="article:modified_time" content="2026-01-27T10:32:49.410Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="network">
 <meta name="twitter:card" content="summary_large_image">
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k words
+          4.8k words
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          25 mins
+          41 mins
         
       </span>
     
@@ -482,6 +482,153 @@
 </ul>
 <p><strong>总结:</strong></p>
 <p>TCP 四次挥手用于可靠地释放连接。由于 TCP 是全双工协议，连接的两个方向需要分别关闭。<br>主动关闭方首先发送 FIN 表示不再发送数据；被动关闭方回复 ACK 确认；待其数据发送完毕后再发送 FIN；最后主动关闭方发送 ACK 确认。<br>主动关闭方进入 TIME_WAIT 状态，以确保连接可靠关闭并防止旧报文干扰新连接。</p>
+<h2 id="浏览器输入url后发生了什么"><a href="#浏览器输入url后发生了什么" class="headerlink" title="浏览器输入url后发生了什么"></a>浏览器输入url后发生了什么</h2><h3 id="URL-统一资源定位符"><a href="#URL-统一资源定位符" class="headerlink" title="URL(统一资源定位符)"></a>URL(统一资源定位符)</h3><p><code>http:</code>:访问协议</p>
+<p><code>www.server.com</code>:服务器名称&#x2F;域名</p>
+<p><code>/dir1/</code>:路径名,目录名</p>
+<p><code>file1.html</code>:文件名</p>
+<h3 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h3><p>DNS将IP地址与域名进行映射,便于用户记忆和访问.</p>
+<p>浏览器自身DNS-&gt;操作系统DNS-&gt;本地host文件-&gt;向域名服务器发送请求</p>
+<p><strong>过程:</strong></p>
+<ol>
+<li><p>请求发起后浏览器首先会解析这个域名，首先查看本地硬盘的hosts文件，查看是否存在这个域名对应的规则，如果有的话，就直接使用hosts文件里面的IP地址</p>
+</li>
+<li><p>如果在本地的hosts文件中没有找到对应的IP地址，浏览器会发出一个DNS请求到本地DNS服务器，本地DNS服务器一般由ISP（网络接入服务商）提供。</p>
+</li>
+<li><p>查询你输入的网址的DNS请求到达本地DNS服务器后，本地DNS服务器会首先查询它的缓存记录，如果缓存命中则直接返回结果，此过程是递归方式进行查询，如果没有，本地服务器还需要向DNS根服务器进行查询。</p>
+</li>
+<li><p>根DNS服务器没有记录具体的域名和IP地址的对应关系，而是告诉本地DNS服务器可以到域服务器上继续查询,并给出域服务器的地址,这个过程是迭代的过程。</p>
+</li>
+</ol>
+<blockquote>
+<p>一、核心概念：什么是 OPTIONS 请求？<br><code>OPTIONS 是 HTTP 的一种请求方法，用于获取服务器支持的通信选项。</code></p>
+<p>在浏览器 <strong>CORS（跨域资源共享）</strong> 场景中，OPTIONS 被用作 “预检请求”（Preflight Request）</p>
+<h2 id="预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。二、两种-CORS-请求类型"><a href="#预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。二、两种-CORS-请求类型" class="headerlink" title="预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。二、两种 CORS 请求类型"></a>预检请求的目的是为了确保实际请求对目标服务器是安全的，发送预请求可以得知服务器是否允许跨域请求以及运行那些字段和HTTP方法。<br>二、两种 CORS 请求类型</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>英文</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>简单请求</strong></td>
+<td>Simple Request</td>
+</tr>
+<tr>
+<td><strong>复杂请求</strong></td>
+<td>Complex Request &#x2F; Preflighted Request</td>
+</tr>
+</tbody></table>
+<h2 id="三、简单请求的判定标准（必须同时满足）"><a href="#三、简单请求的判定标准（必须同时满足）" class="headerlink" title="三、简单请求的判定标准（必须同时满足）"></a>三、简单请求的判定标准（<strong>必须同时满足</strong>）</h2><h3 id="1-方法限制"><a href="#1-方法限制" class="headerlink" title="1. 方法限制"></a>1. 方法限制</h3><p>只能是以下之一：</p>
+<ul>
+<li><p><code>GET</code></p>
+</li>
+<li><p><code>HEAD</code></p>
+</li>
+<li><p><code>POST</code></p>
+</li>
+</ul>
+<h3 id="2-头部限制"><a href="#2-头部限制" class="headerlink" title="2. 头部限制"></a>2. 头部限制</h3><p>只能包含 <strong>CORS 安全列出的头部</strong>：</p>
+<ul>
+<li><p><code>Accept</code></p>
+</li>
+<li><p><code>Accept-Language</code></p>
+</li>
+<li><p><code>Content-Language</code></p>
+</li>
+<li><p><code>Content-Type</code>（但值受限，见下）</p>
+</li>
+</ul>
+<h3 id="3-Content-Type-限制（如果是-POST）"><a href="#3-Content-Type-限制（如果是-POST）" class="headerlink" title="3. Content-Type 限制（如果是 POST）"></a>3. Content-Type 限制（如果是 POST）</h3><p>只能是：</p>
+<ul>
+<li><p><code>application/x-www-form-urlencoded</code></p>
+</li>
+<li><p><code>multipart/form-data</code></p>
+</li>
+<li><p><code>text/plain</code></p>
+</li>
+</ul>
+<h3 id="4-无自定义头部"><a href="#4-无自定义头部" class="headerlink" title="4. 无自定义头部"></a>4. 无自定义头部</h3><p>不能添加如 <code>X-Custom-Header</code>、<code>Authorization</code> 等自定义头部</p>
+<h3 id="5-无-ReadableStream-对象"><a href="#5-无-ReadableStream-对象" class="headerlink" title="5. 无 ReadableStream 对象"></a>5. 无 ReadableStream 对象</h3><p>请求中不能使用 <code>ReadableStream</code></p>
+<h2 id="✅-举例：普通表单提交、简单的-GET-请求四、复杂请求（触发预检的场景）"><a href="#✅-举例：普通表单提交、简单的-GET-请求四、复杂请求（触发预检的场景）" class="headerlink" title="✅ 举例：普通表单提交、简单的 GET 请求四、复杂请求（触发预检的场景）"></a><code>✅ 举例：普通表单提交、简单的 GET 请求</code><br>四、复杂请求（触发预检的场景）</h2><p>只要 <strong>违反上述任一条件</strong>，就是复杂请求：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使用非简单方法</td>
+<td><code>PUT</code>、<code>DELETE</code>、<code>PATCH</code></td>
+</tr>
+<tr>
+<td>发送 JSON 数据</td>
+<td><code>Content-Type: application/json</code></td>
+</tr>
+<tr>
+<td>携带自定义头部</td>
+<td><code>Authorization: Bearer token</code></td>
+</tr>
+<tr>
+<td>使用特殊头部</td>
+<td><code>X-Requested-With</code> 等</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><h4 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h4><p><strong>浏览器强制缓存服务端提供的资源</strong></p>
+<p>通过配置响应头的<code>cache-control</code>字段的<code>max-age</code>和<code>Expires</code>字段来决定</p>
+<table>
+<thead>
+<tr>
+<th>头部</th>
+<th>语法</th>
+<th>特点</th>
+<th>状态码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Expires</strong></td>
+<td><code>Expires: Wed, 21 Oct 2026 07:28:00 GMT</code></td>
+<td>HTTP&#x2F;1.0 产物，绝对时间，受本地时间影响</td>
+<td>200 (from disk cache)</td>
+</tr>
+<tr>
+<td><strong>Cache-Control</strong></td>
+<td><code>Cache-Control: max-age=31536000</code></td>
+<td>HTTP&#x2F;1.1 标准，相对时间（秒），更可靠</td>
+<td>200 (from memory&#x2F;disk cache)</td>
+</tr>
+</tbody></table>
+<h4 id="协商缓存-1"><a href="#协商缓存-1" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>当服务端发现资源最后修改时间<code>Last-Modified</code>和<code>If-modified-since</code>值相等，代表资源从该时间后再未改变过。</p>
+<p>服务端于是返回304（Not Modified）状态码，表示资源没有改变，并且响应体为空。浏览器拿到后，就知道原本可能过期的缓存其实还可以继续使用。</p>
+<p>如果资源改变了，就会返回200，且响应体带上最新资源。Etag 的值没有规定一般是文件hash，当然你也可以设置版本号之类的去对比 </p>
+<p>E-Tag一般规定为文件hash,也可以设置版本号。</p>
+<table>
+<thead>
+<tr>
+<th>头部</th>
+<th>语法</th>
+<th>验证方式</th>
+<th>精度</th>
+<th>状态码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Last-Modified</strong></td>
+<td><code>Last-Modified: Tue, 15 Nov 2024 12:45:26 GMT</code></td>
+<td>对比修改时间</td>
+<td>秒级</td>
+<td>304 &#x2F; 200</td>
+</tr>
+<tr>
+<td><strong>ETag</strong></td>
+<td><code>ETag: &quot;33a64df5-8d5c-4c7a-9c3f-2e1b8d6f5a4c&quot;</code></td>
+<td>对比内容指纹（哈希）</td>
+<td>毫秒级</td>
+<td>304 &#x2F; 200</td>
+</tr>
+</tbody></table>
+<h4 id="缓存规则"><a href="#缓存规则" class="headerlink" title="缓存规则"></a>缓存规则</h4><p>   先强制，后协商；<br>   强制不过期，直接本地拿；<br>   强制过期问服务器，ETag 优先来比对；<br>   ETag 相同 304，不同就下新资源。</p>
 
                 
               </div>
