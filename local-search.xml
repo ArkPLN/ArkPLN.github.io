@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>Leetcode Hot100刷题记</title>
+    <link href="/626095156.html"/>
+    <url>/626095156.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="Leetcode-Hot100刷题记"><a href="#Leetcode-Hot100刷题记" class="headerlink" title="Leetcode Hot100刷题记"></a>Leetcode Hot100刷题记</h1><h2 id="JavaScript基础"><a href="#JavaScript基础" class="headerlink" title="JavaScript基础"></a>JavaScript基础</h2><h2 id="Hot100"><a href="#Hot100" class="headerlink" title="Hot100"></a>Hot100</h2><h3 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h3><h4 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a>1. 两数之和</h4><p><a href="https://leetcode.cn/problems/two-sum?envType=study-plan-v2&envId=top-100-liked">https://leetcode.cn/problems/two-sum?envType=study-plan-v2&amp;envId=top-100-liked</a></p><p><strong>思考:</strong></p><p>最简单的想法是直接暴力遍历，结合题干来看，时间复杂度会做到<code>O(n^2)</code>，即最多时要遍历n(n-1)次。</p><p>为了压低时间复杂度，可以考虑用Map(哈希表)以空间换时间。（想到哈希表的原因是如果可以把数列进行排序，两数之和就可以相当简单的，根据sums和当前遍历的nums[i]的大小比较确认区间，从而快速地的缩小排查范围，但由于题目要求锁死了数组的item和index一一对应的关系，所以要考虑用其他的数据类型来拓展，哈希表则满足这个需要）</p><p>除此之外，本体的Map处理还可以继续优化，考虑到可能出现的相同数字的<code>key</code>覆盖原有的哈希表的键值对的情况，可以采取“先has看有没有，有就直接掉，没有再set”的策略，可以把遍历次数压到一次以内。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">target</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number[]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> twoSum = <span class="hljs-keyword">function</span>(<span class="hljs-params">nums, target</span>) &#123;<br>    <span class="hljs-keyword">let</span> arrayMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>()<br>    <span class="hljs-keyword">let</span> res = []<br>    nums.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item,index</span>)=&gt;</span>&#123;<br>        arrayMap.<span class="hljs-title function_">set</span>(item,index)<br>    &#125;)<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;nums.<span class="hljs-property">length</span>;i++)&#123;<br>        res.<span class="hljs-title function_">push</span>(i)<br>        <span class="hljs-keyword">let</span> remain = target - nums[i]<br><br>   <span class="hljs-comment">// 两个条件:存在数字,且这个数字不与当前选中的nums[i]相同</span><br>        <span class="hljs-keyword">if</span>(arrayMap.<span class="hljs-title function_">has</span>(remain) &amp;&amp; arrayMap.<span class="hljs-title function_">get</span>(remain) != i)&#123;<br>            res.<span class="hljs-title function_">push</span>(arrayMap.<span class="hljs-title function_">get</span>(remain))<br>            <span class="hljs-keyword">break</span><br>        &#125;<br>        res = []<br><br>    &#125;<br>    <span class="hljs-keyword">return</span> res<br>&#125;;<br></code></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 一次遍历的哈希表解法</span><br><span class="hljs-keyword">var</span> twoSum = <span class="hljs-keyword">function</span>(<span class="hljs-params">nums, target</span>) &#123;<br>    <span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">const</span> complement = target - nums[i];<br><span class="hljs-comment">// 如果哈希对照存在就直接获取值</span><br>        <span class="hljs-keyword">if</span> (map.<span class="hljs-title function_">has</span>(complement)) &#123;<br>            <span class="hljs-keyword">return</span> [map.<span class="hljs-title function_">get</span>(complement), i];<br>        &#125;<br><span class="hljs-comment">// 每次遍历都更新哈希表,恰好避开两次选取相同位置数字的情况</span><br>        map.<span class="hljs-title function_">set</span>(nums[i], i);<br>    &#125;<br>    <span class="hljs-keyword">return</span> [];<br>&#125;;<br></code></pre></td></tr></table></figure><h4 id="49-字母异位词分组"><a href="#49-字母异位词分组" class="headerlink" title="49. 字母异位词分组"></a>49. 字母异位词分组</h4><p><a href="https://leetcode.cn/problems/group-anagrams?envType=study-plan-v2&envId=top-100-liked">https://leetcode.cn/problems/group-anagrams?envType=study-plan-v2&amp;envId=top-100-liked</a></p><p><strong>思考:</strong></p><p>这道题要处理的问题主要是提取出每个字母的“共同之处”作为key，value则为对应同属一种“类型”的数组，返回结果要把这些value数组给拼起来。</p><p>最初的设想是将每个字符串<code>str[i]</code>的每个字符统计进一个<code>Map</code>，再以这个<code>Map</code>作为key去归类。</p><p>但JavaScript中的Map(<strong>引用类型</strong>)是按值引用的<strong>地址比较</strong>，故，即便两个Map的内容可能完全一致，但由于每次创建Map对象时分配的<em>地址</em>不一样，所以怎么找也找不到相同的<code>key</code>，因此无论如何也不能将<code>Map</code>对象作为键去查找<code>Map</code>。</p><p>此时转而考虑使用基本类型（字符串）作为Map的键，但要保证每一个字符串都最终可以化归成一个大家都一致的“标志”，想到了可以对字符串进行“排序”，每个符合相同异位词格式的字符串，排序处理之后都最后必然满足“同种异位词”的格式，比如<code>abc</code>和<code>bac</code>最后都可以排序变成<code>abc</code>。由此发现了可以作为<code>Map</code>的键的参数。对每个<code>strs[i]</code>遍历，使之排序后纳入<code>Map</code>哈希表中，最后返回这个Map对象的<code>values()</code>。</p><p>特别注意，<code>Map.values()</code>返回的是一个迭代器而非数组，需要通过<code>Array.from</code>、展开运算符<code>...</code>或<code>for of</code>方法自行迭代一下才能得到结果。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * @lc app=leetcode.cn id=49 lang=javascript</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * [49] 字母异位词分组</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-comment">// @lc code=start</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">string[]</span>&#125; <span class="hljs-variable">strs</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">string[][]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> groupAnagrams = <span class="hljs-keyword">function</span>(<span class="hljs-params">strs</span>) &#123;<br>    <span class="hljs-keyword">let</span> wordsMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>()<br>    strs.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>)=&gt;</span>&#123;<br>        <span class="hljs-keyword">const</span> sortedWord = item.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;&#x27;</span>).<span class="hljs-title function_">sort</span>().<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;&#x27;</span>)<br>        <span class="hljs-keyword">if</span>(wordsMap.<span class="hljs-title function_">has</span>(sortedWord))&#123;<br>            <span class="hljs-keyword">const</span> newArr = wordsMap.<span class="hljs-title function_">get</span>(sortedWord)<br>            newArr.<span class="hljs-title function_">push</span>(item)<br>            wordsMap.<span class="hljs-title function_">set</span>(sortedWord,newArr)<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            wordsMap.<span class="hljs-title function_">set</span>(sortedWord,[item])<br>        &#125;<br>    &#125;)<br>    <span class="hljs-keyword">return</span> [...wordsMap.<span class="hljs-title function_">values</span>()]<br>&#125;;<br><span class="hljs-comment">// @lc code=end</span><br><br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>cs</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>data-structures</tag>
+      
+      <tag>algorithms</tag>
+      
+      <tag>computer-science</tag>
+      
+      <tag>cs</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>计算机网络沉淀心得</title>
     <link href="/3712793328.html"/>
     <url>/3712793328.html</url>
@@ -140,9 +171,9 @@
       
       <tag>react</tag>
       
-      <tag>zustand</tag>
-      
       <tag>state-management</tag>
+      
+      <tag>zustand</tag>
       
     </tags>
     
@@ -262,9 +293,9 @@
     
     <tags>
       
-      <tag>typescript</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>typescript</tag>
       
       <tag>typing</tag>
       
@@ -460,11 +491,11 @@
       
       <tag>react</tag>
       
+      <tag>hooks</tag>
+      
       <tag>components</tag>
       
       <tag>state-management</tag>
-      
-      <tag>hooks</tag>
       
     </tags>
     
@@ -522,11 +553,11 @@
       
       <tag>frontend</tag>
       
+      <tag>components</tag>
+      
       <tag>vue</tag>
       
       <tag>javascript-framework</tag>
-      
-      <tag>components</tag>
       
     </tags>
     

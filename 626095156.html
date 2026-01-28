@@ -17,28 +17,27 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="FangZhou">
-  <meta name="keywords" content="react,web,nodejs,frontend">
+  <meta name="keywords" content="Vue,React,Nodejs,blogs,frontend,web,developer,programmer">
   
-    <meta name="description" content="Zustand状态管理库在React项目中的实战应用笔记">
+    <meta name="description" content="力扣Hot100刷题记录，沉淀学习算法思想和编码能力。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zustand实战应用笔记">
-<meta property="og:url" content="http://arkpln.github.io/2955613371.html">
+<meta property="og:title" content="Leetcode Hot100刷题记">
+<meta property="og:url" content="http://arkpln.github.io/626095156.html">
 <meta property="og:site_name" content="Ark的技术博客">
-<meta property="og:description" content="Zustand状态管理库在React项目中的实战应用笔记">
+<meta property="og:description" content="力扣Hot100刷题记录，沉淀学习算法思想和编码能力。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://arkpln.github.io/images/zustand.jpg">
-<meta property="article:published_time" content="2025-11-10T14:15:09.000Z">
-<meta property="article:modified_time" content="2026-01-26T04:00:30.708Z">
+<meta property="article:published_time" content="2026-01-28T02:05:56.000Z">
+<meta property="article:modified_time" content="2026-01-28T05:21:18.204Z">
 <meta property="article:author" content="FangZhou">
-<meta property="article:tag" content="react">
-<meta property="article:tag" content="state-management">
-<meta property="article:tag" content="zustand">
+<meta property="article:tag" content="data-structures">
+<meta property="article:tag" content="algorithms">
+<meta property="article:tag" content="computer-science">
+<meta property="article:tag" content="cs">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://arkpln.github.io/images/zustand.jpg">
   
   
   
-  <title>Zustand实战应用笔记 - Ark的技术博客</title>
+  <title>Leetcode Hot100刷题记 - Ark的技术博客</title>
 
   <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
 
@@ -208,13 +207,13 @@
 
   
 
-<div id="banner" class="banner" parallax="true" style="background: url('/images/zustand.jpg') no-repeat center center; background-size: cover;">
+<div id="banner" class="banner" parallax="true" style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Zustand实战应用笔记"></span>
+            <span id="subtitle" data-typed-text="Leetcode Hot100刷题记"></span>
           
         </div>
 
@@ -225,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-11-10 22:15" pubdate>
-          November 10, 2025 pm
+        <time datetime="2026-01-28 10:05" pubdate>
+          January 28, 2026 am
         </time>
       </span>
     
@@ -237,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k words
+          2.4k words
         
       </span>
     
@@ -248,7 +247,7 @@
         
         
         
-          13 mins
+          21 mins
         
       </span>
     
@@ -285,67 +284,29 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Zustand实战应用笔记</h1>
+            <h1 id="seo-header">Leetcode Hot100刷题记</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Zustand实战应用笔记"><a href="#Zustand实战应用笔记" class="headerlink" title="Zustand实战应用笔记"></a>Zustand实战应用笔记</h1><h2 id="引言-为什么要状态管理-为什么选择Zustand"><a href="#引言-为什么要状态管理-为什么选择Zustand" class="headerlink" title="引言(为什么要状态管理&#x2F;为什么选择Zustand)"></a>引言(为什么要状态管理&#x2F;为什么选择Zustand)</h2><p>在开发项目的过程中,发现随着我项目后期体量的逐步上升,通过针对一个大类创建多个ts文件和类型文件的简单方式已经开始有些力不从心，特别是复杂的类型注解，相互之间的依赖和大量工厂函数需要管理，因此需要适当做出工程优化，对类型系统和涉及项目需要的各自函数加以进一步封装和管理，综合考虑技术栈和操作难度，这里选择了Zustand并尝试使用该状态管理库探索项目的工程优化迭代，原因有三。</p>
-<ol>
-<li><p>与Redux相比更简洁，单模块依赖，不需要额外的RTK等其他库的二次封装</p>
-</li>
-<li><p>使用方法更简单，语法符合直觉，无须Provider注入，与React的Hooks函数写法相吻合</p>
-</li>
-<li><p>对TypeScript兼容性好，便于与项目已有的类型注解相衔接</p>
-</li>
-</ol>
-<h2 id="全面用法"><a href="#全面用法" class="headerlink" title="全面用法"></a>全面用法</h2><blockquote>
-<p>官网文档在此: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://zustand.docs.pmnd.rs/getting-started/">Zustand Official Docs</a></p>
-</blockquote>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用<code>pnpm</code>安装到项目中</p>
-<blockquote>
-<p>话说真的还有人在用自带的npm吗，速度真的很慢好吗？？</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pnpm install zustand<br></code></pre></td></tr></table></figure>
+                <h1 id="Leetcode-Hot100刷题记"><a href="#Leetcode-Hot100刷题记" class="headerlink" title="Leetcode Hot100刷题记"></a>Leetcode Hot100刷题记</h1><h2 id="JavaScript基础"><a href="#JavaScript基础" class="headerlink" title="JavaScript基础"></a>JavaScript基础</h2><h2 id="Hot100"><a href="#Hot100" class="headerlink" title="Hot100"></a>Hot100</h2><h3 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h3><h4 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a>1. 两数之和</h4><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.cn/problems/two-sum?envType=study-plan-v2&envId=top-100-liked">https://leetcode.cn/problems/two-sum?envType=study-plan-v2&amp;envId=top-100-liked</a></p>
+<p><strong>思考:</strong></p>
+<p>最简单的想法是直接暴力遍历，结合题干来看，时间复杂度会做到<code>O(n^2)</code>，即最多时要遍历n(n-1)次。</p>
+<p>为了压低时间复杂度，可以考虑用Map(哈希表)以空间换时间。（想到哈希表的原因是如果可以把数列进行排序，两数之和就可以相当简单的，根据sums和当前遍历的nums[i]的大小比较确认区间，从而快速地的缩小排查范围，但由于题目要求锁死了数组的item和index一一对应的关系，所以要考虑用其他的数据类型来拓展，哈希表则满足这个需要）</p>
+<p>除此之外，本体的Map处理还可以继续优化，考虑到可能出现的相同数字的<code>key</code>覆盖原有的哈希表的键值对的情况，可以采取“先has看有没有，有就直接掉，没有再set”的策略，可以把遍历次数压到一次以内。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">target</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number[]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> twoSum = <span class="hljs-keyword">function</span>(<span class="hljs-params">nums, target</span>) &#123;<br>    <span class="hljs-keyword">let</span> arrayMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>()<br>    <span class="hljs-keyword">let</span> res = []<br>    nums.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item,index</span>)=&gt;</span>&#123;<br>        arrayMap.<span class="hljs-title function_">set</span>(item,index)<br>    &#125;)<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;nums.<span class="hljs-property">length</span>;i++)&#123;<br>        res.<span class="hljs-title function_">push</span>(i)<br>        <span class="hljs-keyword">let</span> remain = target - nums[i]<br><br>   <span class="hljs-comment">// 两个条件:存在数字,且这个数字不与当前选中的nums[i]相同</span><br>        <span class="hljs-keyword">if</span>(arrayMap.<span class="hljs-title function_">has</span>(remain) &amp;&amp; arrayMap.<span class="hljs-title function_">get</span>(remain) != i)&#123;<br>            res.<span class="hljs-title function_">push</span>(arrayMap.<span class="hljs-title function_">get</span>(remain))<br>            <span class="hljs-keyword">break</span><br>        &#125;<br>        res = []<br><br>    &#125;<br>    <span class="hljs-keyword">return</span> res<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<h3 id="创建Store"><a href="#创建Store" class="headerlink" title="创建Store"></a>创建Store</h3><ol>
-<li>引入<code>zustand</code></li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; create &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;zustand&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 一次遍历的哈希表解法</span><br><span class="hljs-keyword">var</span> twoSum = <span class="hljs-keyword">function</span>(<span class="hljs-params">nums, target</span>) &#123;<br>    <span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">const</span> complement = target - nums[i];<br><span class="hljs-comment">// 如果哈希对照存在就直接获取值</span><br>        <span class="hljs-keyword">if</span> (map.<span class="hljs-title function_">has</span>(complement)) &#123;<br>            <span class="hljs-keyword">return</span> [map.<span class="hljs-title function_">get</span>(complement), i];<br>        &#125;<br><span class="hljs-comment">// 每次遍历都更新哈希表,恰好避开两次选取相同位置数字的情况</span><br>        map.<span class="hljs-title function_">set</span>(nums[i], i);<br>    &#125;<br>    <span class="hljs-keyword">return</span> [];<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>使用<code>create()</code> 方法创建<code>useBoundStore</code> 对象</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">const</span> useTestStore = <span class="hljs-title function_">create</span>(<span class="hljs-function">(<span class="hljs-params">set</span>)=&gt;</span>(&#123;<br>    <span class="hljs-attr">test</span>: <span class="hljs-string">&#x27;test&#x27;</span>,<br>    <span class="hljs-attr">setTest</span>: <span class="hljs-function">(<span class="hljs-params">test</span>) =&gt;</span> <span class="hljs-title function_">set</span>(&#123; test &#125;),<br>&#125;))<br></code></pre></td></tr></table></figure>
+<h4 id="49-字母异位词分组"><a href="#49-字母异位词分组" class="headerlink" title="49. 字母异位词分组"></a>49. 字母异位词分组</h4><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.cn/problems/group-anagrams?envType=study-plan-v2&envId=top-100-liked">https://leetcode.cn/problems/group-anagrams?envType=study-plan-v2&amp;envId=top-100-liked</a></p>
+<p><strong>思考:</strong></p>
+<p>这道题要处理的问题主要是提取出每个字母的“共同之处”作为key，value则为对应同属一种“类型”的数组，返回结果要把这些value数组给拼起来。</p>
+<p>最初的设想是将每个字符串<code>str[i]</code>的每个字符统计进一个<code>Map</code>，再以这个<code>Map</code>作为key去归类。</p>
+<p>但JavaScript中的Map(<strong>引用类型</strong>)是按值引用的<strong>地址比较</strong>，故，即便两个Map的内容可能完全一致，但由于每次创建Map对象时分配的<em>地址</em>不一样，所以怎么找也找不到相同的<code>key</code>，因此无论如何也不能将<code>Map</code>对象作为键去查找<code>Map</code>。</p>
+<p>此时转而考虑使用基本类型（字符串）作为Map的键，但要保证每一个字符串都最终可以化归成一个大家都一致的“标志”，想到了可以对字符串进行“排序”，每个符合相同异位词格式的字符串，排序处理之后都最后必然满足“同种异位词”的格式，比如<code>abc</code>和<code>bac</code>最后都可以排序变成<code>abc</code>。由此发现了可以作为<code>Map</code>的键的参数。对每个<code>strs[i]</code>遍历，使之排序后纳入<code>Map</code>哈希表中，最后返回这个Map对象的<code>values()</code>。</p>
+<p>特别注意，<code>Map.values()</code>返回的是一个迭代器而非数组，需要通过<code>Array.from</code>、展开运算符<code>...</code>或<code>for of</code>方法自行迭代一下才能得到结果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * @lc app=leetcode.cn id=49 lang=javascript</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * [49] 字母异位词分组</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-comment">// @lc code=start</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">string[]</span>&#125; <span class="hljs-variable">strs</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">string[][]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> groupAnagrams = <span class="hljs-keyword">function</span>(<span class="hljs-params">strs</span>) &#123;<br>    <span class="hljs-keyword">let</span> wordsMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>()<br>    strs.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>)=&gt;</span>&#123;<br>        <span class="hljs-keyword">const</span> sortedWord = item.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;&#x27;</span>).<span class="hljs-title function_">sort</span>().<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;&#x27;</span>)<br>        <span class="hljs-keyword">if</span>(wordsMap.<span class="hljs-title function_">has</span>(sortedWord))&#123;<br>            <span class="hljs-keyword">const</span> newArr = wordsMap.<span class="hljs-title function_">get</span>(sortedWord)<br>            newArr.<span class="hljs-title function_">push</span>(item)<br>            wordsMap.<span class="hljs-title function_">set</span>(sortedWord,newArr)<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            wordsMap.<span class="hljs-title function_">set</span>(sortedWord,[item])<br>        &#125;<br>    &#125;)<br>    <span class="hljs-keyword">return</span> [...wordsMap.<span class="hljs-title function_">values</span>()]<br>&#125;;<br><span class="hljs-comment">// @lc code=end</span><br><br><br></code></pre></td></tr></table></figure>
 
-<p><em>注意:</em> <strong><code>set</code></strong> 表示更新状态的函数。它允许你修改store中的状态值，或者接受一个函数，该函数接收当前状态作为参数，返回新的状态，起到一个类似<strong>扳机</strong>的作用。</p>
-<ol start="3">
-<li>导出<code>useStore</code>对象(<strong>跨文件的情况</strong>)</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// 解构导出</span><br><span class="hljs-keyword">export</span> &#123; useTestStore &#125;;<br><br><br><span class="hljs-comment">// 如果只有一个useStore对象,那么default也是可以的</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> useTestStore<br></code></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>调用<code>useStore</code></li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123;useTestStore&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./store/index&#x27;</span><br><br><br><span class="hljs-keyword">const</span> test = <span class="hljs-title function_">useTestStore</span>(<span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> state.<span class="hljs-property">test</span>);<br></code></pre></td></tr></table></figure>
-
-<p><strong>特别注意,对TypeScript来说，需要额外的类型注解处理以避免IDE或ts-check爆黄的情况</strong></p>
-<ol>
-<li>创建<code>storeState</code> <code>interface</code></li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> testState &#123;<br>    <span class="hljs-comment">// state属性</span><br>    <span class="hljs-attr">test</span>: <span class="hljs-built_in">string</span>;<br>    <span class="hljs-comment">// state方法</span><br>    <span class="hljs-attr">setTest</span>: <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">test</span>: <span class="hljs-built_in">string</span></span>) =&gt;</span> <span class="hljs-built_in">void</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>将类型注解应用于<code>create()</code> 方法的泛型上</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">const</span> useTestStore = create&lt;testState&gt;(<span class="hljs-function">(<span class="hljs-params">set</span>)=&gt;</span>(&#123;<br>    <span class="hljs-attr">test</span>: <span class="hljs-string">&#x27;test&#x27;</span>,<br>    <span class="hljs-attr">setTest</span>: <span class="hljs-function">(<span class="hljs-params">test</span>) =&gt;</span> <span class="hljs-title function_">set</span>(&#123; test &#125;),<br>&#125;))<br></code></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>使用对象时对<code>state</code>类型注解</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123;useTestStore,testState&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./store/index&#x27;</span><br><br><br><span class="hljs-keyword">const</span> test = <span class="hljs-title function_">useTestStore</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">state</span>: testState</span>) =&gt;</span> state.<span class="hljs-property">test</span>);<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(test);<br></code></pre></td></tr></table></figure>
-
-<h3 id="调用Store"><a href="#调用Store" class="headerlink" title="调用Store"></a>调用Store</h3>
                 
               </div>
             
@@ -363,7 +324,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/frontend/" class="category-chain-item">frontend</a>
+  <a href="/categories/cs/" class="category-chain-item">cs</a>
   
   
 
@@ -378,11 +339,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/react/" class="print-no-link">#react</a>
+        <a href="/tags/data-structures/" class="print-no-link">#data-structures</a>
       
-        <a href="/tags/state-management/" class="print-no-link">#state-management</a>
+        <a href="/tags/algorithms/" class="print-no-link">#algorithms</a>
       
-        <a href="/tags/zustand/" class="print-no-link">#zustand</a>
+        <a href="/tags/computer-science/" class="print-no-link">#computer-science</a>
+      
+        <a href="/tags/cs/" class="print-no-link">#cs</a>
       
     </div>
   
@@ -394,8 +357,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Zustand实战应用笔记</div>
-      <div>http://arkpln.github.io/2955613371.html</div>
+      <div>Leetcode Hot100刷题记</div>
+      <div>http://arkpln.github.io/626095156.html</div>
     </div>
     <div class="license-meta">
       
@@ -407,7 +370,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 10, 2025</div>
+          <div>January 28, 2026</div>
         </div>
       
       
@@ -439,18 +402,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/1300265934.html" title="Nextjs学习笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Nextjs学习笔记</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/1134849698.html" title="Flutter学习笔记">
-                        <span class="hidden-mobile">Flutter学习笔记</span>
+                      <a href="/3712793328.html" title="计算机网络沉淀心得">
+                        <span class="hidden-mobile">计算机网络沉淀心得</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
