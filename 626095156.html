@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://arkpln.github.io/images/coding.webp">
 <meta property="article:published_time" content="2026-01-28T02:05:56.000Z">
-<meta property="article:modified_time" content="2026-01-28T13:28:41.128Z">
+<meta property="article:modified_time" content="2026-01-29T08:51:13.343Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="data-structures">
 <meta property="article:tag" content="algorithms">
@@ -238,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.1k words
+          5.6k words
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
         
-          34 mins
+          47 mins
         
       </span>
     
@@ -329,7 +329,23 @@
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> longestConsecutive = <span class="hljs-keyword">function</span>(<span class="hljs-params">nums</span>) &#123;<br>    <span class="hljs-keyword">const</span> st = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Set</span>(nums); <span class="hljs-comment">// 把 nums 转成哈希集合</span><br>    <span class="hljs-keyword">let</span> ans = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> x <span class="hljs-keyword">of</span> t) &#123; <span class="hljs-comment">// 遍历哈希集合</span><br>        <span class="hljs-keyword">if</span> (st.<span class="hljs-title function_">has</span>(x - <span class="hljs-number">1</span>)) &#123; <span class="hljs-comment">// 如果 x 不是序列的起点，直接跳过</span><br>            <span class="hljs-keyword">continue</span>;<br>        &#125;<br>        <span class="hljs-comment">// x 是序列的起点</span><br>        <span class="hljs-keyword">let</span> y = x + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (st.<span class="hljs-title function_">has</span>(y)) &#123; <span class="hljs-comment">// 不断查找下一个数是否在哈希集合中</span><br>            y++;<br>        &#125;<br>        <span class="hljs-comment">// 循环结束后，y-1 是最后一个在哈希集合中的数</span><br>        ans = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(ans, y - x); <span class="hljs-comment">// 从 x 到 y-1 一共 y-x 个数，代表长度</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;;<br><br><br></code></pre></td></tr></table></figure>
 
+<h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><h4 id="283-移动零"><a href="#283-移动零" class="headerlink" title="283. 移动零"></a>283. 移动零</h4><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.cn/problems/move-zeroes?envType=study-plan-v2&envId=top-100-liked">https://leetcode.cn/problems/move-zeroes?envType=study-plan-v2&amp;envId=top-100-liked</a></p>
+<p><strong>思考:</strong> 利用双指针来缓存遍历的情况，每当遇到一个非0的数字，就让它和上一个数字交换位置，直到所有非0的数字都被“推”到前面，最后末尾只剩下了0。</p>
+<p><em>注意:</em> 不返回新对象，对原对象的修改不能使用<code>map</code>,<code>concat</code>等方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">void</span>&#125; Do not return anything, modify nums in-place instead.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> moveZeroes = <span class="hljs-keyword">function</span>(<span class="hljs-params">nums</span>) &#123;<br><br>    i0 = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;nums.<span class="hljs-property">length</span>;i++)&#123;<br>        <span class="hljs-keyword">if</span>(nums[i]!==<span class="hljs-number">0</span>)&#123;<br>            [nums[i],nums[i0]]=[nums[i0],nums[i]]<br>            i0 += <span class="hljs-number">1</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<h4 id="11-承最多水的容器"><a href="#11-承最多水的容器" class="headerlink" title="11. 承最多水的容器"></a>11. 承最多水的容器</h4><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.cn/problems/container-with-most-water?envType=study-plan-v2&envId=top-100-liked">https://leetcode.cn/problems/container-with-most-water?envType=study-plan-v2&amp;envId=top-100-liked</a></p>
+<p><strong>思考：</strong></p>
+<p>双指针，左右代表水桶两端，桶的最大高度取决于两个水桶的长度中较短的一方，容积&#x3D;长x宽，宽度即<code>right-left</code>。</p>
+<p>为了确保水桶两端都尽可能的长，可以相互比较，如果右端长于左端，左端向右移动；如果左端更长，那么较短的右端就向左走。</p>
+<p><strong>疑问:</strong>  为什么移动的总是短端？</p>
+<p>想象两个人在一条线上，分别从两端向中间走。每次都是较矮的那个人向前走一步，因为：</p>
+<ul>
+<li>如果让较高的人向前走，容器的高度上限不会增加（因为容器的有效高度总是受较矮者的限制），但宽度减少，面积必然减小。</li>
+<li>只有让较矮的人向前走，才有可能遇到更高的人，从而提升容器的高度上限。</li>
+</ul>
+<p>这个策略保证了我们不会错过任何可能提升面积的机会，符合双指针的算法目标 <strong>淘汰那些确定不可能成为最优解的情况</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * @lc app=leetcode.cn id=11 lang=javascript</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * [11] 盛最多水的容器</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-comment">// @lc code=start</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">height</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> maxArea = <span class="hljs-keyword">function</span>(<span class="hljs-params">height</span>) &#123;<br>    <span class="hljs-keyword">let</span> n = height.<span class="hljs-property">length</span><br>    <span class="hljs-keyword">let</span> left = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">let</span> right = n - <span class="hljs-number">1</span><br>    <span class="hljs-keyword">const</span> <span class="hljs-title function_">getArea</span> = (<span class="hljs-params">left,right</span>)=&gt;&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(height[left],height[right]) * (right-left)<br>    &#125;<br>    <span class="hljs-keyword">let</span> curArea = <span class="hljs-title function_">getArea</span>(left,right)<br>    <span class="hljs-keyword">while</span>(left&lt;right)&#123;<br>        curArea = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(curArea,<span class="hljs-title function_">getArea</span>(left,right))<br>        <span class="hljs-keyword">if</span>(height[left] &lt; height[right])&#123;<br>        <span class="hljs-comment">// 较短的左侧向右</span><br>            left++<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>         <span class="hljs-comment">// 较短的右侧向左</span><br>            right--<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> curArea<br><br>&#125;;<br><span class="hljs-comment">// @lc code=end</span><br><br><br></code></pre></td></tr></table></figure>
 
                 
               </div>
