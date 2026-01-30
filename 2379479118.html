@@ -1,0 +1,810 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme="auto">
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="FangZhou">
+  <meta name="keywords" content="Vue,React,Nodejs,blogs,frontend,web,developer,programmer">
+  
+    <meta name="description" content="Expo React Native + EAS 本地&#x2F;云端构建避坑指南 (Windows&#x2F;Android篇) 在 React Native (特别是 Expo) 开发中，版本依赖一致性和网络连通性是最大的拦路虎。报错时，我们一定要先看环境和配置，最后再怀疑代码。    一、善用 Expo CLI 和 Doctor (版本对齐是生命线)很多编译错误（如 NDK 版本不匹配、Kot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Expo React Native + EAS 本地&#x2F;云端实战真实构建避坑指南">
+<meta property="og:url" content="http://arkpln.github.io/2379479118.html">
+<meta property="og:site_name" content="Ark的技术博客">
+<meta property="og:description" content="Expo React Native + EAS 本地&#x2F;云端构建避坑指南 (Windows&#x2F;Android篇) 在 React Native (特别是 Expo) 开发中，版本依赖一致性和网络连通性是最大的拦路虎。报错时，我们一定要先看环境和配置，最后再怀疑代码。    一、善用 Expo CLI 和 Doctor (版本对齐是生命线)很多编译错误（如 NDK 版本不匹配、Kot">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://arkpln.github.io/images/rn.webp">
+<meta property="article:published_time" content="2026-01-30T08:40:33.000Z">
+<meta property="article:modified_time" content="2026-01-30T08:46:25.483Z">
+<meta property="article:author" content="FangZhou">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="frontend">
+<meta property="article:tag" content="compile-issue">
+<meta property="article:tag" content="mobile-development">
+<meta property="article:tag" content="cross-platform">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://arkpln.github.io/images/rn.webp">
+  
+  
+  
+  <title>Expo React Native + EAS 本地/云端实战真实构建避坑指南 - Ark的技术博客</title>
+
+  <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+
+
+
+  <link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+
+  <link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+
+  <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"arkpln.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"mEwkD7geCX7RWNO8srhDE2oP-gzGzoHsz","app_key":"4EF76hyiVA1QILHZThVbfoat","server_url":"https://mewkd7ge.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  <meta name="google-site-verification" content="5KfTZvtlydmBIzY97rVo-caP5jljAfmD3Qs3sBzY2Go"><style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Ark的技术博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>快乐老家</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont  icon-archive-fill"></i>
+                <span>笔岚档案</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>文以类聚</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>按标签阅览</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>联系我</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax="true" style="background: url('/images/rn.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Expo React Native + EAS 本地/云端实战真实构建避坑指南"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-30 16:40" pubdate>
+          January 30, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          39 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+<aside class="sidebar d-none d-xl-block" style="margin-right:-1rem;z-index:-1"><ins class="adsbygoogle" style="display:flex;justify-content:center;min-width:160px;max-width:300px;width:100%;height:600px;position:sticky;top:2rem" data-ad-client="ca-pub-3240358922862141" data-ad-slot="6522434837"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></aside>
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Expo React Native + EAS 本地/云端实战真实构建避坑指南</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Expo-React-Native-EAS-本地-云端构建避坑指南-Windows-Android篇"><a href="#Expo-React-Native-EAS-本地-云端构建避坑指南-Windows-Android篇" class="headerlink" title="Expo React Native + EAS 本地&#x2F;云端构建避坑指南 (Windows&#x2F;Android篇)"></a>Expo React Native + EAS 本地&#x2F;云端构建避坑指南 (Windows&#x2F;Android篇)</h1><blockquote>
+<p>在 React Native (特别是 Expo) 开发中，<strong>版本依赖一致性</strong>和<strong>网络连通性</strong>是最大的拦路虎。报错时，我们一定要先看环境和配置，最后再怀疑代码。</p>
+</blockquote>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://imgchr.com/i/pZf6aJH"><img src="https://s41.ax1x.com/2026/01/30/pZf6aJH.png" srcset="/img/loading.gif" lazyload alt="pZf6aJH.png"></a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://imgchr.com/i/pZf6UFe"><img src="https://s41.ax1x.com/2026/01/30/pZf6UFe.png" srcset="/img/loading.gif" lazyload alt="pZf6UFe.png"></a></p>
+<h2 id="一、善用-Expo-CLI-和-Doctor-版本对齐是生命线"><a href="#一、善用-Expo-CLI-和-Doctor-版本对齐是生命线" class="headerlink" title="一、善用 Expo CLI 和 Doctor (版本对齐是生命线)"></a>一、善用 Expo CLI 和 Doctor (版本对齐是生命线)</h2><p>很多编译错误（如 NDK 版本不匹配、Kotlin 版本过低、Reanimated 编译失败）的根源，都是因为我们安装的依赖版本和 Expo SDK 不兼容。</p>
+<h3 id="1-永远不要手动-npm-install-原生库"><a href="#1-永远不要手动-npm-install-原生库" class="headerlink" title="1. 永远不要手动 npm install 原生库"></a>1. 永远不要手动 npm install 原生库</h3><p><strong>错误做法</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install react-native-reanimated`<br></code></pre></td></tr></table></figure>
+
+<p><strong>正确做法</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npx expo install react-native-reanimated<br></code></pre></td></tr></table></figure>
+
+<p><strong>原因</strong>：<br><code>npx expo install</code> 会自动查找当前 Expo SDK 版本（如 SDK 52）对应的、经过验证的依赖版本。手动安装容易装上最新的（尚未适配的）版本，导致Gradle编译时疯狂窜稀。</p>
+<h3 id="2-构建前必须运行npx-expo-doctor"><a href="#2-构建前必须运行npx-expo-doctor" class="headerlink" title="2. 构建前必须运行npx expo-doctor"></a>2. 构建前必须运行npx expo-doctor</h3><p>在开始折腾编译相关的事情前，先运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npx expo-doctor<br></code></pre></td></tr></table></figure>
+
+<p><code>expo-doctor</code><br><strong>关注点</strong>：</p>
+<ul>
+<li><strong>Check dependencies for packages that should match Expo SDK</strong>：如果有红叉，必须修。</li>
+<li><strong>React Native Version</strong>：确保 RN 版本完全符合 Expo 要求。</li>
+</ul>
+<p><strong>解决方法:</strong><br>在Expo项目的根目录下执行:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npx expo install --check<br></code></pre></td></tr></table></figure>
+
+<p>直到命令行提示<code>17/17 checks passed. No issues detected!</code>为止，说明彻底解决了Expo依赖可能导致的问题。<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://imgchr.com/i/pZf6toD"><img src="https://s41.ax1x.com/2026/01/30/pZf6toD.md.png" srcset="/img/loading.gif" lazyload alt="pZf6toD.md.png"></a></p>
+<h2 id="二、依赖管理：无条件锁死你的依赖"><a href="#二、依赖管理：无条件锁死你的依赖" class="headerlink" title="二、依赖管理：无条件锁死你的依赖"></a>二、依赖管理：无条件锁死你的依赖</h2><h3 id="1-必须提交-Lock-文件"><a href="#1-必须提交-Lock-文件" class="headerlink" title="1. 必须提交 Lock 文件"></a>1. 必须提交 Lock 文件</h3><p>EAS Build (云端) 和本地构建都严格依赖 <code>yarn.lock</code>。</p>
+<ul>
+<li><strong>切忌</strong>：本地删了 lock 文件跑通了，却不提交 lock 文件。</li>
+<li><strong>后果</strong>：云端构建时会根据 <code>package.json</code> 拉取最新小版本，导致云端和本地环境不一致。</li>
+<li><strong>操作建议</strong>：考虑到EAS Build使用<code>yarn</code>作为默认的包管理工具，强烈建议Expo项目保持一致，同样使用<code>yarn install</code>管理依赖，记得<code>git add yarn.lock -f</code>添加到代码仓库。</li>
+</ul>
+<h3 id="2-清理缓存的“三板斧”"><a href="#2-清理缓存的“三板斧”" class="headerlink" title="2. 清理缓存的“三板斧”"></a>2. 清理缓存的“三板斧”</h3><p>当你感觉环境脏了（改了 NDK、换了源但没生效），按顺序执行：</p>
+<ol>
+<li><strong>项目级清理</strong>：<code>cd android &amp;&amp; ./gradlew clean</code> (最重要，必须做)</li>
+<li><strong>依赖清理</strong>：<code>rm -rf node_modules</code> (Windows下手动删)</li>
+<li><strong>构建缓存</strong>：如果改了 <code>init.gradle</code>，建议重启终端。</li>
+</ol>
+<hr>
+<h2 id="三、关键配置文件-app-json-eas-json"><a href="#三、关键配置文件-app-json-eas-json" class="headerlink" title="三、关键配置文件 (app.json &amp; eas.json)"></a>三、关键配置文件 (<code>app.json</code> &amp; <code>eas.json</code>)</h2><h3 id="app-json-核心配置"><a href="#app-json-核心配置" class="headerlink" title="app.json (核心配置)"></a>app.json (核心配置)</h3><p>不要把原生代码里的修改（如 AndroidManifest.xml）写死在 <code>android</code> 文件夹里（Prebuild 模式下会被覆盖），而是用 Config Plugin。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;expo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;MyApp&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;android&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;package&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;com.company.myapp&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;versionCode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;plugins&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>      <span class="hljs-comment">// 在这里配置原生插件，保证每次 prebuild 都能生成正确的原生代码</span><br>      <span class="hljs-string">&quot;expo-router&quot;</span><br>    <span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="eas-json-构建配置"><a href="#eas-json-构建配置" class="headerlink" title="eas.json (构建配置)"></a>eas.json (构建配置)</h3><p>本地构建（Local Build）是调试神器。</p>
+<p>同时<strong>强烈建议写死<code>node</code>版本号</strong>：</p>
+<p>本人使用<code>EAS Build</code>编译时发现未设置Node版本号可能导致意外的编译失败。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;build&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;development&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;developmentClient&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;distribution&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;internal&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;production&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;node&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;22.15.1&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;android&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;buildType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;app-bundle&quot;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>调试命令</strong>：<code>eas build --platform android --profile development --local</code></p>
+<hr>
+<h2 id="四、Android-环境配置-Windows本地编译必读"><a href="#四、Android-环境配置-Windows本地编译必读" class="headerlink" title="四、Android 环境配置 (Windows本地编译必读)"></a>四、Android 环境配置 (Windows本地编译必读)</h2><p>这是作者踩坑报错最多的地方。</p>
+<h3 id="1-local-properties-路标"><a href="#1-local-properties-路标" class="headerlink" title="1. local.properties (路标)"></a>1. local.properties (路标)</h3><p>确保 <code>android/local.properties</code> 存在，且路径写法正确（Windows下转义冒号和反斜杠）。</p>
+<p><strong>推荐配置（最好全都写清楚）</strong>：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">sdk.dir</span>=<span class="hljs-string">D\:\\dev\\Android\\Sdk</span><br><span class="hljs-attr">ndk.dir</span>=<span class="hljs-string">\\path\\to\\ndk</span><br><span class="hljs-attr">cmake.dir</span>=<span class="hljs-string">\\path\\to\\cmake</span><br><span class="hljs-comment"># 除非特定版本死活找不到，否则尽量写清楚</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-NDK-版本管理-重灾区"><a href="#2-NDK-版本管理-重灾区" class="headerlink" title="2. NDK 版本管理 (重灾区)"></a>2. NDK 版本管理 (重灾区)</h3><p>Gradle 报错 <code>NDK version defined in... disagrees with...</code> 时：</p>
+<ul>
+<li><strong>方案 A (推荐)</strong>：修改 <code>android/build.gradle</code> 中的 <code>ndkVersion</code>，改成你电脑上<strong>实际已安装</strong>的版本（如 <code>27.3.13750724</code>）。</li>
+<li><strong>方案 B (保守)</strong>：去 Android Studio SDK Manager 下载报错信息中要求的精确版本（如 <code>27.1.12297006</code>）。</li>
+</ul>
+<h3 id="3-CMake"><a href="#3-CMake" class="headerlink" title="3. CMake"></a>3. CMake</h3><p>通常不需要手动配置，但如果报错 <code>CMake not found</code>，在 SDK Manager 里安装 <code>CMake 3.22.1</code> 即可。</p>
+<h2 id="五、Gradle-网络救灾指南-中国区特供"><a href="#五、Gradle-网络救灾指南-中国区特供" class="headerlink" title="五、Gradle 网络救灾指南 (中国区特供)"></a>五、Gradle 网络救灾指南 (中国区特供)</h2><p>即便配置了阿里云镜像，依然可能因为 <strong>Gradle Wrapper 下载</strong>、<strong>插件依赖</strong>、<strong>特殊 aar 包</strong> 而失败。</p>
+<h3 id="1-终极-init-gradle-全局镜像"><a href="#1-终极-init-gradle-全局镜像" class="headerlink" title="1. 终极 init.gradle (全局镜像)"></a>1. 终极 <code>init.gradle</code> (全局镜像)</h3><p>不要在每个项目里改 <code>build.gradle</code>，直接在 <code>USER_HOME/.gradle/init.d/init.gradle</code> (gradle所在目录下) 放置此脚本。</p>
+<p><strong>核心逻辑</strong>：不是 <code>remove</code>（会报错），而是 <code>setUrl</code>（劫持替换）。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs groovy"><span class="hljs-keyword">def</span> ALIYUN_PUBLIC = <span class="hljs-string">&#x27;https://maven.aliyun.com/repository/public&#x27;</span><br><span class="hljs-keyword">def</span> ALIYUN_GOOGLE = <span class="hljs-string">&#x27;https://maven.aliyun.com/repository/google&#x27;</span><br><span class="hljs-keyword">def</span> ALIYUN_PLUGIN = <span class="hljs-string">&#x27;https://maven.aliyun.com/repository/gradle-plugin&#x27;</span><br><br><span class="hljs-keyword">def</span> replaceRepositoryUrl = &#123; repo -&gt;<br>    <span class="hljs-keyword">if</span> (repo <span class="hljs-keyword">instanceof</span> MavenArtifactRepository) &#123;<br>        <span class="hljs-keyword">def</span> url = repo.url.toString()<br>        <span class="hljs-keyword">if</span> (url.contains(<span class="hljs-string">&#x27;dl.google.com&#x27;</span>) || url.contains(<span class="hljs-string">&#x27;android/maven2&#x27;</span>)) &#123;<br>            repo.setUrl(ALIYUN_GOOGLE)<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (url.contains(<span class="hljs-string">&#x27;repo1.maven.org&#x27;</span>) || url.contains(<span class="hljs-string">&#x27;jcenter&#x27;</span>)) &#123;<br>            repo.setUrl(ALIYUN_PUBLIC)<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (url.contains(<span class="hljs-string">&#x27;plugins.gradle.org&#x27;</span>)) &#123;<br>            repo.setUrl(ALIYUN_PLUGIN)<br>        &#125;<br>    &#125;<br>&#125;<br><br>allprojects &#123;<br>    buildscript &#123; repositories &#123; all &#123; replaceRepositoryUrl(it) &#125; &#125; &#125;<br>    repositories &#123; all &#123; replaceRepositoryUrl(it) &#125; &#125;<br>&#125;<br>gradle.settingsEvaluated &#123; settings -&gt;<br>    settings.pluginManagement &#123; repositories &#123; all &#123; replaceRepositoryUrl(it) &#125; &#125; &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-只有镜像是不够的：HTTP-代理"><a href="#2-只有镜像是不够的：HTTP-代理" class="headerlink" title="2. 只有镜像是不够的：HTTP 代理"></a>2. 只有镜像是不够的：HTTP 代理</h3><p>阿里云镜像无法覆盖 100% 的 Google 资源（尤其是最新的 NDK 或某些冷门库）。<br><strong>必须配置 Gradle 走本地代理</strong>。<br>强烈建议全程挂载相关的<strong>网络工具</strong>并开启<strong>全局代理</strong>。（原因是部分网络工具可能不支持JDK SSL协议）</p>
+<p>修改 <code>android/gradle.properties</code> (或全局 <code>.gradle/gradle.properties</code>)：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># 假设你的网络工具已经打开了HTTP/HTTPS代理，假设端口是 7890</span><br><span class="hljs-attr">systemProp.http.proxyHost</span>=<span class="hljs-string">127.0.0.1</span><br><span class="hljs-attr">systemProp.http.proxyPort</span>=<span class="hljs-string">7890</span><br><span class="hljs-attr">systemProp.https.proxyHost</span>=<span class="hljs-string">127.0.0.1</span><br><span class="hljs-attr">systemProp.https.proxyPort</span>=<span class="hljs-string">7890</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="六、日志分析心法"><a href="#六、日志分析心法" class="headerlink" title="六、日志分析心法"></a>六、日志分析心法</h2><p>当构建失败（BUILD FAILED）时，不要慌，按以下顺序看日志：</p>
+<ol>
+<li><strong>看最下面</strong>：<code>FAILURE: Build failed with an exception.</code></li>
+<li><strong>找 What went wrong</strong>：<ul>
+<li>如果是 <code>Could not resolve ...</code> -&gt; <strong>网络问题</strong>（检查代理、镜像）。</li>
+<li>如果是 <code>NDK version ... disagrees</code> -&gt; <strong>版本不匹配</strong>（改 build.gradle）。</li>
+<li>如果是 <code>No signature of method: remove()</code> -&gt; <strong>Gradle脚本写错</strong>（不要删集合，要改属性）。</li>
+<li>如果是 <code>Task :app:compileReleaseJavaWithJavac failed</code> -&gt; <strong>代码语法错误</strong>（检查 RN 代码）。</li>
+</ul>
+</li>
+<li><strong>看 Caused by</strong>：通常藏在堆栈中间，特别是 <code>SSLHandshakeException</code> (被墙) 或 <code>EOFException</code> (网络中断)。</li>
+</ol>
+<h2 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h2><p>想要在 Windows 上顺畅开发 React Native Android：</p>
+<ol>
+<li><strong>网络是爹</strong>：准备好魔法，Gradle 配好镜像。</li>
+<li><strong>环境是妈</strong>：Expo Doctor 没病再开工。</li>
+<li><strong>配置是命</strong>：NDK 版本要对齐，<code>local.properties</code> 路径要对。</li>
+</ol>
+<p>祝各位开发老师编译顺利!</p>
+
+                
+              </div>
+            
+            <hr>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/mobile/" class="category-chain-item">mobile</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/react/" class="print-no-link">#react</a>
+      
+        <a href="/tags/frontend/" class="print-no-link">#frontend</a>
+      
+        <a href="/tags/compile-issue/" class="print-no-link">#compile-issue</a>
+      
+        <a href="/tags/mobile-development/" class="print-no-link">#mobile-development</a>
+      
+        <a href="/tags/cross-platform/" class="print-no-link">#cross-platform</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Expo React Native + EAS 本地/云端实战真实构建避坑指南</div>
+      <div>http://arkpln.github.io/2379479118.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>FangZhou</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 30, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" rel="external nofollow noopener noreferrer">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+<div style="width:100%;display:flex;justify-content:center;margin-bottom:1.5rem"><ins class="adsbygoogle" style="display:flex;justify-content:center;max-width:845px;width:100%;height:90px" data-ad-client="ca-pub-3240358922862141" data-ad-slot="6522434837"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></div>
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/626095156.html" title="Leetcode Hot100刷题记">
+                        <span class="hidden-mobile">Leetcode Hot100刷题记</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"mEwkD7geCX7RWNO8srhDE2oP-gzGzoHsz","appKey":"4EF76hyiVA1QILHZThVbfoat","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"el":"#vcomments"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="external nofollow noopener noreferrer"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="external nofollow noopener noreferrer"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+
+
+  <script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script src="/js/img-lazyload.js"></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src="https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js"></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js"></script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script src="/js/boot.js"></script>
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3240358922862141" crossorigin="anonymous"></script>
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

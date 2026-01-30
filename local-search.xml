@@ -4,6 +4,39 @@
   
   
   <entry>
+    <title>Expo React Native + EAS 本地/云端实战真实构建避坑指南</title>
+    <link href="/2379479118.html"/>
+    <url>/2379479118.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="Expo-React-Native-EAS-本地-云端构建避坑指南-Windows-Android篇"><a href="#Expo-React-Native-EAS-本地-云端构建避坑指南-Windows-Android篇" class="headerlink" title="Expo React Native + EAS 本地&#x2F;云端构建避坑指南 (Windows&#x2F;Android篇)"></a>Expo React Native + EAS 本地&#x2F;云端构建避坑指南 (Windows&#x2F;Android篇)</h1><blockquote><p>在 React Native (特别是 Expo) 开发中，<strong>版本依赖一致性</strong>和<strong>网络连通性</strong>是最大的拦路虎。报错时，我们一定要先看环境和配置，最后再怀疑代码。</p></blockquote><p><a href="https://imgchr.com/i/pZf6aJH"><img src="https://s41.ax1x.com/2026/01/30/pZf6aJH.png" alt="pZf6aJH.png"></a></p><p><a href="https://imgchr.com/i/pZf6UFe"><img src="https://s41.ax1x.com/2026/01/30/pZf6UFe.png" alt="pZf6UFe.png"></a></p><h2 id="一、善用-Expo-CLI-和-Doctor-版本对齐是生命线"><a href="#一、善用-Expo-CLI-和-Doctor-版本对齐是生命线" class="headerlink" title="一、善用 Expo CLI 和 Doctor (版本对齐是生命线)"></a>一、善用 Expo CLI 和 Doctor (版本对齐是生命线)</h2><p>很多编译错误（如 NDK 版本不匹配、Kotlin 版本过低、Reanimated 编译失败）的根源，都是因为我们安装的依赖版本和 Expo SDK 不兼容。</p><h3 id="1-永远不要手动-npm-install-原生库"><a href="#1-永远不要手动-npm-install-原生库" class="headerlink" title="1. 永远不要手动 npm install 原生库"></a>1. 永远不要手动 npm install 原生库</h3><p><strong>错误做法</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install react-native-reanimated`<br></code></pre></td></tr></table></figure><p><strong>正确做法</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npx expo install react-native-reanimated<br></code></pre></td></tr></table></figure><p><strong>原因</strong>：<br><code>npx expo install</code> 会自动查找当前 Expo SDK 版本（如 SDK 52）对应的、经过验证的依赖版本。手动安装容易装上最新的（尚未适配的）版本，导致Gradle编译时疯狂窜稀。</p><h3 id="2-构建前必须运行npx-expo-doctor"><a href="#2-构建前必须运行npx-expo-doctor" class="headerlink" title="2. 构建前必须运行npx expo-doctor"></a>2. 构建前必须运行npx expo-doctor</h3><p>在开始折腾编译相关的事情前，先运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npx expo-doctor<br></code></pre></td></tr></table></figure><p><code>expo-doctor</code><br><strong>关注点</strong>：</p><ul><li><strong>Check dependencies for packages that should match Expo SDK</strong>：如果有红叉，必须修。</li><li><strong>React Native Version</strong>：确保 RN 版本完全符合 Expo 要求。</li></ul><p><strong>解决方法:</strong><br>在Expo项目的根目录下执行:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npx expo install --check<br></code></pre></td></tr></table></figure><p>直到命令行提示<code>17/17 checks passed. No issues detected!</code>为止，说明彻底解决了Expo依赖可能导致的问题。<br><a href="https://imgchr.com/i/pZf6toD"><img src="https://s41.ax1x.com/2026/01/30/pZf6toD.md.png" alt="pZf6toD.md.png"></a></p><h2 id="二、依赖管理：无条件锁死你的依赖"><a href="#二、依赖管理：无条件锁死你的依赖" class="headerlink" title="二、依赖管理：无条件锁死你的依赖"></a>二、依赖管理：无条件锁死你的依赖</h2><h3 id="1-必须提交-Lock-文件"><a href="#1-必须提交-Lock-文件" class="headerlink" title="1. 必须提交 Lock 文件"></a>1. 必须提交 Lock 文件</h3><p>EAS Build (云端) 和本地构建都严格依赖 <code>yarn.lock</code>。</p><ul><li><strong>切忌</strong>：本地删了 lock 文件跑通了，却不提交 lock 文件。</li><li><strong>后果</strong>：云端构建时会根据 <code>package.json</code> 拉取最新小版本，导致云端和本地环境不一致。</li><li><strong>操作建议</strong>：考虑到EAS Build使用<code>yarn</code>作为默认的包管理工具，强烈建议Expo项目保持一致，同样使用<code>yarn install</code>管理依赖，记得<code>git add yarn.lock -f</code>添加到代码仓库。</li></ul><h3 id="2-清理缓存的“三板斧”"><a href="#2-清理缓存的“三板斧”" class="headerlink" title="2. 清理缓存的“三板斧”"></a>2. 清理缓存的“三板斧”</h3><p>当你感觉环境脏了（改了 NDK、换了源但没生效），按顺序执行：</p><ol><li><strong>项目级清理</strong>：<code>cd android &amp;&amp; ./gradlew clean</code> (最重要，必须做)</li><li><strong>依赖清理</strong>：<code>rm -rf node_modules</code> (Windows下手动删)</li><li><strong>构建缓存</strong>：如果改了 <code>init.gradle</code>，建议重启终端。</li></ol><hr><h2 id="三、关键配置文件-app-json-eas-json"><a href="#三、关键配置文件-app-json-eas-json" class="headerlink" title="三、关键配置文件 (app.json &amp; eas.json)"></a>三、关键配置文件 (<code>app.json</code> &amp; <code>eas.json</code>)</h2><h3 id="app-json-核心配置"><a href="#app-json-核心配置" class="headerlink" title="app.json (核心配置)"></a>app.json (核心配置)</h3><p>不要把原生代码里的修改（如 AndroidManifest.xml）写死在 <code>android</code> 文件夹里（Prebuild 模式下会被覆盖），而是用 Config Plugin。</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;expo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;MyApp&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;android&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;package&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;com.company.myapp&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;versionCode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;plugins&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>      <span class="hljs-comment">// 在这里配置原生插件，保证每次 prebuild 都能生成正确的原生代码</span><br>      <span class="hljs-string">&quot;expo-router&quot;</span><br>    <span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure><h3 id="eas-json-构建配置"><a href="#eas-json-构建配置" class="headerlink" title="eas.json (构建配置)"></a>eas.json (构建配置)</h3><p>本地构建（Local Build）是调试神器。</p><p>同时<strong>强烈建议写死<code>node</code>版本号</strong>：</p><p>本人使用<code>EAS Build</code>编译时发现未设置Node版本号可能导致意外的编译失败。</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;build&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;development&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;developmentClient&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;distribution&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;internal&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;production&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;node&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;22.15.1&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;android&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;buildType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;app-bundle&quot;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure><p><strong>调试命令</strong>：<code>eas build --platform android --profile development --local</code></p><hr><h2 id="四、Android-环境配置-Windows本地编译必读"><a href="#四、Android-环境配置-Windows本地编译必读" class="headerlink" title="四、Android 环境配置 (Windows本地编译必读)"></a>四、Android 环境配置 (Windows本地编译必读)</h2><p>这是作者踩坑报错最多的地方。</p><h3 id="1-local-properties-路标"><a href="#1-local-properties-路标" class="headerlink" title="1. local.properties (路标)"></a>1. local.properties (路标)</h3><p>确保 <code>android/local.properties</code> 存在，且路径写法正确（Windows下转义冒号和反斜杠）。</p><p><strong>推荐配置（最好全都写清楚）</strong>：</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">sdk.dir</span>=<span class="hljs-string">D\:\\dev\\Android\\Sdk</span><br><span class="hljs-attr">ndk.dir</span>=<span class="hljs-string">\\path\\to\\ndk</span><br><span class="hljs-attr">cmake.dir</span>=<span class="hljs-string">\\path\\to\\cmake</span><br><span class="hljs-comment"># 除非特定版本死活找不到，否则尽量写清楚</span><br></code></pre></td></tr></table></figure><h3 id="2-NDK-版本管理-重灾区"><a href="#2-NDK-版本管理-重灾区" class="headerlink" title="2. NDK 版本管理 (重灾区)"></a>2. NDK 版本管理 (重灾区)</h3><p>Gradle 报错 <code>NDK version defined in... disagrees with...</code> 时：</p><ul><li><strong>方案 A (推荐)</strong>：修改 <code>android/build.gradle</code> 中的 <code>ndkVersion</code>，改成你电脑上<strong>实际已安装</strong>的版本（如 <code>27.3.13750724</code>）。</li><li><strong>方案 B (保守)</strong>：去 Android Studio SDK Manager 下载报错信息中要求的精确版本（如 <code>27.1.12297006</code>）。</li></ul><h3 id="3-CMake"><a href="#3-CMake" class="headerlink" title="3. CMake"></a>3. CMake</h3><p>通常不需要手动配置，但如果报错 <code>CMake not found</code>，在 SDK Manager 里安装 <code>CMake 3.22.1</code> 即可。</p><h2 id="五、Gradle-网络救灾指南-中国区特供"><a href="#五、Gradle-网络救灾指南-中国区特供" class="headerlink" title="五、Gradle 网络救灾指南 (中国区特供)"></a>五、Gradle 网络救灾指南 (中国区特供)</h2><p>即便配置了阿里云镜像，依然可能因为 <strong>Gradle Wrapper 下载</strong>、<strong>插件依赖</strong>、<strong>特殊 aar 包</strong> 而失败。</p><h3 id="1-终极-init-gradle-全局镜像"><a href="#1-终极-init-gradle-全局镜像" class="headerlink" title="1. 终极 init.gradle (全局镜像)"></a>1. 终极 <code>init.gradle</code> (全局镜像)</h3><p>不要在每个项目里改 <code>build.gradle</code>，直接在 <code>USER_HOME/.gradle/init.d/init.gradle</code> (gradle所在目录下) 放置此脚本。</p><p><strong>核心逻辑</strong>：不是 <code>remove</code>（会报错），而是 <code>setUrl</code>（劫持替换）。</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs groovy"><span class="hljs-keyword">def</span> ALIYUN_PUBLIC = <span class="hljs-string">&#x27;https://maven.aliyun.com/repository/public&#x27;</span><br><span class="hljs-keyword">def</span> ALIYUN_GOOGLE = <span class="hljs-string">&#x27;https://maven.aliyun.com/repository/google&#x27;</span><br><span class="hljs-keyword">def</span> ALIYUN_PLUGIN = <span class="hljs-string">&#x27;https://maven.aliyun.com/repository/gradle-plugin&#x27;</span><br><br><span class="hljs-keyword">def</span> replaceRepositoryUrl = &#123; repo -&gt;<br>    <span class="hljs-keyword">if</span> (repo <span class="hljs-keyword">instanceof</span> MavenArtifactRepository) &#123;<br>        <span class="hljs-keyword">def</span> url = repo.url.toString()<br>        <span class="hljs-keyword">if</span> (url.contains(<span class="hljs-string">&#x27;dl.google.com&#x27;</span>) || url.contains(<span class="hljs-string">&#x27;android/maven2&#x27;</span>)) &#123;<br>            repo.setUrl(ALIYUN_GOOGLE)<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (url.contains(<span class="hljs-string">&#x27;repo1.maven.org&#x27;</span>) || url.contains(<span class="hljs-string">&#x27;jcenter&#x27;</span>)) &#123;<br>            repo.setUrl(ALIYUN_PUBLIC)<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (url.contains(<span class="hljs-string">&#x27;plugins.gradle.org&#x27;</span>)) &#123;<br>            repo.setUrl(ALIYUN_PLUGIN)<br>        &#125;<br>    &#125;<br>&#125;<br><br>allprojects &#123;<br>    buildscript &#123; repositories &#123; all &#123; replaceRepositoryUrl(it) &#125; &#125; &#125;<br>    repositories &#123; all &#123; replaceRepositoryUrl(it) &#125; &#125;<br>&#125;<br>gradle.settingsEvaluated &#123; settings -&gt;<br>    settings.pluginManagement &#123; repositories &#123; all &#123; replaceRepositoryUrl(it) &#125; &#125; &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h3 id="2-只有镜像是不够的：HTTP-代理"><a href="#2-只有镜像是不够的：HTTP-代理" class="headerlink" title="2. 只有镜像是不够的：HTTP 代理"></a>2. 只有镜像是不够的：HTTP 代理</h3><p>阿里云镜像无法覆盖 100% 的 Google 资源（尤其是最新的 NDK 或某些冷门库）。<br><strong>必须配置 Gradle 走本地代理</strong>。<br>强烈建议全程挂载相关的<strong>网络工具</strong>并开启<strong>全局代理</strong>。（原因是部分网络工具可能不支持JDK SSL协议）</p><p>修改 <code>android/gradle.properties</code> (或全局 <code>.gradle/gradle.properties</code>)：</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># 假设你的网络工具已经打开了HTTP/HTTPS代理，假设端口是 7890</span><br><span class="hljs-attr">systemProp.http.proxyHost</span>=<span class="hljs-string">127.0.0.1</span><br><span class="hljs-attr">systemProp.http.proxyPort</span>=<span class="hljs-string">7890</span><br><span class="hljs-attr">systemProp.https.proxyHost</span>=<span class="hljs-string">127.0.0.1</span><br><span class="hljs-attr">systemProp.https.proxyPort</span>=<span class="hljs-string">7890</span><br></code></pre></td></tr></table></figure><h2 id="六、日志分析心法"><a href="#六、日志分析心法" class="headerlink" title="六、日志分析心法"></a>六、日志分析心法</h2><p>当构建失败（BUILD FAILED）时，不要慌，按以下顺序看日志：</p><ol><li><strong>看最下面</strong>：<code>FAILURE: Build failed with an exception.</code></li><li><strong>找 What went wrong</strong>：<ul><li>如果是 <code>Could not resolve ...</code> -&gt; <strong>网络问题</strong>（检查代理、镜像）。</li><li>如果是 <code>NDK version ... disagrees</code> -&gt; <strong>版本不匹配</strong>（改 build.gradle）。</li><li>如果是 <code>No signature of method: remove()</code> -&gt; <strong>Gradle脚本写错</strong>（不要删集合，要改属性）。</li><li>如果是 <code>Task :app:compileReleaseJavaWithJavac failed</code> -&gt; <strong>代码语法错误</strong>（检查 RN 代码）。</li></ul></li><li><strong>看 Caused by</strong>：通常藏在堆栈中间，特别是 <code>SSLHandshakeException</code> (被墙) 或 <code>EOFException</code> (网络中断)。</li></ol><h2 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h2><p>想要在 Windows 上顺畅开发 React Native Android：</p><ol><li><strong>网络是爹</strong>：准备好魔法，Gradle 配好镜像。</li><li><strong>环境是妈</strong>：Expo Doctor 没病再开工。</li><li><strong>配置是命</strong>：NDK 版本要对齐，<code>local.properties</code> 路径要对。</li></ol><p>祝各位开发老师编译顺利!</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>mobile</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>react</tag>
+      
+      <tag>frontend</tag>
+      
+      <tag>compile-issue</tag>
+      
+      <tag>mobile-development</tag>
+      
+      <tag>cross-platform</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Leetcode Hot100刷题记</title>
     <link href="/626095156.html"/>
     <url>/626095156.html</url>
@@ -136,9 +169,9 @@
     
     <tags>
       
-      <tag>nextjs</tag>
-      
       <tag>react</tag>
+      
+      <tag>nextjs</tag>
       
       <tag>ssr</tag>
       
@@ -198,13 +231,13 @@
     
     <tags>
       
-      <tag>flutter</tag>
-      
-      <tag>dart</tag>
-      
       <tag>mobile-development</tag>
       
       <tag>cross-platform</tag>
+      
+      <tag>flutter</tag>
+      
+      <tag>dart</tag>
       
     </tags>
     
@@ -229,15 +262,15 @@
     
     <tags>
       
-      <tag>web-framework</tag>
-      
-      <tag>backend</tag>
-      
       <tag>fastapi</tag>
       
       <tag>python</tag>
       
+      <tag>web-framework</tag>
+      
       <tag>api</tag>
+      
+      <tag>backend</tag>
       
     </tags>
     
@@ -283,9 +316,9 @@
       
       <tag>typescript</tag>
       
-      <tag>javascript</tag>
-      
       <tag>frontend</tag>
+      
+      <tag>javascript</tag>
       
       <tag>typing</tag>
       
@@ -312,9 +345,9 @@
     
     <tags>
       
-      <tag>nodejs</tag>
-      
       <tag>backend</tag>
+      
+      <tag>nodejs</tag>
       
       <tag>nestjs</tag>
       
@@ -345,9 +378,9 @@
     
     <tags>
       
-      <tag>nodejs</tag>
-      
       <tag>backend</tag>
+      
+      <tag>nodejs</tag>
       
       <tag>javascript</tag>
       
@@ -444,9 +477,9 @@
     
     <tags>
       
-      <tag>javascript</tag>
-      
       <tag>frontend</tag>
+      
+      <tag>javascript</tag>
       
       <tag>eventloop</tag>
       
@@ -508,13 +541,13 @@
     
     <tags>
       
-      <tag>express</tag>
-      
-      <tag>nodejs</tag>
-      
       <tag>web-framework</tag>
       
       <tag>backend</tag>
+      
+      <tag>express</tag>
+      
+      <tag>nodejs</tag>
       
     </tags>
     
@@ -539,11 +572,11 @@
     
     <tags>
       
+      <tag>frontend</tag>
+      
       <tag>components</tag>
       
       <tag>vue</tag>
-      
-      <tag>frontend</tag>
       
       <tag>javascript-framework</tag>
       
