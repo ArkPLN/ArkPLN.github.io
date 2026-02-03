@@ -204,9 +204,9 @@
       
       <tag>react</tag>
       
-      <tag>zustand</tag>
-      
       <tag>state-management</tag>
+      
+      <tag>zustand</tag>
       
     </tags>
     
@@ -512,11 +512,11 @@
       
       <tag>react</tag>
       
-      <tag>state-management</tag>
+      <tag>hooks</tag>
       
       <tag>components</tag>
       
-      <tag>hooks</tag>
+      <tag>state-management</tag>
       
     </tags>
     
@@ -574,11 +574,11 @@
       
       <tag>frontend</tag>
       
+      <tag>components</tag>
+      
       <tag>vue</tag>
       
       <tag>javascript-framework</tag>
-      
-      <tag>components</tag>
       
     </tags>
     
