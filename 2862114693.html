@@ -1,0 +1,782 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme="auto">
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="FangZhou">
+  <meta name="keywords" content="Vue,React,Nodejs,blogs,frontend,web,developer,programmer">
+  
+    <meta name="description" content="使用TypeORM配合Nest.js开发，维护实体与DTO数据的正确处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NestJS全栈实战笔记:优雅处理Entity与DTO的映射与字段过滤">
+<meta property="og:url" content="http://arkpln.github.io/2862114693.html">
+<meta property="og:site_name" content="Ark的技术博客">
+<meta property="og:description" content="使用TypeORM配合Nest.js开发，维护实体与DTO数据的正确处理">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://arkpln.github.io/images/nest-logo.png">
+<meta property="article:published_time" content="2026-02-08T09:40:24.000Z">
+<meta property="article:modified_time" content="2026-02-08T10:39:44.938Z">
+<meta property="article:author" content="FangZhou">
+<meta property="article:tag" content="nestjs">
+<meta property="article:tag" content="backend">
+<meta property="article:tag" content="nodejs">
+<meta property="article:tag" content="fullstack">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://arkpln.github.io/images/nest-logo.png">
+  
+  
+  
+  <title>NestJS全栈实战笔记:优雅处理Entity与DTO的映射与字段过滤 - Ark的技术博客</title>
+
+  <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+
+
+
+  <link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+
+  <link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+
+  <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"arkpln.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"mEwkD7geCX7RWNO8srhDE2oP-gzGzoHsz","app_key":"4EF76hyiVA1QILHZThVbfoat","server_url":"https://mewkd7ge.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  <meta name="google-site-verification" content="5KfTZvtlydmBIzY97rVo-caP5jljAfmD3Qs3sBzY2Go"><style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Ark的技术博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>快乐老家</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont  icon-archive-fill"></i>
+                <span>笔岚档案</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>文以类聚</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>按标签阅览</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>联系我</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax="true" style="background: url('/images/nest-logo.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="NestJS全栈实战笔记:优雅处理Entity与DTO的映射与字段过滤"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-08 17:40" pubdate>
+          February 8, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          45 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+<aside class="sidebar d-none d-xl-block" style="margin-right:-1rem;z-index:-1"><ins class="adsbygoogle" style="display:flex;justify-content:center;min-width:160px;max-width:300px;width:100%;height:600px;position:sticky;top:2rem" data-ad-client="ca-pub-3240358922862141" data-ad-slot="6522434837"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></aside>
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">NestJS全栈实战笔记:优雅处理Entity与DTO的映射与字段过滤</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="NestJS全栈实战笔记：优雅处理-Entity-与-DTO-的映射与字段过滤"><a href="#NestJS全栈实战笔记：优雅处理-Entity-与-DTO-的映射与字段过滤" class="headerlink" title="NestJS全栈实战笔记：优雅处理 Entity 与 DTO 的映射与字段过滤"></a>NestJS全栈实战笔记：优雅处理 Entity 与 DTO 的映射与字段过滤</h1><blockquote>
+<p><strong>掘金:</strong> <a target="_blank" rel="noopener" href="https://juejin.cn/post/7603643044035313700">https://juejin.cn/post/7603643044035313700</a></p>
+</blockquote>
+<p>在 NestJS + TypeORM 开发中，我们经常面临一个两难困境：数据库实体 (Entity) 包含所有字段（密码、角色、审计时间），但 API 接口往往只需要部分字段。<br>如果直接返回 Entity，会泄露敏感信息；如果手动写无数个 DTO，又会产生大量重复代码。本文记录了如何利用 <strong>Mapped Types</strong> 和 <strong>序列化 (Serialization)</strong> 优雅解决这一问题。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在项目开发过程中，我定义了一个包含 <code>password</code>、<code>userRole</code>、<code>isActive</code> 等敏感字段的 <code>User</code> 实体。<br>但在编写 RESTful API 时，出现了以下痛点：</p>
+<ol>
+<li>数据冗余与泄露：普通用户查询接口不应返回 <code>userRole</code> 或 <code>password</code>，而管理员接口又需要这些信息。</li>
+<li>类型不匹配：我尝试用 <code>OmitType</code> 派生一个“阉割版”Entity 在 Service 层流转，导致 Service 内部逻辑（如鉴权）无法获取到被切除的字段。</li>
+<li>手动脱敏繁琐：在 Controller 或 Service 中手动写 <code>user.password = &#39;&#39;</code> 既不优雅也容易遗漏，而且心智负担极其昂贵，不符合<strong>DRY</strong>原则（<strong>Don’t Repeat Yourself</strong>）。</li>
+</ol>
+<p>这个问题的核心矛盾在于，Service 层需要“全量数据”处理业务，Controller 层需要“按需数据”响应客户端。</p>
+<h2 id="方案搜索与整合"><a href="#方案搜索与整合" class="headerlink" title="方案搜索与整合"></a>方案搜索与整合</h2><h3 id="使用Nest-js的映射类型"><a href="#使用Nest-js的映射类型" class="headerlink" title="使用Nest.js的映射类型"></a>使用Nest.js的映射类型</h3><blockquote>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.nestjs.cn/openapi/mapped-types#pick">NestJS 中文文档|映射类型</a></p>
+</blockquote>
+<p>映射类型是Nestjs内部实现的一套工具函数，实现了类型转换，使这项任务更加便捷。包含<code>Paticial</code>,<code>Pick</code>,<code>Omit</code>等。</p>
+<h4 id="1-PartialType-部分类型"><a href="#1-PartialType-部分类型" class="headerlink" title="1 PartialType (部分类型)"></a>1 PartialType (部分类型)</h4><p><strong>场景</strong>：用于更新操作（Patch），将基类所有属性变为<strong>可选</strong>。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">PartialType</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/swagger&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">CreateCatDto</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./create-cat.dto&#x27;</span>;<br><br><span class="hljs-comment">// UpdateCatDto 拥有 CreateCatDto 的所有属性，但都是可选的</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UpdateCatDto</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">PartialType</span>(<span class="hljs-title class_">CreateCatDto</span>) &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-PickType-挑选类型"><a href="#2-PickType-挑选类型" class="headerlink" title="2 PickType (挑选类型)"></a>2 PickType (挑选类型)</h4><p><strong>场景</strong>：只需要基类中的某几个字段。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">PickType</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/swagger&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">CreateCatDto</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./create-cat.dto&#x27;</span>;<br><br><span class="hljs-comment">// 只包含 &#x27;name&#x27; 和 &#x27;age&#x27; 字段</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CatAgeDto</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">PickType</span>(<span class="hljs-title class_">CreateCatDto</span>, [<span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>] <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>) &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-OmitType-忽略类型"><a href="#3-OmitType-忽略类型" class="headerlink" title="3 OmitType (忽略类型)"></a>3 OmitType (忽略类型)</h4><p><strong>场景</strong>：排除基类中的敏感字段或不需要的字段。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">OmitType</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/swagger&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">CreateUserDto</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./create-user.dto&#x27;</span>;<br><br><span class="hljs-comment">// 排除 &#x27;password&#x27; 字段，保留其他所有字段</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserResponseDto</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">OmitType</span>(<span class="hljs-title class_">CreateUserDto</span>, [<span class="hljs-string">&#x27;password&#x27;</span>] <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>) &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="4-IntersectionType-交叉类型"><a href="#4-IntersectionType-交叉类型" class="headerlink" title="4 IntersectionType (交叉类型)"></a>4 IntersectionType (交叉类型)</h4><p><strong>场景</strong>：合并两个不同的 DTO。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">IntersectionType</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/swagger&#x27;</span>;<br><br><span class="hljs-comment">// 合并 CreateCatDto 和 AdditionalCatInfo 的属性</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CombinedCatDto</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">IntersectionType</span>(<br>  <span class="hljs-title class_">CreateCatDto</span>,<br>  <span class="hljs-title class_">AdditionalCatInfo</span>,<br>) &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="5-类型组合-Composition"><a href="#5-类型组合-Composition" class="headerlink" title="5. 类型组合 (Composition)"></a>5. 类型组合 (Composition)</h4><p>这些映射类型可以相互嵌套组合，以构建更复杂的 DTO 逻辑。</p>
+<p><strong>示例</strong>：创建一个用于更新的 DTO，但排除掉 <code>id</code> 字段，且其余字段可选。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">PartialType</span>, <span class="hljs-title class_">OmitType</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/swagger&#x27;</span>;<br><br><span class="hljs-comment">// 1. 先排除 &#x27;id&#x27;</span><br><span class="hljs-comment">// 2. 再将剩余属性变为可选</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UpdateCatDto</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">PartialType</span>(<br>  <span class="hljs-title class_">OmitType</span>(<span class="hljs-title class_">CreateCatDto</span>, [<span class="hljs-string">&#x27;id&#x27;</span>] <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>),<br>) &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="class-transformer"><a href="#class-transformer" class="headerlink" title="class-transformer"></a>class-transformer</h3><blockquote>
+<p> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/typestack/class-transformer#table-of-contents">class-transformer|@Exclude</a></p>
+</blockquote>
+<p>可以利用<code>class-transformer</code>的装饰器来实现跳过特定字段</p>
+<p>有时候你想在转换过程中跳过一些字段. 可以使用 <code>@Exclude</code> 装饰器:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Exclude</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;class-transformer&#x27;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> &#123;<br>  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;<br><br>  <span class="hljs-attr">email</span>: <span class="hljs-built_in">string</span>;<br><br>  <span class="hljs-meta">@Exclude</span>()<br>  <span class="hljs-attr">password</span>: <span class="hljs-built_in">string</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>现在当你转换<code>User</code>时,  <code>password</code> 字段就会被跳过并不再出现在转换后的结果里。</p>
+<h2 id="敲定方案"><a href="#敲定方案" class="headerlink" title="敲定方案"></a>敲定方案</h2><p>解决该问题的核心在于 <strong>关注点分离 (Separation of Concerns)</strong> 和 <strong>单一数据源 (Single Source of Truth)</strong>。</p>
+<ul>
+<li><strong>Entity 不变</strong>：Entity 类应完整映射数据库结构，不应为了迁就某个 API 接口而修改 Entity 的定义。</li>
+<li><strong>Mapped Types 减少样板代码</strong>：利用 Swagger 的映射类型，我们可以基于 Entity 自动生成 DTO，当 Entity 字段变更（如修改 Swagger 文档描述）时，DTO 自动同步。</li>
+<li><strong>DTO 决定响应结构</strong>：DTO (Data Transfer Object) 负责定义“给前端看什么”。</li>
+<li><strong>序列化负责清洗数据</strong>：TypeScript 的类型检查是编译时的，运行时的对象往往包含多余属性。必须使用序列化工具（如 <code>class-transformer</code>）在运行时剔除 DTO 中未定义的字段。</li>
+</ul>
+<h2 id="解决步骤与代码实现"><a href="#解决步骤与代码实现" class="headerlink" title="解决步骤与代码实现"></a>解决步骤与代码实现</h2><h3 id="1-定义全量-Entity-配合-class-transformer"><a href="#1-定义全量-Entity-配合-class-transformer" class="headerlink" title="1. 定义全量 Entity (配合 class-transformer)"></a>1. 定义全量 Entity (配合 class-transformer)</h3><p>保持 Entity 的完整性。对于<strong>全局敏感</strong>字段（如密码），直接在 Entity 层面使用 <code>@Exclude</code> 进行兜底保护。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// entities/user.entity.ts</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Entity</span>, <span class="hljs-title class_">Column</span>, <span class="hljs-title class_">PrimaryGeneratedColumn</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;typeorm&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">ApiProperty</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/swagger&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Exclude</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;class-transformer&#x27;</span>;<br><br><span class="hljs-meta">@Entity</span>(<span class="hljs-string">&#x27;users&#x27;</span>)<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> &#123;<br>  <span class="hljs-meta">@PrimaryGeneratedColumn</span>()<br>  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;<br><br>  <span class="hljs-meta">@Column</span>()<br>  <span class="hljs-attr">username</span>: <span class="hljs-built_in">string</span>;<br><br>  <span class="hljs-comment">// 默认序列化时永远排除，防止意外泄露</span><br>  <span class="hljs-meta">@Exclude</span>() <br>  <span class="hljs-meta">@Column</span>()<br>  <span class="hljs-attr">password</span>: <span class="hljs-built_in">string</span>;<br><br>  <span class="hljs-meta">@ApiProperty</span>(&#123; <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;角色&#x27;</span> &#125;)<br>  <span class="hljs-meta">@Column</span>(&#123; <span class="hljs-attr">default</span>: <span class="hljs-string">&#x27;user&#x27;</span> &#125;)<br>  <span class="hljs-attr">userRole</span>: <span class="hljs-built_in">string</span>; <span class="hljs-comment">// 业务逻辑需要，但普通API不需要</span><br><br>  <span class="hljs-meta">@Column</span>()<br>  <span class="hljs-attr">isActive</span>: <span class="hljs-built_in">boolean</span>;<br><br>  <span class="hljs-meta">@Column</span>()<br>  <span class="hljs-attr">createdAt</span>: <span class="hljs-title class_">Date</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-利用-Mapped-Types-派生场景化-DTO"><a href="#2-利用-Mapped-Types-派生场景化-DTO" class="headerlink" title="2. 利用 Mapped Types 派生场景化 DTO"></a>2. 利用 Mapped Types 派生场景化 DTO</h3><p>针对不同接口需求，从 Entity 中“挑选”或“排除”字段生成 DTO。不要手动复制粘贴属性。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// dto/user.dto.ts</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">PickType</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/swagger&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">User</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../entities/user.entity&#x27;</span>;<br><br><span class="hljs-comment">// 场景A：普通用户视图（只看基本信息）</span><br><span class="hljs-comment">// PickType 会自动继承 User 中对应字段的 @ApiProperty 描述</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PublicUserDto</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">PickType</span>(<span class="hljs-title class_">User</span>, [<br>  <span class="hljs-string">&#x27;id&#x27;</span>, <br>  <span class="hljs-string">&#x27;username&#x27;</span><br>] <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>) &#123;&#125;<br><br><span class="hljs-comment">// 场景B：管理员视图（排除密码，保留其他所有）</span><br><span class="hljs-comment">// 即使 User 类有 password 字段，因为加了 @Exclude，这里其实双重保险</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AdminUserDto</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">PickType</span>(<span class="hljs-title class_">User</span>, [<br>  <span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;username&#x27;</span>, <span class="hljs-string">&#x27;userRole&#x27;</span>, <span class="hljs-string">&#x27;isActive&#x27;</span>, <span class="hljs-string">&#x27;createdAt&#x27;</span><br>] <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>) &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-Controller-层进行转换与清理"><a href="#3-Controller-层进行转换与清理" class="headerlink" title="3. Controller 层进行转换与清理"></a>3. Controller 层进行转换与清理</h3><p>Service 层返回完整的 <code>User</code> 实体，Controller 层使用 <code>plainToInstance</code> 将其转换为特定的 DTO，并剔除多余字段。</p>
+<p>需要配置 <code>excludeExtraneousValues: true</code>，这意味着“<strong>DTO 里没定义的字段，全部丢弃</strong>”。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// user.controller.ts</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Controller</span>, <span class="hljs-title class_">Get</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; plainToInstance &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;class-transformer&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">PublicUserDto</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./dto/user.dto&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">UserService</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./user.service&#x27;</span>;<br><br><span class="hljs-meta">@Controller</span>(<span class="hljs-string">&#x27;users&#x27;</span>)<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-attr">userService</span>: <span class="hljs-title class_">UserService</span></span>) &#123;&#125;<br><br>  <span class="hljs-meta">@Get</span>(<span class="hljs-string">&#x27;list&#x27;</span>)<br>  <span class="hljs-keyword">async</span> <span class="hljs-title function_">findAll</span>(): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">PublicUserDto</span>[]&gt; &#123;<br>    <span class="hljs-comment">// 1. Service 返回的是完整的 User[] (包含 userRole, isActive, createdAt)</span><br>    <span class="hljs-keyword">const</span> users = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">userService</span>.<span class="hljs-title function_">findAll</span>();<br><br>    <span class="hljs-comment">// 2. 转换为 PublicUserDto</span><br>    <span class="hljs-comment">// excludeExtraneousValues: true 确保只保留 PublicUserDto 中定义的 &#x27;id&#x27; 和 &#x27;username&#x27;</span><br>    <span class="hljs-comment">// 任何多余字段（如 userRole）都会被剔除</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_">plainToInstance</span>(<span class="hljs-title class_">PublicUserDto</span>, users, &#123;<br>      <span class="hljs-attr">excludeExtraneousValues</span>: <span class="hljs-literal">true</span>, <br>    &#125;);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><strong>Service 层</strong>：只处理 <code>User</code> Entity，确保业务逻辑拥有完整数据。</li>
+<li><strong>DTO 定义</strong>：使用 <code>PickType</code> &#x2F; <code>OmitType</code> 基于 Entity 生成，避免重复定义。</li>
+<li><strong>Controller 层</strong>：使用 <code>plainToInstance</code> + <code>excludeExtraneousValues</code> 清洗数据，实现接口的字段过滤。</li>
+</ol>
+<p>这种模式既保证了内部逻辑的灵活性，又确保了对外接口的安全性和整洁性。</p>
+
+                
+              </div>
+            
+            <hr>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/backend/" class="category-chain-item">backend</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/nestjs/" class="print-no-link">#nestjs</a>
+      
+        <a href="/tags/backend/" class="print-no-link">#backend</a>
+      
+        <a href="/tags/nodejs/" class="print-no-link">#nodejs</a>
+      
+        <a href="/tags/fullstack/" class="print-no-link">#fullstack</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>NestJS全栈实战笔记:优雅处理Entity与DTO的映射与字段过滤</div>
+      <div>http://arkpln.github.io/2862114693.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>FangZhou</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 8, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" rel="external nofollow noopener noreferrer">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+<div style="width:100%;display:flex;justify-content:center;margin-bottom:1.5rem"><ins class="adsbygoogle" style="display:flex;justify-content:center;max-width:845px;width:100%;height:90px" data-ad-client="ca-pub-3240358922862141" data-ad-slot="6522434837"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></div>
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2379479118.html" title="Expo React Native + EAS 本地/云端实战真实构建避坑指南">
+                        <span class="hidden-mobile">Expo React Native + EAS 本地/云端实战真实构建避坑指南</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"mEwkD7geCX7RWNO8srhDE2oP-gzGzoHsz","appKey":"4EF76hyiVA1QILHZThVbfoat","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"el":"#vcomments"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="external nofollow noopener noreferrer"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="external nofollow noopener noreferrer"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+
+
+  <script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script src="/js/img-lazyload.js"></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src="https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js"></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js"></script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script src="/js/boot.js"></script>
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3240358922862141" crossorigin="anonymous"></script>
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
