@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://arkpln.github.io/images/cn.jpg">
 <meta property="article:published_time" content="2026-01-26T03:43:02.000Z">
-<meta property="article:modified_time" content="2026-02-12T09:38:37.969Z">
+<meta property="article:modified_time" content="2026-02-22T10:21:25.023Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="network">
 <meta name="twitter:card" content="summary_large_image">
@@ -246,7 +246,7 @@
         
         
         
-          125 mins
+          129 mins
         
       </span>
     
@@ -882,7 +882,36 @@
 <h4 id="EventSource-onmessage-事件"><a href="#EventSource-onmessage-事件" class="headerlink" title="EventSource.onmessage 事件"></a>EventSource.onmessage 事件</h4><p><code>onmessage</code> 事件表示已经接收到服务器发送的数据，当接收到数据时，触发该事件。</p>
 <p><code>eventSource.onmessage = function(event) &#123;   console.log(&#39;接收到数据：&#39;, event); &#125;;</code></p>
 <p>以上就是 <code>EventSource</code> 对象的常用 API 介绍，需要注意的是，在使用 <code>EventSource</code> 对象的过程中，如果服务器没有正确地设置响应头信息（如：<code>Content-Type: text/event-stream</code>），可能会导致 <code>EventSource</code> 对象无法接收到服务器发送的数据。</p>
-
+<h2 id="navigator-sendBeacon"><a href="#navigator-sendBeacon" class="headerlink" title="navigator.sendBeacon"></a>navigator.sendBeacon</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>在 web 开发中，我们经常需要将用户行为或性能数据上报到服务器。为了不影响用户体验，开发者通常会在页面卸载时进行数据上报。然而，传统的数据上报方式，如 <code>XMLHttpRequest</code> 或 <code>Fetch API</code>，容易受到页面卸载过程中的阻塞，导致数据丢失。为了解决这个问题，<code>navigator.sendBeacon</code> API 被引入，它可以在页面卸载时安全、可靠地发送数据。</p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ol>
+<li><p>发送心跳包，保持服务器长连接</p>
+</li>
+<li><p>埋点，在页面卸载或关闭时记录用户在线时间，pv uv，以及错误日志上报。</p>
+</li>
+<li><p>发送用户反馈，发送用户反馈信息。</p>
+</li>
+</ol>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ol>
+<li><p>不受页面卸载过程的影响，确保数据可靠发送</p>
+</li>
+<li><p>异步执行，不阻塞页面关闭或跳转</p>
+</li>
+<li><p>能够发送跨域请求</p>
+</li>
+</ol>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li><p><code>fetch</code>和<code>AJAX</code>都可以发送任意请求，<code>sendBeacon</code>只能发送POST</p>
+</li>
+<li><p>~可以传输任意字节，<code>sendBeacon</code>只能传输少量数据</p>
+</li>
+<li><p>~可以定义任意请求头，<code>sendBeacon</code>无法自定义请求头</p>
+</li>
+<li><p><code>sendBeacon</code>只能传输<code>ArrayBuffer</code>，<code>ArrayBufferView</code>，<code>Blob</code>，<code>DOMString</code>，<code>FormData</code>，<code>URLSearchParams</code>。</p>
+</li>
+<li><p>处于危险网络环境或开启广告屏蔽插件则无法使用。</p>
+</li>
+</ol>
+<h2 id="HTTP-HTTPS"><a href="#HTTP-HTTPS" class="headerlink" title="HTTP&#x2F;HTTPS"></a>HTTP&#x2F;HTTPS</h2>
                 
               </div>
             
