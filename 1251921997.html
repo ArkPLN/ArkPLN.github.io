@@ -27,7 +27,7 @@
 <meta property="og:description" content="TypeScript类型系统学习笔记，从基础到高级类型应用">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-08-02T05:14:31.000Z">
-<meta property="article:modified_time" content="2026-02-12T13:29:45.625Z">
+<meta property="article:modified_time" content="2026-02-22T13:36:56.822Z">
 <meta property="article:author" content="FangZhou">
 <meta property="article:tag" content="frontend">
 <meta property="article:tag" content="typescript">
@@ -247,7 +247,7 @@
         
         
         
-          139 mins
+          140 mins
         
       </span>
     
@@ -563,7 +563,7 @@
 <tr>
 <td><code>never</code></td>
 <td>表示永不存在的值的类型</td>
-<td><code>function error(): never &#123;</code></td>
+<td><code>function error(): never &#123;&#125;</code></td>
 <td>1. 用于总是抛出异常的函数<br>2. 无限循环函数的返回类型</td>
 </tr>
 <tr>
@@ -680,7 +680,7 @@
 <td>是所有类型的子类型</td>
 </tr>
 </tbody></table>
-<h4 id="原始类型与包装类型"><a href="#原始类型与包装类型" class="headerlink" title="原始类型与包装类型"></a>原始类型与包装类型</h4><p>在JavaScript﻿中的这些内置构造函数：<code> ﻿Number</code>﻿、<code>﻿String</code>﻿、﻿<code>Boolean﻿</code>，用于<br>创建对应的包装对象， 在日常开发时很少使用，在﻿TypeScript﻿中也是同理，所以<br>在TypeScript﻿中进行类型声明时，通常都是用小写的<code>﻿number</code>﻿、﻿<code>string﻿</code>、<code>﻿bo olean﻿</code>。</p>
+<h4 id="原始类型与包装类型"><a href="#原始类型与包装类型" class="headerlink" title="原始类型与包装类型"></a>原始类型与包装类型</h4><p>在JavaScript﻿中的这些内置构造函数：<code> ﻿Number</code>﻿、<code>﻿String</code>﻿、﻿<code>Boolean﻿</code>，用于创建对应的包装对象， 在日常开发时很少使用，在﻿TypeScript﻿中也是同理，所以在TypeScript﻿中进行类型声明时，通常都是用小写的<code>﻿number</code>﻿、﻿<code>string﻿</code>、<code>﻿bo olean﻿</code>。</p>
 <ol>
 <li><p><strong>原始类型 VS 包装对象：</strong><br>原始类型：如number﻿、﻿string﻿、﻿boolean﻿，在 JavaScript 中是简单数据<br>类型，它们在内存中占用空间少，处理速度快。<br>包装对象：如Number﻿对象、﻿String﻿对象、﻿Boolean﻿对象，是复杂类型，在<br>内存中占用更多空间，在日常开发时很少由开发人员自己创建包装对象。</p>
 </li>
@@ -739,7 +739,7 @@
 
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">function</span> <span class="hljs-title function_">logMessage</span>(<span class="hljs-params"><span class="hljs-attr">msg</span>:<span class="hljs-built_in">string</span></span>):<span class="hljs-literal">undefined</span>&#123;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(msg)<br>&#125;<br><span class="hljs-keyword">let</span> result = <span class="hljs-title function_">logMessage</span>(<span class="hljs-string">&#x27;你好&#x27;</span>)<br><span class="hljs-keyword">if</span>(result)&#123; <span class="hljs-comment">// 此行无警告</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;logMessage&#x27;</span>)<br></code></pre></td></tr></table></figure>
 
-<p><strong>理解 void 与 undefined:</strong><br><code>void﻿</code>是一个广泛的概念，用来表达“空”，而 ﻿<code>undefined﻿</code>则是这种“空”的具体实现。<br>因此可以说 <code>﻿undefined</code>﻿是﻿<code>void﻿</code>能接受的一种“空”的状态。<br>也可以理解为： <code>void</code>﻿包含<code>﻿undefined</code>﻿，但﻿<code>void﻿</code>所表达的语义超越了﻿<code>undefi ned﻿</code>， ﻿<code>void﻿</code>是一种意图上的约定，而不仅仅是特定值的限制。</p>
+<p><strong>理解 void 与 undefined:</strong><br><code>void﻿</code>是一个广泛的概念，用来表达“空”，而 ﻿<code>undefined﻿</code>则是这种“空”的具体实现。<br>因此可以说 <code>﻿undefined</code>﻿是﻿<code>void﻿</code>能接受的一种“空”的状态。也可以理解为： <code>void</code>﻿包含<code>﻿undefined</code>﻿，但﻿<code>void﻿</code>所表达的语义超越了﻿<code>undefined﻿</code>， ﻿<code>void﻿</code>是一种意图上的约定，而不仅仅是特定值的限制。</p>
 <p><strong>总结:</strong></p>
 <p>如果一个函数返回类型为<code>void</code>﻿，那么：</p>
 <ol>
