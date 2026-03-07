@@ -28,12 +28,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://arkpln.github.io/images/flutter.webp">
 <meta property="article:published_time" content="2025-10-23T12:32:40.000Z">
-<meta property="article:modified_time" content="2026-01-28T05:26:25.076Z">
+<meta property="article:modified_time" content="2026-03-07T08:15:54.977Z">
 <meta property="article:author" content="FangZhou">
-<meta property="article:tag" content="mobile-development">
-<meta property="article:tag" content="cross-platform">
 <meta property="article:tag" content="flutter">
 <meta property="article:tag" content="dart">
+<meta property="article:tag" content="mobile-development">
+<meta property="article:tag" content="cross-platform">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://arkpln.github.io/images/flutter.webp">
   
@@ -238,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.5k words
+          8k words
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
         
-          55 mins
+          67 mins
         
       </span>
     
@@ -420,6 +420,176 @@
 <li><p><code>var</code>:根据初始值推断类型,确定类型后,<strong>有编译检查,仅限推断的属性和方法</strong></p>
 </li>
 </ul>
+<h4 id="Dart的空安全机制"><a href="#Dart的空安全机制" class="headerlink" title="Dart的空安全机制"></a>Dart的空安全机制</h4><ul>
+<li><p><strong>定义</strong>: 在Dart中，通过编译静态检查将运行时空指针提前暴露。</p>
+</li>
+<li><p><strong>特点：</strong> 将空指针异常从运行时提前至编译时，减少线上崩溃</p>
+</li>
+<li><p>常用空安全操作符:</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>符号</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>可空类型</td>
+<td>?</td>
+<td>声明可空变量</td>
+<td>String?</td>
+</tr>
+<tr>
+<td>安全访问</td>
+<td>?.</td>
+<td>对象为null跳过操作，返回null</td>
+<td>user?.name</td>
+</tr>
+<tr>
+<td>非空断言</td>
+<td>!.</td>
+<td>开发者保证变量非空(否则运行时崩溃)</td>
+<td>name!.length</td>
+</tr>
+<tr>
+<td>空合并</td>
+<td>??</td>
+<td>左侧为null时返回右侧默认值</td>
+<td>name??”Guest”</td>
+</tr>
+</tbody></table>
+<h3 id="Dart中的常用运算符"><a href="#Dart中的常用运算符" class="headerlink" title="Dart中的常用运算符"></a>Dart中的常用运算符</h3><h4 id="算数运算符"><a href="#算数运算符" class="headerlink" title="算数运算符"></a>算数运算符</h4><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li></li>
+</ul>
+</li>
+<li><ul>
+<li></li>
+</ul>
+</li>
+<li><p>&#x2F;</p>
+</li>
+<li><p>~&#x2F; 整除</p>
+</li>
+<li><p>% 取余数</p>
+</li>
+</ul>
+<h4 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h4><ul>
+<li><p>&#x3D; 赋值</p>
+</li>
+<li><p>+&#x3D; 加等</p>
+</li>
+<li><p>-&#x3D; 减等</p>
+</li>
+<li><p>*&#x3D; 乘等</p>
+</li>
+<li><p>&#x2F;&#x3D; 除等</p>
+</li>
+</ul>
+<h4 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h4><ul>
+<li><p>&#x3D;&#x3D; 值相等</p>
+</li>
+<li><p>!&#x3D; 值不等</p>
+</li>
+<li><p>&gt; 大于</p>
+</li>
+<li><p>&gt;&#x3D; 大于等于</p>
+</li>
+<li><p>&lt; 小于</p>
+</li>
+<li><p>&lt;&#x3D; 小于等于</p>
+</li>
+</ul>
+<h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><ul>
+<li><p>&amp;&amp; 逻辑与</p>
+</li>
+<li><p>|| 逻辑或</p>
+</li>
+<li><p>! 逻辑非</p>
+</li>
+</ul>
+<p>注意: 使用逻辑运算符需要保证参与的变量为布尔类型</p>
+<h3 id="Dart的流程控制"><a href="#Dart的流程控制" class="headerlink" title="Dart的流程控制"></a>Dart的流程控制</h3><h4 id="if分支语句"><a href="#if分支语句" class="headerlink" title="if分支语句"></a>if分支语句</h4><ul>
+<li><p>单分支:<code>if() &#123;&#125;</code></p>
+</li>
+<li><p>双分支:<code>if() &#123;&#125; else&#123;&#125;</code></p>
+</li>
+<li><p>多分支:<code>if()&#123;&#125; else if()&#123;&#125; else&#123;&#125;</code></p>
+</li>
+</ul>
+<h4 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h4><ul>
+<li><p>定义:简化版本的双分支</p>
+</li>
+<li><p><code>bool?val1:val2</code></p>
+</li>
+</ul>
+<h4 id="switch-case"><a href="#switch-case" class="headerlink" title="switch&#x2F;case"></a>switch&#x2F;case</h4><p> <strong>语法:</strong> </p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">switch</span>(condition )&#123;<br>    <span class="hljs-keyword">case</span> val1:<br>        ...<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> val2:<br>        ...<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">default</span>:<br>        ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="while"><a href="#while" class="headerlink" title="while"></a>while</h4><ul>
+<li>定义：在Dart中，循环主要使用<code>while</code>和<code>for</code>循环</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dart"><br><span class="hljs-keyword">while</span>(condition)&#123;<br><br>    ...;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>break</code>跳出整个while循环,<code>continue</code>跳出当前迭代,进入下一次迭代。</li>
+</ul>
+<h4 id="for"><a href="#for" class="headerlink" title="for"></a>for</h4><ul>
+<li>定义：对列表类型进行遍历</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;<br>    ...;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>特点: 只有小括号逻辑满足,大括号一直执行,断开可以用<code>break</code>或<code>continue</code></li>
+</ul>
+<h3 id="Dart的函数"><a href="#Dart的函数" class="headerlink" title="Dart的函数"></a>Dart的函数</h3><h4 id="Dart的函数定义"><a href="#Dart的函数定义" class="headerlink" title="Dart的函数定义"></a>Dart的函数定义</h4><ul>
+<li><p><strong>定义:</strong> 在Dart语言中，函数是代码组合和复用的核心单元</p>
+</li>
+<li><p>使用函数组织代码</p>
+</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">int</span> add(<span class="hljs-built_in">int</span> a,<span class="hljs-built_in">int</span> b)&#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="Dart的函数返回值"><a href="#Dart的函数返回值" class="headerlink" title="Dart的函数返回值"></a>Dart的函数返回值</h4><ul>
+<li><p>有返回值: 具体类型 函数名称() {}</p>
+</li>
+<li><p>无返回值: void 函数名称() {}</p>
+</li>
+</ul>
+<h4 id="Dart的函数形参"><a href="#Dart的函数形参" class="headerlink" title="Dart的函数形参"></a>Dart的函数形参</h4><ul>
+<li><p>分类:函数的形参分为:<strong>必传参数</strong>,<strong>可选位置参数</strong>,<strong>可选命名参数</strong></p>
+</li>
+<li><p>必传参数不能为空</p>
+</li>
+<li><p>可选参数使用中括号包裹，必须位于必传参数后面，可选参数可以设置默认值<code>函数名(String a,[String?b,...])</code></p>
+</li>
+<li><p>可选命名参数必须位于必传参数后面，使用花括号包裹，传递参数时按{params：value}传递，不关注顺序（适合参数多且含义明确的情况）<code>函数名 (String a,&#123;String?b,...&#125;)</code></p>
+</li>
+</ul>
+<h4 id="Dart的匿名函数"><a href="#Dart的匿名函数" class="headerlink" title="Dart的匿名函数"></a>Dart的匿名函数</h4><p><strong>匿名函数:</strong></p>
+<p>可以声明一个没有名称的函数赋值给变量进行调用</p>
+<p><code>Function 变量名 = ()&#123;&#125;</code></p>
+<p><strong>箭头函数:</strong></p>
+<p>当函数体只有一行代码时可以使用，使用箭头函数可以省略return关键字</p>
+<p><code>函数名 () =&gt; 代码逻辑</code></p>
+<h3 id="Dart中的类"><a href="#Dart中的类" class="headerlink" title="Dart中的类"></a>Dart中的类</h3><ul>
+<li><p>定义： Dart语言中，类是面向对象编程的核心，包含属性和方法来定义对象的行为和状态。</p>
+</li>
+<li><p>定义类语法<code>class Person &#123; &#125;</code></p>
+</li>
+<li><p>实例化对象<code>Person 变量 = Person()</code></p>
+</li>
+<li><p>属性和方法<code>变量.属性/方法()</code></p>
+</li>
+</ul>
 
                 
               </div>
@@ -453,13 +623,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/mobile-development/" class="print-no-link">#mobile-development</a>
-      
-        <a href="/tags/cross-platform/" class="print-no-link">#cross-platform</a>
-      
         <a href="/tags/flutter/" class="print-no-link">#flutter</a>
       
         <a href="/tags/dart/" class="print-no-link">#dart</a>
+      
+        <a href="/tags/mobile-development/" class="print-no-link">#mobile-development</a>
+      
+        <a href="/tags/cross-platform/" class="print-no-link">#cross-platform</a>
       
     </div>
   
