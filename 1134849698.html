@@ -28,12 +28,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://arkpln.github.io/images/flutter.webp">
 <meta property="article:published_time" content="2025-10-23T12:32:40.000Z">
-<meta property="article:modified_time" content="2026-03-07T08:15:54.977Z">
+<meta property="article:modified_time" content="2026-03-08T14:30:46.426Z">
 <meta property="article:author" content="FangZhou">
-<meta property="article:tag" content="flutter">
-<meta property="article:tag" content="dart">
 <meta property="article:tag" content="mobile-development">
 <meta property="article:tag" content="cross-platform">
+<meta property="article:tag" content="flutter">
+<meta property="article:tag" content="dart">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://arkpln.github.io/images/flutter.webp">
   
@@ -238,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8k words
+          11k words
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
         
-          67 mins
+          94 mins
         
       </span>
     
@@ -590,6 +590,231 @@
 <li><p>属性和方法<code>变量.属性/方法()</code></p>
 </li>
 </ul>
+<h2 id="Flutter开发"><a href="#Flutter开发" class="headerlink" title="Flutter开发"></a>Flutter开发</h2><h3 id="创建Flutter项目"><a href="#创建Flutter项目" class="headerlink" title="创建Flutter项目"></a>创建Flutter项目</h3><p>在VS Code上安装<code>Flutter</code>和<code>Awesome Flutter Snippets</code></p>
+<p>使用Flutter CLI创建工程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">flutter create --platform web &lt;project_name&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="应用目录"><a href="#应用目录" class="headerlink" title="应用目录"></a>应用目录</h3><ul>
+<li><p>.dart_tool:Dart工具生成的缓存和文件</p>
+</li>
+<li><p>.idea IDEA生成的配置文件</p>
+</li>
+<li><p>build 生成构建的产物</p>
+</li>
+<li><p>lib 项目的主要源代码目录</p>
+<ul>
+<li>main.dart 应用程序入点</li>
+</ul>
+</li>
+<li><p>test 测试文件</p>
+</li>
+<li><p>web web平台的特定配置和资源文件</p>
+</li>
+<li><p>.gitgnore</p>
+</li>
+<li><p>metadata Flutter项目标志文件</p>
+</li>
+<li><p>analysis_options.yaml 配置静态代码分析工具</p>
+</li>
+<li><p>flutter_core.iml 存储模块的特定设置</p>
+</li>
+<li><p>pubspec.lock 依赖锁定文件</p>
+</li>
+<li><p>pubspec.yaml 项目依赖和配置文件</p>
+</li>
+<li><p>README.md 项目说明文件</p>
+</li>
+</ul>
+<h3 id="启动文件"><a href="#启动文件" class="headerlink" title="启动文件"></a>启动文件</h3><ul>
+<li><p><code>runApp</code>函数是Flutter内部提供的函数</p>
+</li>
+<li><p>Widget表示组件,Flutter中万物皆组件</p>
+</li>
+</ul>
+<p>Flutter使用的默认组件库是Material，包含了很多的规范设计，如颜色、文字排版、动画等。 </p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter/material.dart&#x27;</span>; <span class="hljs-comment">// Imports Flutter.</span><br><br><span class="hljs-keyword">void</span> main() &#123;<br>  <span class="hljs-comment">// 运行应用程序</span><br>  runApp(<span class="hljs-keyword">const</span> MainApp());<br>&#125;<br><span class="hljs-comment">// ...</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>&#123;<br>  <span class="hljs-comment">// 组件构造函数</span><br>  <span class="hljs-keyword">const</span> MainApp(&#123;<span class="hljs-keyword">super</span>.key&#125;);<br><br>  <span class="hljs-comment">// 构建组件</span><br>  <span class="hljs-meta">@override</span><br>  Widget build(BuildContext context) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">const</span> MaterialApp(<br>      title: <span class="hljs-string">&#x27;Arona Agent&#x27;</span>,<br>      home: Scaffold(<br>        body: Center(<br>          child: Text(<span class="hljs-string">&#x27;Hello, Arona Agent!&#x27;</span>),<br>        ),<br>      )<br>    );<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="Flutter组件"><a href="#Flutter组件" class="headerlink" title="Flutter组件"></a>Flutter组件</h3><h4 id="MaterialApp"><a href="#MaterialApp" class="headerlink" title="MaterialApp"></a>MaterialApp</h4><ul>
+<li><p><strong>特性：</strong> 应用被整个MaterialApp包裹，方便我们对整个应用的属性进行设计。</p>
+</li>
+<li><p>常见属性</p>
+<ul>
+<li><p><code>title</code>: 用来展示窗口的标题</p>
+</li>
+<li><p><code>theme</code>: 用来展示应用主题<code>ThemeData()</code></p>
+</li>
+<li><p><code>home</code>: 用来展示窗口的主题内容</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Scaffold组件"><a href="#Scaffold组件" class="headerlink" title="Scaffold组件"></a>Scaffold组件</h4><ul>
+<li><p><strong>特性:</strong>  用于构建Material Design风格页面的核心布局组件，提供标准、灵活配置的页面骨架。</p>
+</li>
+<li><p><strong>属性：</strong> </p>
+<ul>
+<li><p><code>appBar</code>: 页面顶部的应用浏览，用于显示不同，导航按钮和操作菜单</p>
+</li>
+<li><p><code>body</code>： 页面的主要内容，可以放置任何其他组件</p>
+</li>
+<li><p><code>bottomNavigationBar</code>：底部导航栏，方便用户在不同核心功能页面之间切换</p>
+</li>
+<li><p><code>backgroundColor</code>：设置Scaffold的背景颜色</p>
+</li>
+<li><p><code>floatingActionButtom</code>：悬浮操作按钮，常用于触发页面的主要动作</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs dart"><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter/material.dart&#x27;</span>; <span class="hljs-comment">// Imports Flutter.</span><br><br><span class="hljs-keyword">void</span> main() &#123;<br>  <span class="hljs-comment">// 运行应用程序</span><br>  runApp(<span class="hljs-keyword">const</span> MainApp());<br>&#125;<br><br><span class="hljs-comment">// ...</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>&#123;<br>  <span class="hljs-comment">// 组件构造函数</span><br>  <span class="hljs-keyword">const</span> MainApp(&#123;<span class="hljs-keyword">super</span>.key&#125;);<br><br>  <span class="hljs-comment">// 构建组件</span><br>  <span class="hljs-meta">@override</span><br>  Widget build(BuildContext context) &#123;<br>    <span class="hljs-keyword">return</span> MaterialApp(<br>      title: <span class="hljs-string">&#x27;Arona Agent&#x27;</span>,<br>      theme: ThemeData(<br>        useMaterial3: <span class="hljs-keyword">true</span>,<br>        scaffoldBackgroundColor: Colors.blueAccent,<br>      ),<br>      home: Scaffold(<br>        <span class="hljs-comment">// 应用程序的主界面</span><br>        appBar: AppBar(<br>          title: <span class="hljs-keyword">const</span> Text(<span class="hljs-string">&#x27;Arona Agent&#x27;</span>),<br>        ),<br>        <span class="hljs-comment">// 主体内容</span><br>        body: <span class="hljs-keyword">const</span> Center(<br>          child: Text(<br>            <span class="hljs-string">&#x27;Welcome to Arona Agent!&#x27;</span>,<br>            style: TextStyle(fontSize: <span class="hljs-number">24</span>, color: Colors.white),<br>          ),<br>        ),<br>        <span class="hljs-comment">// 底部导航栏</span><br>        bottomNavigationBar: BottomAppBar(<br>          color: Colors.blueGrey,<br>          child: Container(<br>            height: <span class="hljs-number">50</span>,<br>            alignment: Alignment.center,<br>            child: <span class="hljs-keyword">const</span> Text(<br>              <span class="hljs-string">&#x27;© 2024 Arona Agent&#x27;</span>,<br>              style: TextStyle(color: Colors.white),<br>            ),<br>          ),<br>        ),<br><br>      ),<br>    );<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="无状态组件与有状态组件"><a href="#无状态组件与有状态组件" class="headerlink" title="无状态组件与有状态组件"></a>无状态组件与有状态组件</h4><ul>
+<li><p><strong>定义:</strong> 根据自己特定的需求创建Widget</p>
+</li>
+<li><p><strong>分类：</strong> 分为无状态组件与有状态组件</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>StatelessWidget</th>
+<th>StatefulWidget</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>核心特征</td>
+<td>一旦创建,内部状态不可变</td>
+<td>持有可在其生命周期内改变的方式</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td>静态内容展示,外观仅由配置参数决定</td>
+<td>交互式组件</td>
+</tr>
+<tr>
+<td>生命周期</td>
+<td>相对简单,主要是build</td>
+<td>更为复杂,包含状态管理,更新和销毁</td>
+</tr>
+<tr>
+<td>代码结构</td>
+<td>单个类</td>
+<td>两个关联类:Widget本身和State类</td>
+</tr>
+</tbody></table>
+<h4 id="StatelessWidget无状态组件"><a href="#StatelessWidget无状态组件" class="headerlink" title="StatelessWidget无状态组件"></a>StatelessWidget无状态组件</h4><ul>
+<li><p>定义:创建一个新的类，继承<code>StatelessWidget</code>类并实现<code>build</code>方法</p>
+</li>
+<li><p>要点: build方法返回<code>Widget</code></p>
+</li>
+<li><p>场景:纯展示型组件,没有用户交互操作</p>
+</li>
+<li><p>生命周期: build</p>
+</li>
+</ul>
+<p>当组件被创建或父组件状态变化导致其需要被重新构建时,build方法会被调用</p>
+<p>在<code>Awesome Flutter Snippets</code>中使用<code>statelessW</code></p>
+<h4 id="StatefulWidget有状态组件"><a href="#StatefulWidget有状态组件" class="headerlink" title="StatefulWidget有状态组件"></a>StatefulWidget有状态组件</h4><ul>
+<li><p>生命周期:</p>
+<ol>
+<li>创建阶段</li>
+</ol>
+<ul>
+<li><p><code>StatefulWidget</code>被创建</p>
+</li>
+<li><p><code>createState</code></p>
+</li>
+<li><p><code>State</code>对象创建</p>
+</li>
+<li><p><code>initState</code></p>
+</li>
+<li><p><code>didChangeDependencies</code></p>
+</li>
+<li><p><code>build</code></p>
+</li>
+</ul>
+<ol start="2">
+<li>更新阶段</li>
+</ol>
+<ul>
+<li><p>父组件重建-配置变更</p>
+</li>
+<li><p><code>didUpdateWidget</code> -&gt; <code>build</code></p>
+</li>
+</ul>
+<ol start="3">
+<li>销毁阶段</li>
+</ol>
+<ul>
+<li><p>组件被移除</p>
+</li>
+<li><p><code>deactive</code></p>
+</li>
+<li><p><code>dispose</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>生命周期阶段</th>
+<th>函数名</th>
+<th>调用时机与核心任务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>创建阶段</strong></td>
+<td><code>createState()</code></td>
+<td>Widget初始化调用,创建State对象</td>
+</tr>
+<tr>
+<td></td>
+<td><code>initState()</code></td>
+<td>State对象插入Widget树立刻执行,只执行一次</td>
+</tr>
+<tr>
+<td></td>
+<td><code>didChangeDependencies()</code></td>
+<td><code>initState</code>后立即执行,当依赖的<code>inheritedWidget</code>更新时立即调用,可能多次</td>
+</tr>
+<tr>
+<td><strong>构建与更新阶段</strong></td>
+<td><code>build()</code></td>
+<td>构建UI方法,初始化或更新后多次调用</td>
+</tr>
+<tr>
+<td></td>
+<td><code>didUpdateWeiget()</code></td>
+<td>父组件传入新配置时调用,用于比较新旧配置</td>
+</tr>
+<tr>
+<td><strong>销毁阶段</strong></td>
+<td><code>deactiveate()</code></td>
+<td>当State对象从Widget树中暂时移除时被调用</td>
+</tr>
+<tr>
+<td></td>
+<td><code>dispose()</code></td>
+<td>当State对象被永久移除时被调用,释放资源,仅执行一次</td>
+</tr>
+</tbody></table>
+<p><strong>总结:</strong></p>
+<ul>
+<li><p>无状态组件:build</p>
+</li>
+<li><p>有状态组件(创建):createState -&gt; initState -&gt; didChangeDependencies -&gt; build</p>
+</li>
+<li><p>有状态组件(更新):didUpdateWiget -&gt; build</p>
+</li>
+<li><p>有状态组件更新(销毁):deactivate -&gt; dispose</p>
+</li>
+<li><p>执行一次的函数: createState、initState、dispose</p>
+</li>
+<li><p><code>InheritedWidget</code>专门用于Widget树中自顶向下高效地共享数据,顶层组件提供数据,子孙节点直接获取。</p>
+</li>
+</ul>
 
                 
               </div>
@@ -623,13 +848,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/flutter/" class="print-no-link">#flutter</a>
-      
-        <a href="/tags/dart/" class="print-no-link">#dart</a>
-      
         <a href="/tags/mobile-development/" class="print-no-link">#mobile-development</a>
       
         <a href="/tags/cross-platform/" class="print-no-link">#cross-platform</a>
+      
+        <a href="/tags/flutter/" class="print-no-link">#flutter</a>
+      
+        <a href="/tags/dart/" class="print-no-link">#dart</a>
       
     </div>
   
