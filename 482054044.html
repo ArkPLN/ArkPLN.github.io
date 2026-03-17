@@ -1,0 +1,777 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme="auto">
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="FangZhou">
+  <meta name="keywords" content="Vue,React,Nodejs,blogs,frontend,web,developer,programmer">
+  
+    <meta name="description" content="初探下一代前端工具链VitePlus">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vite-plus下一代统一前端工具链初体验">
+<meta property="og:url" content="http://arkpln.github.io/482054044.html">
+<meta property="og:site_name" content="Ark的技术博客">
+<meta property="og:description" content="初探下一代前端工具链VitePlus">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-14T11:16:11.000Z">
+<meta property="article:modified_time" content="2026-03-14T12:00:19.380Z">
+<meta property="article:author" content="FangZhou">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="frontend">
+<meta property="article:tag" content="dev">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Vite-plus下一代统一前端工具链初体验 - Ark的技术博客</title>
+
+  <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+
+
+
+  <link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+
+  <link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+
+  <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"arkpln.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"mEwkD7geCX7RWNO8srhDE2oP-gzGzoHsz","app_key":"4EF76hyiVA1QILHZThVbfoat","server_url":"https://mewkd7ge.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  <meta name="google-site-verification" content="5KfTZvtlydmBIzY97rVo-caP5jljAfmD3Qs3sBzY2Go"><style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Ark的技术博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>快乐老家</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont  icon-archive-fill"></i>
+                <span>笔岚档案</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>文以类聚</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>按标签阅览</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>联系我</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax="true" style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Vite-plus下一代统一前端工具链初体验"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-14 19:16" pubdate>
+          March 14, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+<aside class="sidebar d-none d-xl-block" style="margin-right:-1rem;z-index:-1"><ins class="adsbygoogle" style="display:flex;justify-content:center;min-width:160px;max-width:300px;width:100%;height:600px;position:sticky;top:2rem" data-ad-client="ca-pub-3240358922862141" data-ad-slot="6522434837"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></aside>
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Vite-plus下一代统一前端工具链初体验</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Vite-Plus-剑指前端工具链的”秦始皇”初体验"><a href="#Vite-Plus-剑指前端工具链的”秦始皇”初体验" class="headerlink" title="Vite-Plus 剑指前端工具链的”秦始皇”初体验"></a>Vite-Plus 剑指前端工具链的”秦始皇”初体验</h1><h2 id="为什么是Vite-Plus在哪"><a href="#为什么是Vite-Plus在哪" class="headerlink" title="为什么是Vite?Plus在哪?"></a>为什么是Vite?Plus在哪?</h2><p>去年年中的时候就已经听说过尤佬宣布要推出<strong>VitePlus</strong>以一举统一前端工具链，这我当然要拍手称快，但就如同过去近10年不断折腾的前端一样，就连统一也要不停的折腾。<strong>Vite</strong>，<strong>Turbopack</strong>，<strong>Rspack</strong>…CLI作为开发的入口，自然是兵家必争之地，虽然大家都心知肚明，CLI背后当然是各自的生态，VitePlus要寻求稳健的商业化路径，Turbopack是Vercel的潜在流量池，Rspack背后自然是字节跳动在开发框架上的巨大野心。</p>
+<p>所以，<strong>VitePlus</strong>到底<strong>Plus</strong>在哪，我阅读了VitePlus官网的<a href="%22https://voidzero.dev/posts/announcing-vite-plus?utm_source=vite&utm_content=top_banner%22">原文</a>，试图找出答案：</p>
+<blockquote>
+<p><strong>Vite+致力于解决的问题</strong></p>
+<p>多年来，JavaScript 工具生态系统经历了相当程度的碎片化与动荡。作为一种最初仅用 10 天设计的语言，没人能想象如今我们会用 JavaScript 构建如此规模和复杂度的应用程序。对于面临日益庞大的网络项目却内部工具资源有限的企业而言，工具链的复杂性和性能已成为切实的瓶颈。</p>
+<p>对于拥有多个团队且各自采用独特工具链选择的公司来说，这些瓶颈问题尤为突出。依赖管理或安全审查等任务必须为每个团队单独处理。不同项目间的依赖组合逐渐失去同步，随着时间的推移越来越难以协调。如果团队或项目合并，开发者就必须投入时间迁移工具，否则最终会形成一套错综复杂、拼凑而成的工具栈。</p>
+<p>通过 Vite+，我们致力于为 JavaScript 工具链提供统一解决方案——让面临这些挑战的团队能够专注于产品交付，而非将时间浪费在工具栈的评估、琐碎争论、配置和调试上。</p>
+</blockquote>
+<p><strong>VitePlus</strong>剑指<strong>前端生态的大一统</strong>，具体来说，VitePlus承担了以下功能：</p>
+<ul>
+<li><p><strong><code>vite new</code></strong> —— 用于快速搭建新项目（特别是单体仓库），提供与 Vite+最适配的推荐项目结构。同时支持代码生成功能，例如向单体仓库添加新包，或调用自定义生成器。</p>
+</li>
+<li><p><strong><code>vite test</code></strong> —— 运行由 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://vitest.dev/">Vitest</a> 驱动的单元测试。它提供兼容 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://jestjs.io/">Jest</a> 的 API，可与您的主应用开箱即用，并包含浏览器模式、分片测试、视觉回归测试等完整功能集。</p>
+</li>
+<li><p><strong><code>vite lint</code></strong> — 使用 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://oxc.rs/docs/guide/usage/linter.html">Oxlint</a> 对代码进行静态检查，它内置 600 多项 ESLint 兼容规则，速度比 ESLint 快达 100 倍。同时支持类型感知的代码检查，以及通过 ESLint 兼容 API 编写的 JavaScript 插件。</p>
+</li>
+<li><p><strong><code>vite fmt</code></strong> — 使用即将发布的 Oxfmt 格式化代码，其目标是与 Prettier 保持 99% 以上的兼容性，同时提供更强的控制力和灵活性，例如对换行规则进行更精细的调控。</p>
+</li>
+<li><p><strong><code>vite lib</code></strong> — 通过内置最佳实践的方案打包库项目，由 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://tsdown.dev/">tsdown</a> 和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://rolldown.rs/">Rolldown</a> 提供支持。包含通过 <code>isolatedDeclarations</code> 转换实现的极速捆绑式 DTS 生成功能。</p>
+</li>
+<li><p><strong><code>vite run</code></strong> — 内置的智能缓存型单体仓库任务执行器。我们实现了复杂的任务输入推断机制，使得大多数任务无需显式配置即可获得缓存效果——其缓存粒度通常比手动设置更加精细。可将其视为无需告知系统缓存失效规则的 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://turborepo.com/">Turborepo</a>。</p>
+</li>
+<li><p><strong><code>vite ui</code></strong> —— 提供模块解析&#x2F;转换行为洞察、打包体积&#x2F;摇树优化分析，并与框架专属开发工具集成的图形界面开发工具。</p>
+</li>
+</ul>
+<p>换言之，VitePlus几乎彻底的绝大多数前端工程化要考虑的工程选型问题，其中，我也早已深度体验了当中不少的工具，其中Vite和Vitest的体验还是非常不错的，Vite几乎是Vue3、React（不考虑SSR）的默认构建工具链，即便是默认配置，其HMR和编译速度也是相当的快，这也是得益于Rollup和基于Golang编写的esbuild。而在Turbopack和Rspack不约而同的转向”锈化”的Rust生态,Vite也适时的跟进了Rust的步伐,推出了可选的Rolldown的js打包工具,提供了绝对凶猛的性能，太恐怖了Rust大人。</p>
+<p>同时，我也非常青睐使用Vitest执行可视化的视觉测试功能，这是Jest无法提供的，在此之前往往需要使用Storybook这种专门的UI框架，无疑增加了开发和测试验证的负担，而Jest作为老牌测试框架已有些力不从心；而且Jest的配置对新手不太友好，需要适当的修改jest配置，使用babel转译也是不可忽视的速度硬伤，在这一点上，Vitest选择兼容Jest的语法无疑是及其明知的选择。</p>
+<p>同时，VitePlus也统一了Lint和Check的问题，在此之前的默认配置都是<code>ESLint</code>+<code>Prettier</code>，现在有了更加统一的组合，当然是好事。</p>
+<p>除此之外，VitePlus还解决了一个很重要的问题<strong>Monorepo</strong>，在此之前，往往是<code>pnpm workspace + turbopack </code>的方案，无疑造成的巨大的学习成本，而且在配合<strong>Github Workflows</strong> 执行CI&#x2F;CD流水线时,pnpm和其他包管理工具混用又会造成额外的适配成本,VitePlus解决了这个问题.</p>
+<h2 id="快速使用"><a href="#快速使用" class="headerlink" title="快速使用"></a>快速使用</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://viteplus.dev/guide/">Getting Started | The Unified Toolchain for the Web</a></p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">irm</span> https://vite.plus/ps1 | <span class="hljs-built_in">iex</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="MacOS-Linux"><a href="#MacOS-Linux" class="headerlink" title="MacOS&#x2F;Linux"></a>MacOS&#x2F;Linux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -fsSL https://vite.plus | bash<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Vite+ 会管理全局 Node.js 运行时和包管理器。如需禁用此功能，请运行 <code>vp env off</code>。若您认为 Vite+ 不适合您，请输入 <code>vp implode</code></p>
+</blockquote>
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">vp create<br>vp create &lt;template&gt;<br>vp create &lt;template&gt; -- &lt;template-options&gt;<br></code></pre></td></tr></table></figure>
+
+<p>Vite+ 内置了以下模板：</p>
+<ul>
+<li><code>vite:monorepo</code> 创建一个新的单体仓库</li>
+<li><code>vite:application</code> 创建一个新的应用程序</li>
+<li><code>vite:library</code> 创建一个新的库</li>
+</ul>
+<h2 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vp run<br></code></pre></td></tr></table></figure>
+
+<h2 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a>构建项目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">vp build<br>vp build --watch<br>vp build --sourcemap<br></code></pre></td></tr></table></figure>
+
+<h2 id="打包项目"><a href="#打包项目" class="headerlink" title="打包项目"></a>打包项目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">vp pack<br>vp pack src/index.ts --dts<br>vp pack --watch<br></code></pre></td></tr></table></figure>
+
+<h2 id="迁移项目"><a href="#迁移项目" class="headerlink" title="迁移项目"></a>迁移项目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">vp migrate<br>vp migrate &lt;path&gt;<br>vp migrate --no-interactive<br></code></pre></td></tr></table></figure>
+
+<h2 id="测试项目"><a href="#测试项目" class="headerlink" title="测试项目"></a>测试项目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vp <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+
+
+
+                
+              </div>
+            
+            <hr>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/frontend/" class="category-chain-item">frontend</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/react/" class="print-no-link">#react</a>
+      
+        <a href="/tags/frontend/" class="print-no-link">#frontend</a>
+      
+        <a href="/tags/dev/" class="print-no-link">#dev</a>
+      
+        <a href="/tags/web/" class="print-no-link">#web</a>
+      
+        <a href="/tags/vue/" class="print-no-link">#vue</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Vite-plus下一代统一前端工具链初体验</div>
+      <div>http://arkpln.github.io/482054044.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>FangZhou</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 14, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" rel="external nofollow noopener noreferrer">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+<div style="width:100%;display:flex;justify-content:center;margin-bottom:1.5rem"><ins class="adsbygoogle" style="display:flex;justify-content:center;max-width:845px;width:100%;height:90px" data-ad-client="ca-pub-3240358922862141" data-ad-slot="6522434837"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></div>
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/4238683975.html" title="NestJS全栈实战笔记：序列化与更优雅的响应结果处理">
+                        <span class="hidden-mobile">NestJS全栈实战笔记：序列化与更优雅的响应结果处理</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"mEwkD7geCX7RWNO8srhDE2oP-gzGzoHsz","appKey":"4EF76hyiVA1QILHZThVbfoat","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"el":"#vcomments"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="external nofollow noopener noreferrer"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="external nofollow noopener noreferrer"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+
+
+  <script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script src="/js/img-lazyload.js"></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src="https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js"></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js"></script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script src="/js/boot.js"></script>
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3240358922862141" crossorigin="anonymous"></script>
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
